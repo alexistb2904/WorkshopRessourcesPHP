@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 include_once('config/mysql.php');
 include_once('variables.php');
 include_once('functions.php');
@@ -132,7 +132,7 @@ if (isset($_COOKIE['LOGGED_USER']) || isset($_SESSION['LOGGED_USER'])) {
 <?php else: ?>
     <div style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;' role="alert">
         <h1>Bonjour <?php echo($loggedUser['email']); ?> !</h1>
-        <a class="grid-download-item-a" style="margin-bottom: 2vmax" href="home.php"><p>Accueil</p></a>
+        <a class="grid-download-item-a" style="margin-bottom: 2vmax" href="index.php"><p>Accueil</p></a>
     </div>
 <?php endif; ?>
 </div>
