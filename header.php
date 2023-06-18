@@ -10,7 +10,7 @@
             <img src="https://workshopressources.fr/assets/img/Logo/logowr_trans_128.png" alt="Logo of WorkshopRessources" width="64">
         </div>
         <div class="nav-bar">
-            <a href="<?php echo($rootUrl). 'home.php'; ?>">Accueil</a>
+            <a href="<?php echo($rootUrl). 'index.php'; ?>">Accueil</a>
             <a href="<?php echo($rootUrl). 'zebra/page.php'; ?>">Zébra</a>
             <a href="<?php echo($rootUrl). 'help/helpreskin.php'; ?>">Aide</a>
             <div class="dropdown">

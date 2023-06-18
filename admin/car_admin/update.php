@@ -6,7 +6,7 @@
 
 if (!is_admin($loggedUser['email'])) {
     echo 'Vous n\'avez pas les droits pour accéder à cette page.';
-    header("refresh:5;$rootUrl/home.php");
+    header("refresh:5;$rootUrl/index.php");
     exit();
 }
 
