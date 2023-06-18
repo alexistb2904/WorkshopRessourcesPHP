@@ -11,8 +11,8 @@ $postData = $_POST;
 if (isset($postData['email']) &&  isset($postData['password'])) {
     foreach ($users as $user) {
         if (
-            $user['email'] === $postData['email'] &&
-            $user['password'] === $postData['password']
+            $passhash = password_hash($postData['password'])
+            $user['email'] === $postData['email'] && password_verify($user['password'], $passhash)
         ) {
             $loggedUser = [
                 'email' => $user['email'],
