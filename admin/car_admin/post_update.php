@@ -20,15 +20,29 @@ if (!isset($postData['creator'])) {
 } else {
     if ($postData['creator'] === 'zebra' || $postData['creator'] === 'decals') {
         if (!isset($postData['car_title']) || !isset($postData['car_photo']) || !isset($postData['id']) || !isset($postData['is_enabled'])) {
-            echo('Il faut remplir tous les champs pour pouvoir créer un véhicule ERROR2.' . $postData['creator'] . ' ' . $postData['car_title'] . ' ' . $postData['car_photo'] . ' ' . $postData['id'] . ' ' . $postData['is_enabled'] . ' ' . $postData['creator'] );
+            echo('Il faut remplir tous les champs pour pouvoir créer un véhicule ERROR2.');
+
+            // Debugging
+            var_dump($postData['car_title']);
+            var_dump($postData['car_photo']);
+            var_dump($postData['id']);
+            var_dump($postData['is_enabled']);
+
             return;
         }
-    } elseif ( !isset($postData['car_title']) || !isset($postData['car_url']) || !isset($postData['car_photo']) || !isset($postData['id']) )
-    {
+    } elseif (!isset($postData['car_title']) || !isset($postData['car_url']) || !isset($postData['car_photo']) || !isset($postData['id'])) {
         echo('Il faut remplir tous les champs pour pouvoir créer un véhicule ERROR3.');
+
+        // Debugging
+        var_dump($postData['car_title']);
+        var_dump($postData['car_url']);
+        var_dump($postData['car_photo']);
+        var_dump($postData['id']);
+
         return;
     }
 }
+
 
 $id = $postData['id'];
 $title = $postData['car_title'];
