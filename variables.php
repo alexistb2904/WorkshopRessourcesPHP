@@ -1,5 +1,6 @@
 <?php
 
+include_once('config/mysql.php');
 $usersStatement = $mysqlClient->prepare('SELECT * FROM users');
 $usersStatement->execute();
 $users = $usersStatement->fetchAll();
@@ -32,15 +33,7 @@ $otherFetch = $mysqlClient->prepare('SELECT * FROM other');
 $otherFetch->execute();
 $other = $otherFetch->fetchAll();
 
-$zebraFetch = $mysqlClient->prepare('SELECT * FROM zebra');
-$zebraFetch->execute();
-$zebra = $zebraFetch->fetchAll();
-
-$decalsFetch = $mysqlClient->prepare('SELECT * FROM decals');
-$decalsFetch->execute();
-$decals = $decalsFetch->fetchAll();
-
-// Si le cookie ou la session sont présentes
+// Si le cookie est présent
 if (isset($_COOKIE['LOGGED_USER_EMAIL']) || isset($_SESSION['LOGGED_USER_EMAIL'])) {
     $loggedUser['email'] = $_COOKIE['LOGGED_USER_EMAIL'] ?? $_SESSION['LOGGED_USER_EMAIL'];
 }
@@ -50,6 +43,4 @@ if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO
 }
 
 $rootPath = $_SERVER['DOCUMENT_ROOT'];
-$rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
-
-
+$rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';

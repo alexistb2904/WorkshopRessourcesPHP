@@ -4,61 +4,74 @@ session_start();
 include_once('config/mysql.php');
 include_once('config/user.php');
 include_once('variables.php');
-include_once ('functions.php');
+include_once('functions.php');
 
 $postData = $_POST;
 
 $rootPath = $_SERVER['DOCUMENT_ROOT'];
 $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
-if (isset($loggedUser['email'])) {
+if (isset($loggedUser['email']) || isset($loggedUser['pseudo'])) {
     echo 'Vous êtes déjà connecté.';
-    header("refresh:5;$rootUrl/index.php");
+    echo 'Redirection vers la page d\'accueil dans 5 secondes.';
+    header("refresh:5;$rootUrl"."index.php");
     exit();
 }
 
 if (!isset($postData['username']) || !isset($postData['password']) || !isset($postData['email'])) {
     echo('Il faut remplir tous les champs pour pouvoir créer un compte');
-    return;
+    echo 'Redirection vers la page d\'accueil dans 5 secondes.';
+    header("refresh:5;$rootUrl"."index.php");
+    exit();
 } else {
     if (empty($postData['username']) || empty($postData['password']) || empty($postData['email'])) {
         echo('Il faut remplir tous les champs pour pouvoir créer un compte');
-        return;
+        echo 'Redirection vers la page d\'accueil dans 5 secondes.';
+        header("refresh:5;$rootUrl"."index.php");
+        exit();
     } else {
-        $username = mysqli_real_escape_string($mysqlClient,htmlspecialchars($postData['username']));
-        $password = mysqli_real_escape_string($mysqlClient,htmlspecialchars($postData['password']));
-        $email = mysqli_real_escape_string($mysqlClient,htmlspecialchars($postData['email']));
-        $requete = "SELECT count(*) FROM users where 
-        username = ' . $username . ' and email = ' . $email . '";
-        $exec_requete = mysqli_query($mysqlClient,$requete);
-        $reponse = mysqli_fetch_array($exec_requete);
-        $count = $reponse['count(*)'];
-        if($count!=0) {
+        $username = htmlspecialchars($postData['username']);
+        $password = htmlspecialchars($postData['password']);
+        $email = htmlspecialchars($postData['email']);
+
+        $stmt = $mysqlClient->prepare("SELECT COUNT(*) FROM users WHERE username = :username AND email = :email");
+        $stmt->execute([
+            'username' => $username,
+            'email' => $email
+        ]);
+        $count = $stmt->fetchColumn();
+
+        if ($count != 0) {
             echo 'Ce compte existe déjà.';
-            header("refresh:5;$rootUrl/index.php");
+            echo 'Redirection vers la page d\'accueil dans 5 secondes.';
+            header("refresh:5;$rootUrl"."index.php");
             exit();
         } else {
-            $requete = "SELECT count(*) FROM users where username = ' . $username . ' or  email = ' . $email . '";
-            $exec_requete = mysqli_query($mysqlClient,$requete);
-            $reponse = mysqli_fetch_array($exec_requete);
-            $count = $reponse['count(*)'];
-            if($count!=0) {
+            $stmt = $mysqlClient->prepare("SELECT COUNT(*) FROM users WHERE username = :username OR email = :email");
+            $stmt->execute([
+                'username' => $username,
+                'email' => $email
+            ]);
+            $count = $stmt->fetchColumn();
+
+            if ($count != 0) {
                 echo 'Ton nom d\'utilisateur ou ton adresse mail est déjà utilisé.';
-                header("refresh:5;$rootUrl/index.php");
+                echo 'Redirection vers la page d\'accueil dans 5 secondes.';
+                header("refresh:5;$rootUrl"."index.php");
                 exit();
             } else {
-            $insertRecipe = $mysqlClient->prepare('INSERT INTO users(username, email, password) VALUES (:username, :email, :password)');
-            $insertRecipe->execute([
-                'username' => $username,
-                'password' => $password,
-                'email' => $email,
-            ]);
+                $stmt = $mysqlClient->prepare('INSERT INTO users (username, email, password) VALUES (:username, :email, :password)');
+                $stmt->execute([
+                    'username' => $username,
+                    'email' => $email,
+                    'password' => $password
+                ]);
             }
         }
     }
 }
-
 ?>
+
 
 <?php
 $nameExtension = basename(__FILE__);
@@ -75,7 +88,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 <head>
     <title><?php echo($Cname); ?> - WorkshopRessources</title>
     <!-- Required meta tags -->
-    <link rel="stylesheet" href="<?php echo($rootUrl). 'style-admin.css'?>">
+    <link rel="stylesheet" href="<?php echo($rootUrl). 'style.css'?>">
     <link rel="icon" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.ico'?>">
     <link rel="apple-touch-icon" sizes="114x114" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
     <link rel="shortcut icon" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
@@ -129,7 +142,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
     </form>
     <br/>
 </main>
-<?php include_once('../../footer.php'); ?>
+<?php include_once($rootPath.'/footer.php'); ?>
 <script>
     var dropdown = document.getElementsByClassName("btn-dropdown-ws");
     var i;
