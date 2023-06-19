@@ -1,10 +1,10 @@
 <?php
 
-const MYSQL_HOST = '54.37.204.19';
-const MYSQL_PORT = 3306;
-const MYSQL_NAME = 's79805_WorkshopRessources';
-const MYSQL_USER = 'u79805_RH6t4MFKuh';
-const MYSQL_PASSWORD = 'h2w+Lx5w.RPvqU+xB0YeiuTu';
+    const MYSQL_HOST = echo($_ENV['MYSQL_HOST']);
+    const MYSQL_USER = echo($_ENV['MYSQL_USERNAME']);
+    const MYSQL_PASSWORD = echo($_ENV['MYSQL_PASSWORD']);
+    const MYSQL_NAME = echo($_ENV['MYSQL_DATABASE']);
+    const MYSQL_PORT = 3306;
 
 try {
     $mysqlClient = new PDO(
@@ -16,3 +16,5 @@ try {
 } catch(Exception $exception) {
     die('Erreur : '.$exception->getMessage());
 }
+
+?>
