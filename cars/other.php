@@ -84,19 +84,19 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
     <main class="main-download">
         <div class="title-download">
             <h1><?php echo($Cname); ?></h1>
-            <p>Vous trouverez ici les autres templates</p>
+            <p>Vous trouverez ici les templates de <?php echo($Cname); ?></p>
         </div>
         <div class="grid-download">
         <?php foreach (get_car($$name) as $category_item) : ?>
             <div class="grid-download-item">
                     <div class="grid-download-item-img">
-                        <img src="<?php echo($category_item['car_photo']); ?>"
+                        <img src="../<?php echo($category_item['car_photo']); ?>"
                              alt="<?php echo($category_item['car_title']); ?> <?php echo($Cname); ?>" loading="lazy";>
                     </div>
                 <a href="<?php echo($category_item['car_url']); ?>" target="_blank">
                     <p><?php echo($category_item['car_title']); ?></p>
                 </a>
-                    <a class="grid-download-item-a" href="<?php echo($category_item['car_photo']); ?>" download>Télécharger</a>
+                    <a class="grid-download-item-a" href="../<?php echo($category_item['car_photo']); ?>" download>Télécharger</a>
             </div>
 
         <?php endforeach ?>

@@ -94,10 +94,10 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
                         <img src="<?php echo($category_item['car_photo']); ?>"
                              alt="<?php echo($category_item['car_title']); ?> <?php echo($Cname); ?>" loading="lazy";>
                     </div>
-                <a href="<?php echo($category_item['car_url']); ?>" target="_blank">
+                <a href="../<?php echo($category_item['car_url']); ?>" target="_blank">
                     <p><?php echo($category_item['car_title']); ?></p>
                 </a>
-                    <a class="grid-download-item-a" href="<?php echo($category_item['car_photo']); ?>" download>Télécharger</a>
+                    <a class="grid-download-item-a" href="../<?php echo($category_item['car_photo']); ?>" download>Télécharger</a>
             </div>
             <?php } ?>
 

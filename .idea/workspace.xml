@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="99e47d32-5c25-4ae9-abe7-24cc3e09903b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/car_admin/create.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/car_admin/create.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/car_admin/delete.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/car_admin/delete.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/car_admin/post_create.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/car_admin/post_create.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/car_admin/post_update.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/car_admin/post_update.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/car_admin/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/car_admin/update.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/home.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cars/alexcars.php" beforeDir="false" afterPath="$PROJECT_DIR$/cars/alexcars.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cars/azok30.php" beforeDir="false" afterPath="$PROJECT_DIR$/cars/azok30.php" afterDir="false" />
@@ -19,7 +16,6 @@
       <change beforePath="$PROJECT_DIR$/cars/rytrak.php" beforeDir="false" afterPath="$PROJECT_DIR$/cars/rytrak.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cars/sgm.php" beforeDir="false" afterPath="$PROJECT_DIR$/cars/sgm.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cars/w4nou.php" beforeDir="false" afterPath="$PROJECT_DIR$/cars/w4nou.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/misc/decals.php" beforeDir="false" afterPath="$PROJECT_DIR$/misc/decals.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/misc/zebra.php" beforeDir="false" afterPath="$PROJECT_DIR$/misc/zebra.php" afterDir="false" />
     </list>
@@ -117,7 +113,7 @@
       <workItem from="1687035283804" duration="3814000" />
       <workItem from="1687088584826" duration="25849000" />
       <workItem from="1687167918179" duration="761000" />
-      <workItem from="1687169470816" duration="5138000" />
+      <workItem from="1687169470816" duration="5706000" />
     </task>
     <servers />
   </component>

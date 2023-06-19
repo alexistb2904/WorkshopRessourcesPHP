@@ -131,7 +131,7 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
             <h1><?php echo($title); ?> à été mis à jour</h1>
             <p>Catégorie : <?php echo($creator); ?></p>
             <div class="grid-img">
-                <img src="<?php echo($photo); ?>"
+                <img src="../../<?php echo($photo); ?>"
                      alt="<?php echo($title); ?>" loading="lazy";>
 
             </div>

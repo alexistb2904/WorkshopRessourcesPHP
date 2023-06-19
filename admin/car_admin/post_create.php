@@ -60,7 +60,8 @@ $rootPath = $_SERVER['DOCUMENT_ROOT'];
 $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
 
 ?>
-
+<!doctype html>
+<html lang="fr">
 <head>
     <title><?php echo($Cname); ?> - WorkshopRessources</title>
     <!-- Required meta tags -->
@@ -115,7 +116,7 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
             <h1><?php echo($title); ?> à été crée</h1>
             <p>Catégorie : <?php echo($creator); ?></p>
             <div class="grid-img">
-                <img src="<?php echo($photo); ?>"
+                <img src="../../<?php echo($photo); ?>"
                      alt="<?php echo($title); ?>" loading="lazy";>
 
             </div>
