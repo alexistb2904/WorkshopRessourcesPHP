@@ -108,7 +108,7 @@
                 <?php else: ?>
                     <h1 class="entrytext">Bienvenue sur Workshop Ressources ! <br><br></h1>
                 <?php endif; ?>
-                <p>Ce site vous permettra de trouver du
+                <p>Ce site vous permettra de trouver du <?php echo($_ENV['MYSQL_DATABASE']); ?>
                     contenu qui vous convient, que ce soit des modèles, des décalcomanies ou des motifs zébrés. Nous
                     proposons une grande variété de ressources à votre disposition, et tout cela
                     gratuitement.<br><br>Amusez-vous bien !</p>
