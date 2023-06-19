@@ -91,10 +91,10 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
             <?php if($category_item['is_enabled'] == "1") { ?>
             <div class="grid-download-item">
                     <div class="grid-download-item-img">
-                        <img src="<?php echo($category_item['car_photo']); ?>"
+                        <img src="../<?php echo($category_item['car_photo']); ?>"
                              alt="<?php echo($category_item['car_title']); ?> <?php echo($Cname); ?>" loading="lazy";>
                     </div>
-                <a href="../<?php echo($category_item['car_url']); ?>" target="_blank">
+                <a href="<?php echo($category_item['car_url']); ?>" target="_blank">
                     <p><?php echo($category_item['car_title']); ?></p>
                 </a>
                     <a class="grid-download-item-a" href="../<?php echo($category_item['car_photo']); ?>" download>Télécharger</a>
