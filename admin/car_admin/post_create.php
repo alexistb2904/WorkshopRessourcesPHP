@@ -13,16 +13,31 @@ if (!is_admin($loggedUser['email'])) {
     header("refresh:5;$rootUrl/index.php");
     exit();
 }
-if (
-    !isset($postData['car_title']) || !isset($postData['car_url']) || !isset($postData['car_photo']) || !isset($postData['creator'])
-    )
-{
-	echo('Il faut remplir tous les champs pour pouvoir créer un véhicule.');
+
+if (!isset($postData['creator'])) {
+    echo('Il faut remplir tous les champs pour pouvoir créer un véhicule.');
     return;
+} else {
+    if ($postData['creator'] === 'zebra' || $postData['creator'] === 'decals') {
+        if (
+            !isset($postData['car_title']) || !isset($postData['car_photo'])
+        ) {
+            echo('Il faut remplir tous les champs pour pouvoir créer un véhicule.');
+            return;
+        }
+    } elseif ( !isset($postData['car_title']) || !isset($postData['car_url']) || !isset($postData['car_photo']) )
+    {
+        echo('Il faut remplir tous les champs pour pouvoir créer un véhicule.');
+        return;
+    }
 }
 
 $title = $postData['car_title'];
-$url = $postData['car_url'];
+if (!isset($postData['car_url'])){
+    $url = '';
+} else {
+    $url = $postData['car_url'];
+}
 $photo = $rootUrl . '' . $postData['car_photo'];
 $creator = $postData['creator'];
 
@@ -104,7 +119,10 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
                      alt="<?php echo($title); ?>" loading="lazy";>
 
             </div>
+            <?php if($creator == 'zebra' || $creator == 'decals' ) { ?>
+            <?php } else { ?>
             <a href="<?php echo($url); ?>">Lien Workshop</a>
+            <?php } ?>
         </div>
     </form>
     <br/>

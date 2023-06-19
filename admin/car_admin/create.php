@@ -72,9 +72,19 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
         <form action="<?php echo($rootUrl . 'admin/car_admin/post_create.php'); ?>" method="POST">
             <h1>Création de contenu</h1>
             <div class="part-form">
-                <label for="creator-fake" class="form-label">Choisi un créateur</label>
-                <input type="text" class="form-control" id="creator-fake" name="creator-fake" value="<?php echo($getData['creator']); ?>" disabled>
-                <input type="hidden" class="form-control" id="creator" name="creator" value="<?php echo($getData['creator']); ?>">
+                <label for="creator" class="form-label">Choisi une catégorie</label>
+                <select name="creator" id="creator">
+                    <option value="<?php echo($getData['creator']); ?>" selected><?php echo($getData['creator']); ?></option>
+                    <option value="azok30">Azok30</option>
+                    <option value="rytrak">Rytrak</option>
+                    <option value="sgm">SGM</option>
+                    <option value="itzdannio25">ItzDannio25</option>
+                    <option value="w4nou">W4nou</option>
+                    <option value="alexcars">AlexCars</option>
+                    <option value="other">Autre</option>
+                    <option value="zebra">Zébra</option>
+                    <option value="decals">Decals</option>
+                </select>
             </div>
             <div class="part-form">
                 <label for="car_title" class="form-label">Titre du contenu</label>
@@ -82,7 +92,7 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
             </div>
             <div class="part-form">
                 <label for="car_url" class="form-label">Url du contenu</label>
-                <input type="text" class="form-control" placeholder="URL Workshop du contenu" id="car_url" name="car_url" autocomplete="off">
+                <input type="text" class="form-control" placeholder="URL Workshop du contenu | Sauf zébra & decals" id="car_url" name="car_url" autocomplete="off">
             </div>
             <div class="part-form">
                 <label for="car_photo" class="form-label">Template/Image du contenu</label>

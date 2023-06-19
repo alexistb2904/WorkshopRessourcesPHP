@@ -14,27 +14,55 @@ if (!is_admin($loggedUser['email'])) {
 
 $postData = $_POST;
 
-if (
-    !isset($postData['car_title']) || !isset($postData['car_url']) || !isset($postData['car_photo']) || !isset($postData['creator']) || !isset($postData['id'])
-    )
-{
-	echo('Il manque des informations pour permettre l\'édition du véhicule.');
+if (!isset($postData['creator'])) {
+    echo('Il faut remplir tous les champs pour pouvoir créer un véhicule.');
     return;
-}	
+} else {
+    if ($postData['creator'] === 'zebra' || $postData['creator'] === 'decals') {
+        if (
+            !isset($postData['car_title']) || !isset($postData['car_photo']) || !isset($postData['id']) || !isset($postData['is_enabled'])
+        ) {
+            echo('Il faut remplir tous les champs pour pouvoir créer un véhicule.');
+            return;
+        }
+    } elseif ( !isset($postData['car_title']) || !isset($postData['car_url']) || !isset($postData['car_photo']) || !isset($postData['id']) )
+    {
+        echo('Il faut remplir tous les champs pour pouvoir créer un véhicule.');
+        return;
+    }
+}
 
 $id = $postData['id'];
 $title = $postData['car_title'];
 $photo = $rootUrl . '' . $postData['car_photo'];
-$url = $postData['car_url'];
+if (!isset($postData['car_url'])){
+    $url = '';
+} else {
+    $url = $postData['car_url'];
+}
+if (isset($postData['is_enabled'])){
+    $is_enabled = $postData['is_enabled'];
+}
 $creator = $postData['creator'];
 
-$insertRecipeStatement = $mysqlClient->prepare('UPDATE ' . $creator . ' SET car_title = :title, car_url = :url, car_photo = :photo WHERE car_id = :id');
-$insertRecipeStatement->execute([
-    'title' => $title,
-    'photo' => $photo,
-    'url' => $url,
-    'id' => $id,
-]);
+if (!isset($postData['is_enabled'])) {
+    $insertRecipeStatement = $mysqlClient->prepare('UPDATE ' . $creator . ' SET car_title = :title, car_url = :url, car_photo = :photo WHERE car_id = :id');
+    $insertRecipeStatement->execute([
+        'title' => $title,
+        'photo' => $photo,
+        'url' => $url,
+        'id' => $id,
+    ]);
+} else {
+    $insertRecipeStatement = $mysqlClient->prepare('UPDATE ' . $creator . ' SET car_title = :title, car_url = :url, car_photo = :photo, is_enabled = :is_enabled WHERE car_id = :id');
+    $insertRecipeStatement->execute([
+        'title' => $title,
+        'photo' => $photo,
+        'url' => $url,
+        'is_enabled' => $is_enabled,
+        'id' => $id,
+    ]);
+}
 
 ?>
 
@@ -100,13 +128,18 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
 
     <form action="" method="POST">
         <div style="display: flex; align-items: center; flex-direction: column">
-            <h1><?php echo($title); ?> à été modifié</h1>
+            <h1><?php echo($title); ?> à été mis à jour</h1>
+            <p>Catégorie : <?php echo($creator); ?></p>
             <div class="grid-img">
                 <img src="<?php echo($photo); ?>"
                      alt="<?php echo($title); ?>" loading="lazy";>
 
             </div>
-            <a href="<?php echo($url); ?>">Lien Workshop</a>
+            <?php if($creator == 'zebra' || $creator == 'decals' ) { ?>
+                <a href="<?php echo($url); ?>">Status <?php echo($url); ?></a>
+            <?php } else { ?>
+                <a href="<?php echo($url); ?>">Lien Workshop</a>
+            <?php } ?>
         </div>
     </form>
     <br/>

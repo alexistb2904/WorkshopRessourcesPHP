@@ -32,6 +32,14 @@ $otherFetch = $mysqlClient->prepare('SELECT * FROM other');
 $otherFetch->execute();
 $other = $otherFetch->fetchAll();
 
+$zebraFetch = $mysqlClient->prepare('SELECT * FROM zebra');
+$zebraFetch->execute();
+$zebra = $zebraFetch->fetchAll();
+
+$decalsFetch = $mysqlClient->prepare('SELECT * FROM decals');
+$decalsFetch->execute();
+$decals = $decalsFetch->fetchAll();
+
 // Si le cookie est présent
 if (isset($_COOKIE['LOGGED_USER']) || isset($_SESSION['LOGGED_USER'])) {
     $loggedUser = [

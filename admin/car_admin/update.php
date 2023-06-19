@@ -78,26 +78,32 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
         <form action="<?php echo($rootUrl . 'admin/car_admin/post_update.php'); ?>" method="POST">
             <h1>Mettre à jour <?php echo($getData['car_title']); ?></h1>
             <div class="part-form">
-                <label for="id" class="form-label">ID du véhicule</label>
+                <label for="id" class="form-label">ID du contenu</label>
                 <input type="text" class="form-control" id="id" name="id" value="<?php echo($getData['id']); ?> " disabled>
                 <input type="hidden" class="form-control" id="creator" name="creator" value="<?php echo($getData['creator']); ?>">
             </div>
             <div class="part-form">
-                <label for="id" class="form-label">Créateur du véhicule</label>
+                <label for="id" class="form-label">Créateur du contenu</label>
                 <input type="text" class="form-control" id="creator" name="creator" value="<?php echo($getData['creator']); ?> " disabled>
             </div>
             <div class="part-form">
-                <label for="car_title" class="form-label">Titre du véhicule</label>
+                <label for="car_title" class="form-label">Titre du contenu</label>
                 <input type="text" class="form-control" id="car_title" name="car_title" aria-describedby="title-help" value="<?php echo($getData['car_title']); ?>" placeholder="<?php echo($getData['car_title']); ?>" autocomplete="off">
             </div>
             <div class="part-form">
                 <label for="car_url" class="form-label">Url du workshop</label>
-                <input type="text" class="form-control" placeholder="URL Workshop du véhicule" id="car_url" name="car_url" value="<?php echo strip_tags($getData['car_url']); ?>" autocomplete="off">
+                <input type="text" class="form-control" placeholder="URL Workshop du contenu" id="car_url" name="car_url" value="<?php echo strip_tags($getData['car_url']); ?>" autocomplete="off">
             </div>
             <div class="part-form">
-                <label for="car_photo" class="form-label">Template du véhicule</label>
+                <label for="car_photo" class="form-label">Template du contenu</label>
                 <input type="text" class="form-control" placeholder="URL de l'image" id="car_photo" name="car_photo" value="<?php echo strip_tags($getData['car_photo']); ?>" autocomplete="off">
             </div>
+            <?php if(isset($getData['is_enabled'])) { ?>
+                <div class="part-form">
+                    <label for="is_enabled" class="form-label">Activation</label>
+                    <input type="text" class="form-control" placeholder="Base : <?php echo strip_tags($getData['is_enabled']); ?>" id="is_enabled" name="is_enabled" value="<?php echo strip_tags($getData['is_enabled']); ?>" autocomplete="off">
+                </div>
+            <?php } ?>
             <button type="submit" class="btn-up">Envoyer</button>
         </form>
         <br />
