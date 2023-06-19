@@ -33,10 +33,7 @@ if (isset($postData['email']) &&  isset($postData['password'])) {
 
             $_SESSION['LOGGED_USER'] = $loggedUser['email'];
         } else {
-            $errorMessage = sprintf('Les informations envoyées ne permettent pas de vous identifier : (%s/%s)',
-                $postData['email'],
-                $postData['password']
-            );
+            $errorMessage = "L'email ou le mot de passe est incorrect.";
         }
     }
 }
