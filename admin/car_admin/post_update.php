@@ -15,7 +15,7 @@ if (!is_admin($loggedUser['email'])) {
 $postData = $_POST;
 
 if (!isset($postData['creator'])) {
-    echo('Il faut remplir tous les champs pour pouvoir créer un véhicule ERROR1.');
+    echo('Il faut remplir tous les champs pour pouvoir créer un véhicule ERROR1.' . $postData['creator'] . ' ');
     return;
 } else {
     if ($postData['creator'] === 'zebra' || $postData['creator'] === 'decals') {
