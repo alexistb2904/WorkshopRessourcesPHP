@@ -48,4 +48,4 @@ if (isset($_COOKIE['LOGGED_USER']) || isset($_SESSION['LOGGED_USER'])) {
 }
 
 $rootPath = $_SERVER['DOCUMENT_ROOT'];
-$rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
+$rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
