@@ -8,14 +8,14 @@ include_once('functions.php');
 
 $postData = $_POST;
 
-if (isset($postData['email']) &&  isset($postData['password'])) {
-    $passhash = password_hash($postData['password'], PASSWORD_DEFAULT);
+if (htmlspecialchars(isset($postData['email'])) &&  htmlspecialchars(isset($postData['password']))) {
+    $passhash = htmlspecialchars(password_hash($postData['password'], PASSWORD_DEFAULT));
     foreach ($users as $user) {
         if (
-            $user['email'] === $postData['email'] && password_verify($user['password'], $passhash)
+            htmlspecialchars($user['email']) === htmlspecialchars($postData['email']) && password_verify(htmlspecialchars($user['password']), $passhash)
         ) {
             $loggedUser = [
-                'email' => $user['email'],
+                'email' => htmlspecialchars($user['email']),
             ];
 
             /**
@@ -109,6 +109,8 @@ if (isset($_COOKIE['LOGGED_USER']) || isset($_SESSION['LOGGED_USER'])) {
 <?php include_once('header.php'); ?>
 
 <?php if(!isset($loggedUser)): ?>
+    <div>
+        <div>
     <form action="" method="post">
         <div class="part-form" style="display: flex; align-items: center; flex-direction: column">
         <?php if(isset($errorMessage)) : ?>
@@ -126,6 +128,26 @@ if (isset($_COOKIE['LOGGED_USER']) || isset($_SESSION['LOGGED_USER'])) {
         </div>
         <button type="submit" class="btn-accueil" style="margin-bottom: 3vmax;">Envoyer</button>
     </form>
+        </div>
+        <div>
+            <form action="createaccount.php" method="post">
+                <div class="part-form" style="display: flex; align-items: center; flex-direction: column">
+                    <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;margin-top: 3vmax;margin-bottom: 1vmax;'>
+                        <label for="username" class="form-label">Pseudo</label>
+                        <input type="username" class="form-control" id="email" name="username" placeholder="Ton pseudo ( 64 max )">
+                    </div>
+                    <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;margin-top: 3vmax;margin-bottom: 1vmax;'>
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="email-help" placeholder="you@exemple.com">
+                    </div>
+                    <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;'>
+                        <label for="password" class="form-label">Mot de passe</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+                    <button type="submit" class="btn-accueil" style="margin-bottom: 3vmax;">Envoyer</button>
+            </form>
+        </div>
+    </div>
 <?php else: ?>
     <div style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;' role="alert">
         <h1>Bonjour <?php echo($loggedUser['email']); ?> !</h1>
