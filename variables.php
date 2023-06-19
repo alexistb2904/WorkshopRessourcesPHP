@@ -48,7 +48,8 @@ if (isset($_COOKIE['LOGGED_USER_EMAIL']) || isset($_SESSION['LOGGED_USER_EMAIL']
 if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO'])) {
     $loggedUser['pseudo'] = $_COOKIE['LOGGED_USER_PSEUDO'] ?? $_SESSION['LOGGED_USER_PSEUDO'];
 }
-?>
 
 $rootPath = $_SERVER['DOCUMENT_ROOT'];
 $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
+
+
