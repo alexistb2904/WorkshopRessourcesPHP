@@ -27,7 +27,7 @@
                     <a href="<?php echo($rootUrl).'cars/other.php';?>">Autre</a>
                 </div>
             </div>
-            <?php if(isset($loggedUser) && is_admin($loggedUser['email'])) : ?>
+            <?php if(isset($loggedUser) && is_admin($_SESSION['LOGGED_USER_EMAIL'])) : ?>
                 <a class="nav-link" href="<?php echo($rootUrl). 'admin/home.php'; ?>">Panel Administrateur</a>
             <?php elseif(!isset($loggedUser)): ?>
                 <a class="nav-link" href="<?php echo($rootUrl). 'login.php'; ?>">Login</a>
