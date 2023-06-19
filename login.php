@@ -13,7 +13,7 @@ if (htmlspecialchars(isset($postData['login'])) &&  htmlspecialchars(isset($post
         ) {
             $loggedUser = [
                 'email' => htmlspecialchars($user['email']),
-                'pseudo' => htmlspecialchars($user['pseudo']),
+                'pseudo' => htmlspecialchars($user['username'])
             ];
 
             /**
