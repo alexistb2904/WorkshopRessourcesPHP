@@ -38,7 +38,7 @@ if (!isset($postData['car_url'])){
 } else {
     $url = $postData['car_url'];
 }
-$photo = $rootUrl . '' . $postData['car_photo'];
+$photo = $postData['car_photo'];
 $creator = $postData['creator'];
 
 $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $creator . '(car_title, car_url, car_photo) VALUES (:title, :url, :photo)');

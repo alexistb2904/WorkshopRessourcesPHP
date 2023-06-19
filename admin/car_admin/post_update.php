@@ -32,7 +32,7 @@ if (!isset($postData['creator'])) {
 
 $id = $postData['id'];
 $title = $postData['car_title'];
-$photo = $rootUrl . '' . $postData['car_photo'];
+$photo = $postData['car_photo'];
 if (!isset($postData['car_url'])){
     $url = '';
 } else {
@@ -130,11 +130,11 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
             <p>Catégorie : <?php echo($creator); ?></p>
             <div class="grid-img">
                 <img src="../../<?php echo($photo); ?>"
-                     alt="<?php echo($title); ?>" loading="lazy";>
+                     alt="<?php echo($title); ?>" loading="lazy">
 
             </div>
             <?php if($creator == 'zebra' || $creator == 'decals' ) { ?>
-                <a href="<?php echo($url); ?>">Status <?php echo($url); ?></a>
+                <p>Status <?php echo($is_enabled); ?></p>
             <?php } else { ?>
                 <a href="<?php echo($url); ?>">Lien Workshop</a>
             <?php } ?>
