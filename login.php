@@ -126,34 +126,36 @@ if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO
 <?php include_once('header.php'); ?>
 
 <?php if(!isset($loggedUser)): ?>
-    <div>
+    <div style="display: flex; align-items: center; justify-content: space-evenly;">
         <div>
-    <form action="" method="post">
-        <div class="part-form" style="display: flex; align-items: center; flex-direction: column">
-        <?php if(isset($errorMessage)) : ?>
-            <div class="part-form" role="alert" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;'>
-                <?php echo($errorMessage); ?>
+        <form action="" method="post">
+            <p>Se connecter</p>
+            <div class="part-form" style="display: flex; align-items: center; flex-direction: column">
+            <?php if(isset($errorMessage)) : ?>
+                <div class="part-form" role="alert" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;'>
+                    <?php echo($errorMessage); ?>
+                </div>
+            <?php endif; ?>
+            <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;margin-top: 3vmax;margin-bottom: 1vmax;'>
+                <label for="login" class="form-label">Email ou Pseudo</label>
+                <input type="text" class="form-control" id="login" name="login" aria-describedby="email-help" placeholder="you@exemple.com">
             </div>
-        <?php endif; ?>
-        <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;margin-top: 3vmax;margin-bottom: 1vmax;'>
-            <label for="login" class="form-label">Email ou Pseudo</label>
-            <input type="text" class="form-control" id="login" name="login" aria-describedby="email-help" placeholder="you@exemple.com">
-        </div>
-        <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;'>
-            <label for="password" class="form-label">Mot de passe</label>
-            <input type="password" class="form-control" id="password" name="password">
-        </div>
-        <button type="submit" class="btn-accueil" style="margin-bottom: 3vmax;">Envoyer</button>
-    </form>
+            <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;'>
+                <label for="password" class="form-label">Mot de passe</label>
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <button type="submit" class="btn-accueil" style="margin-bottom: 3vmax;">Se connecter</button>
+        </form>
         </div>
         <div>
             <form action="createaccount.php" method="post">
                 <div class="part-form" style="display: flex; align-items: center; flex-direction: column">
+                    <p>Crée un compte</p>
                     <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;margin-top: 3vmax;margin-bottom: 1vmax;'>
                         <label for="username" class="form-label">Pseudo</label>
-                        <input type="username" class="form-control" id="email" name="username" placeholder="Ton pseudo ( 64 max )">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Ton pseudo ( 64 max )">
                     </div>
-                    <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;margin-top: 3vmax;margin-bottom: 1vmax;'>
+                    <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;margin-bottom: 1vmax;'>
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" name="email" aria-describedby="email-help" placeholder="you@exemple.com">
                     </div>
@@ -161,7 +163,7 @@ if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO
                         <label for="password" class="form-label">Mot de passe</label>
                         <input type="password" class="form-control" id="password" name="password">
                     </div>
-                    <button type="submit" class="btn-accueil" style="margin-bottom: 3vmax;">Envoyer</button>
+                    <button type="submit" class="btn-accueil" style="margin-bottom: 3vmax;">S'enregistrer</button>
             </form>
         </div>
     </div>
