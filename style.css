@@ -363,6 +363,12 @@ button[type="submit"] {
     align-items: center;
 }
 
+form p {
+    font-size: 1.5vmax;
+    font-family: "Roboto", sans-serif;
+    color: white;
+    margin: 0px;
+}
 .sectionform {
     display: flex;
     flex-direction: column;

@@ -116,33 +116,35 @@ if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO
         gtag('config', 'G-408NVZ99VY');
     </script>
 </head>
-
+<body>
 <div style="background-color: rgb(38,49,59);">
 
     <!-- Navigation -->
 <?php include_once('header.php'); ?>
 
 <?php if(!isset($loggedUser)): ?>
-    <div>
-        <div style="display: flex; align-items: center; justify-content: space-evenly;">
-        <form action="" method="post">
-            <p>Se connecter</p>
-            <div class="part-form" style="display: flex; align-items: center; flex-direction: column">
-            <?php if(isset($errorMessage)) : ?>
-                <div class="part-form" role="alert" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;'>
-                    <?php echo($errorMessage); ?>
+    <div style="display: flex; align-items: center; justify-content: space-evenly;">
+        <div>
+            <form action="" method="post">
+                <div class="part-form" style="display: flex; align-items: center; flex-direction: column">
+                <p>Se connecter</p>
+                <div class="part-form" style="display: flex; align-items: center; flex-direction: column">
+                <?php if(isset($errorMessage)) : ?>
+                    <div class="part-form" role="alert" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;'>
+                        <?php echo($errorMessage); ?>
+                    </div>
+                <?php endif; ?>
+                <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;margin-top: 3vmax;margin-bottom: 1vmax;'>
+                    <label for="login" class="form-label">Email ou Pseudo</label>
+                    <input type="text" class="form-control" id="login" name="login" aria-describedby="email-help" placeholder="you@exemple.com">
                 </div>
-            <?php endif; ?>
-            <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;margin-top: 3vmax;margin-bottom: 1vmax;'>
-                <label for="login" class="form-label">Email ou Pseudo</label>
-                <input type="text" class="form-control" id="login" name="login" aria-describedby="email-help" placeholder="you@exemple.com">
-            </div>
-            <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;'>
-                <label for="password" class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" id="password" name="password">
-            </div>
-            <button type="submit" class="btn-accueil" style="margin-bottom: 3vmax;">Se connecter</button>
-        </form>
+                <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;'>
+                    <label for="password" class="form-label">Mot de passe</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <button type="submit" class="btn-accueil" style="margin-bottom: 3vmax;">Se connecter</button>
+                </div>
+            </form>
         </div>
         <div>
             <form action="createaccount.php" method="post">
@@ -161,6 +163,7 @@ if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO
                         <input type="password" class="form-control" id="password" name="password">
                     </div>
                     <button type="submit" class="btn-accueil" style="margin-bottom: 3vmax;">S'enregistrer</button>
+                </div>
             </form>
         </div>
     </div>
