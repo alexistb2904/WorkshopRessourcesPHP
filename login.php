@@ -9,9 +9,9 @@ include_once('functions.php');
 $postData = $_POST;
 
 if (isset($postData['email']) &&  isset($postData['password'])) {
+    $passhash = password_hash($postData['password'], PASSWORD_DEFAULT);
     foreach ($users as $user) {
         if (
-            $passhash = password_hash($postData['password'])
             $user['email'] === $postData['email'] && password_verify($user['password'], $passhash)
         ) {
             $loggedUser = [
@@ -25,7 +25,7 @@ if (isset($postData['email']) &&  isset($postData['password'])) {
                 'LOGGED_USER',
                 $loggedUser['email'],
                 [
-                    'expires' => time() + 365*24*3600,
+                    'expires' => time() + 1*24*3600,
                     'secure' => true,
                     'httponly' => true,
                 ]
