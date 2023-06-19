@@ -8,21 +8,22 @@ include_once('functions.php');
 
 $postData = $_POST;
 
-if (htmlspecialchars(isset($postData['email'])) &&  htmlspecialchars(isset($postData['password']))) {
+if (htmlspecialchars(isset($postData['login'])) &&  htmlspecialchars(isset($postData['password']))) {
     $passhash = htmlspecialchars(password_hash($postData['password'], PASSWORD_DEFAULT));
     foreach ($users as $user) {
         if (
-            htmlspecialchars($user['email']) === htmlspecialchars($postData['email']) && password_verify(htmlspecialchars($user['password']), $passhash)
+            htmlspecialchars($user['login']) === htmlspecialchars($postData['login']) && password_verify(htmlspecialchars($user['password']), $passhash)
         ) {
             $loggedUser = [
                 'email' => htmlspecialchars($user['email']),
+                'pseudo' => htmlspecialchars($user['pseudo']),
             ];
 
             /**
              * Cookie qui expire dans un an
              */
             setcookie(
-                'LOGGED_USER',
+                'LOGGED_USER_EMAIL',
                 $loggedUser['email'],
                 [
                     'expires' => time() + 1*24*3600,
@@ -30,8 +31,18 @@ if (htmlspecialchars(isset($postData['email'])) &&  htmlspecialchars(isset($post
                     'httponly' => true,
                 ]
             );
+            setcookie(
+                'LOGGED_USER_PSEUDO',
+                $loggedUser['pseudo'],
+                [
+                    'expires' => time() + 1*24*3600,
+                    'secure' => true,
+                    'httponly' => true,
+                ]
+            );
 
-            $_SESSION['LOGGED_USER'] = $loggedUser['email'];
+            $_SESSION['LOGGED_USER_EMAIL'] = $loggedUser['email'];
+            $_SESSION['LOGGED_USER_PSEUDO'] = $loggedUser['pseudo'];
         } else {
             $errorMessage = "L'email ou le mot de passe est incorrect.";
         }
@@ -39,9 +50,15 @@ if (htmlspecialchars(isset($postData['email'])) &&  htmlspecialchars(isset($post
 }
 
 // Si le cookie ou la session sont présentes
-if (isset($_COOKIE['LOGGED_USER']) || isset($_SESSION['LOGGED_USER'])) {
+if (isset($_COOKIE['LOGGED_USER_EMAIL']) || isset($_SESSION['LOGGED_USER_EMAIL'])) {
     $loggedUser = [
-        'email' => $_COOKIE['LOGGED_USER'] ?? $_SESSION['LOGGED_USER'],
+        'email' => $_COOKIE['LOGGED_USER_EMAIL'] ?? $_SESSION['LOGGED_USER_EMAIL'],
+    ];
+}
+
+if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO'])) {
+    $loggedUser = [
+        'pseudo' => $_COOKIE['LOGGED_USER_PSEUDO'] ?? $_SESSION['LOGGED_USER_PSEUDO'],
     ];
 }
 ?>
@@ -119,8 +136,8 @@ if (isset($_COOKIE['LOGGED_USER']) || isset($_SESSION['LOGGED_USER'])) {
             </div>
         <?php endif; ?>
         <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;margin-top: 3vmax;margin-bottom: 1vmax;'>
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" aria-describedby="email-help" placeholder="you@exemple.com">
+            <label for="login" class="form-label">Email ou Pseudo</label>
+            <input type="text" class="form-control" id="login" name="login" aria-describedby="email-help" placeholder="you@exemple.com">
         </div>
         <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;'>
             <label for="password" class="form-label">Mot de passe</label>
@@ -150,7 +167,7 @@ if (isset($_COOKIE['LOGGED_USER']) || isset($_SESSION['LOGGED_USER'])) {
     </div>
 <?php else: ?>
     <div style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;' role="alert">
-        <h1>Bonjour <?php echo($loggedUser['email']); ?> !</h1>
+        <h1>Bonjour <?php echo($loggedUser['pseudo']); ?> !</h1>
         <a class="grid-download-item-a" style="margin-bottom: 2vmax" href="index.php"><p>Accueil</p></a>
     </div>
 <?php endif; ?>

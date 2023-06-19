@@ -104,7 +104,7 @@
             </div>
             <div class="start-text">
                 <?php if(isset($loggedUser)) : ?>
-                    <h1 class="entrytext">Bienvenue sur Workshop Ressources <?php echo($loggedUser['email']); ?> ! <br><br></h1>
+                    <h1 class="entrytext">Bienvenue sur Workshop Ressources <?php echo($loggedUser['pseudo']); ?> ! <br><br></h1>
                 <?php else: ?>
                     <h1 class="entrytext">Bienvenue sur Workshop Ressources ! <br><br></h1>
                 <?php endif; ?>
