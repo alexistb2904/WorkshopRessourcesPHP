@@ -9,7 +9,7 @@ if (htmlspecialchars(isset($postData['login'])) &&  htmlspecialchars(isset($post
     $passhash = htmlspecialchars(password_hash($postData['password'], PASSWORD_DEFAULT));
     foreach ($users as $user) {
         if (
-            htmlspecialchars($user['login']) === htmlspecialchars($postData['login']) && password_verify(htmlspecialchars($user['password']), $passhash)
+            htmlspecialchars($user['email']) || htmlspecialchars($user['username']) === htmlspecialchars($postData['login']) && password_verify(htmlspecialchars($user['password']), $passhash)
         ) {
             $loggedUser = [
                 'email' => htmlspecialchars($user['email']),
