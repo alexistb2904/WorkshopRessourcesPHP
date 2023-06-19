@@ -2,9 +2,6 @@
 include_once('config/mysql.php');
 include_once('variables.php');
 include_once('functions.php');
-?>
-
-<?php
 
 $postData = $_POST;
 
@@ -67,7 +64,7 @@ if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO
     <html lang="fr">
 
 <head>
-    <title>AlexCars - WorkshopRessources</title>
+    <title>Connection - WorkshopRessources</title>
     <!-- Required meta tags -->
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="../../assets/img/Logo/LogoWS.ico">
@@ -82,16 +79,16 @@ if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO
     <link rel="canonical" href="https://workshopressources.fr/template/creator/alexcars" />
 
     <!-- Base Meta Tags -->
-    <meta name="title" content="AlexCars - WorkshopRessources">
+    <meta name="title" content="Connection - WorkshopRessources">
     <meta name="description"
-          content="Ici découvrez les templates des véhicules de AlexCars (alexistb2904) qui sont disponible sur WorkshopRessources.">
+          content="Page de connection workshopressources">
     <meta name="keywords"
           content="AlexCars,workshop,ressources,steam,download,template,gratuit,free,vehicle,véhicule,voiture,3D,police,secours,pompiers,png,jpeg,jpg,alexistb2904">
 
     <!-- Facebook Meta Tags -->
-    <meta property="og:title" content="Templates de AlexCars" />
+    <meta property="og:title" content="Connection - WorkshopRessources" />
     <meta property="og:description"
-          content="Ici découvrez les templates des véhicules de AlexCars (alexistb2904) qui sont disponible sur WorkshopRessources." />
+          content="Page de connection workshopressources" />
     <meta property="og:image" content="https://workshopressources.fr/assets/img/Logo/LogoWS.png">
     <meta property="og:url" content="https://workshopressources.fr/template/creator/alexcars" />
     <meta property="og:locale" content="fr_FR" />
@@ -100,9 +97,9 @@ if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO
     <!-- Twitter Meta Tags -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://workshopressources.fr/template/creator/alexcars">
-    <meta property="twitter:title" content="Templates de AlexCars">
+    <meta property="twitter:title" content="Connection - WorkshopRessources">
     <meta property="twitter:description"
-          content="Ici découvrez les templates des véhicules de AlexCars (alexistb2904) qui sont disponible sur WorkshopRessources.">
+          content="Page de connection workshopressources">
     <meta property="twitter:image" content="https://workshopressources.fr/assets/img/Logo/LogoWS.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
