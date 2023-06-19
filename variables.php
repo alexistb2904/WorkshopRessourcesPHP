@@ -40,12 +40,15 @@ $decalsFetch = $mysqlClient->prepare('SELECT * FROM decals');
 $decalsFetch->execute();
 $decals = $decalsFetch->fetchAll();
 
-// Si le cookie est présent
-if (isset($_COOKIE['LOGGED_USER']) || isset($_SESSION['LOGGED_USER'])) {
-    $loggedUser = [
-        'email' => $_COOKIE['LOGGED_USER'] ?? $_SESSION['LOGGED_USER'],
-    ];
+// Si le cookie ou la session sont présentes
+if (isset($_COOKIE['LOGGED_USER_EMAIL']) || isset($_SESSION['LOGGED_USER_EMAIL'])) {
+    $loggedUser['email'] = $_COOKIE['LOGGED_USER_EMAIL'] ?? $_SESSION['LOGGED_USER_EMAIL'];
 }
+
+if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO'])) {
+    $loggedUser['pseudo'] = $_COOKIE['LOGGED_USER_PSEUDO'] ?? $_SESSION['LOGGED_USER_PSEUDO'];
+}
+?>
 
 $rootPath = $_SERVER['DOCUMENT_ROOT'];
 $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
