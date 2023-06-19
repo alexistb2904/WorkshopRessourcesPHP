@@ -29,9 +29,9 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
     <title><?php echo($Cname); ?> - WorkshopRessources</title>
     <!-- Required meta tags -->
     <link rel="stylesheet" href="<?php echo($rootUrl). 'style-admin.css'?>">
-    <link rel="icon" href=<?php echo($rootUrl). 'assets/img/Logo/LogoWS.ico'?>">
+    <link rel="icon" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.ico'?>">
     <link rel="apple-touch-icon" sizes="114x114" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
-    <link rel="shortcut icon" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?> type="image/png" />
+    <link rel="shortcut icon" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="color-scheme" content="normal">

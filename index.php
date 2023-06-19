@@ -3,43 +3,43 @@
 <html lang="fr">
 
 <head>
-    <title>Home - WorkshopRessources</title>
+    <title>Accueil - WorkshopRessources</title>
     <!-- Required meta tags -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="../../assets/img/Logo/LogoWS.ico">
-    <link rel="apple-touch-icon" sizes="114x114" href="../../assets/img/Logo/LogoWS.png" type="image/png" />
-    <link rel="shortcut icon" href="../../assets/img/Logo/LogoWS.png" type="image/png" />
+    <link rel="stylesheet" href="<?php echo($rootUrl). 'style.css'?>">
+    <link rel="icon" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.ico'?>">
+    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
+    <link rel="shortcut icon" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="color-scheme" content="normal">
     <meta name="author" content="alexistb2904">
     <meta name="robots" content="index, follow">
     <meta http-equiv="content-language" content="fr-fr">
-    <link rel="canonical" href="https://workshopressources.fr/template/creator/alexcars" />
+    <link rel="canonical" href="https://<?php echo($currentURL); ?>" />
 
     <!-- Base Meta Tags -->
-    <meta name="title" content="AlexCars - WorkshopRessources">
+    <meta name="title" content="Accueil - WorkshopRessources">
     <meta name="description"
-          content="Ici découvrez les templates des véhicules de AlexCars (alexistb2904) qui sont disponible sur WorkshopRessources.">
+          content="WorkshopRessources est une plateforme qui propose une variété de ressources utiles aux reskinneurs et développeurs de Garry's Mod.">
     <meta name="keywords"
-          content="AlexCars,workshop,ressources,steam,download,template,gratuit,free,vehicle,véhicule,voiture,3D,police,secours,pompiers,png,jpeg,jpg,alexistb2904">
+          content="Accueil,workshop,ressources,steam,download,template,gratuit,free,vehicle,véhicule,voiture,3D,police,secours,pompiers,png,jpeg,jpg,alexistb2904,decals,zebra">
 
     <!-- Facebook Meta Tags -->
-    <meta property="og:title" content="Templates de AlexCars" />
+    <meta property="og:title" content="Accueil - WorkshopRessources" />
     <meta property="og:description"
-          content="Ici découvrez les templates des véhicules de AlexCars (alexistb2904) qui sont disponible sur WorkshopRessources." />
-    <meta property="og:image" content="https://workshopressources.fr/assets/img/Logo/LogoWS.png">
-    <meta property="og:url" content="https://workshopressources.fr/template/creator/alexcars" />
+          content="WorkshopRessources est une plateforme qui propose une variété de ressources utiles aux reskinneurs et développeurs de Garry's Mod." />
+    <meta property="og:image" content="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>">
+    <meta property="og:url" content="https://<?php echo($currentURL); ?>" />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:type" content="website">
 
     <!-- Twitter Meta Tags -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://workshopressources.fr/template/creator/alexcars">
-    <meta property="twitter:title" content="Templates de AlexCars">
+    <meta property="twitter:url" content="https://<?php echo($currentURL); ?>">
+    <meta property="twitter:title" content="Accueil - WorkshopRessources">
     <meta property="twitter:description"
-          content="Ici découvrez les templates des véhicules de AlexCars (alexistb2904) qui sont disponible sur WorkshopRessources.">
-    <meta property="twitter:image" content="https://workshopressources.fr/assets/img/Logo/LogoWS.png">
+          content="WorkshopRessources est une plateforme qui propose une variété de ressources utiles aux reskinneurs et développeurs de Garry's Mod.">
+    <meta property="twitter:image" content="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
@@ -100,7 +100,7 @@
     <main>
         <div class="start">
             <div class="start-img">
-                <img src="https://workshopressources.fr/assets/img/gmodimage/ImgAccueil/gmodaccueil.webp" alt="Peugeot 208 Gendamerie" width="1366" height="768" loading="lazy">
+                <img src="<?php echo($rootUrl). 'assets/img/gmodimage/ImgAccueil/gmodaccueil.webp'?>" alt="Peugeot 208 Gendamerie" width="1366" height="768" loading="lazy">
             </div>
             <div class="start-text">
                 <?php if(isset($loggedUser)) : ?>
