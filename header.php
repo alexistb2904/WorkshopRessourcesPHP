@@ -11,8 +11,8 @@
         </div>
         <div class="nav-bar">
             <a href="<?php echo($rootUrl). 'index.php'; ?>">Accueil</a>
-            <a href="<?php echo($rootUrl). 'zebra/page.php'; ?>">Zébra</a>
-            <a href="<?php echo($rootUrl). 'help/helpreskin.php'; ?>">Aide</a>
+            <a href="<?php echo($rootUrl). 'misc/zebra.php'; ?>">Zébra</a>
+            <a href="<?php echo($rootUrl). 'misc/helpreskin.php'; ?>">Aide</a>
             <div class="dropdown">
                 <button class="btn-dropdown-ws">Template</button>
                 <div class="dropdown-content">

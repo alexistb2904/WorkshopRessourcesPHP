@@ -122,22 +122,22 @@
                         <p class="h3card">Template</p>
                     </div>
                 </a>
-                <a href="zebra/page" class="zebra">
+                <a href="misc/zebra.php" class="zebra">
                     <div>
                         <p class="h3card">Zébras</p>
                     </div>
                 </a>
-                <a href="decals/page" class="decals">
+                <a href="misc/decals.php" class="decals">
                     <div>
                         <p class="h3card">Decals</p>
                     </div>
                 </a>
-                <a href="help/helpreskin" class="aide">
+                <a href="misc/helpreskin.php" class="aide">
                     <div>
                         <p class="h3card">Aide</p>
                     </div>
                 </a>
-                <a href="help/vmt.vtf" class="vmt_vtf">
+                <a href="misc/vmt.vtf.php" class="vmt_vtf">
                     <div>
                         <p class="h3card">Vmt / Vtf</p>
                     </div>
