@@ -161,7 +161,7 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
         <details open="true">
             <summary>Decals</summary>
             <div class="grid-download">
-                <?php foreach ($zebra as $category_item) : ?>
+                <?php foreach ($decals as $category_item) : ?>
                     <div class="grid-download-item">
                         <div class="grid-download-item-img">
                             <img src="<?php echo $category_item['car_photo']; ?>"

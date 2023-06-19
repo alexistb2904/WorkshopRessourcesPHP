@@ -88,6 +88,7 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
         </div>
         <div class="grid-download">
         <?php foreach (get_car($$name) as $category_item) : ?>
+            <?php if($category_item['is_enabled'] == "1") { ?>
             <div class="grid-download-item">
                     <div class="grid-download-item-img">
                         <img src="<?php echo($category_item['car_photo']); ?>"
@@ -98,6 +99,7 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
                 </a>
                     <a class="grid-download-item-a" href="<?php echo($category_item['car_photo']); ?>" download>Télécharger</a>
             </div>
+            <?php } ?>
 
         <?php endforeach ?>
         </div>
