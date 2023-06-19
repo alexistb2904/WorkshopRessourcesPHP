@@ -144,13 +144,39 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
                         <a href="<?php echo $category_item['car_url']; ?>" target="_blank">
                             <p><?php echo $category_item['car_title']; ?> | <?php echo $category_item['is_enabled']; ?></p>
                         </a>
-                        <a class="link-warning grid-download-item-a" href="car_admin/update.php?id=<?php echo $category_item['car_id']; ?>&car_title=<?php echo $category_item['car_title']; ?>&car_photo=<?php echo $category_item['car_photo']; ?>&creator=<?php echo $variableName; ?>&car_url=<?php echo $category_item['car_url']; ?>&is_enabled=<?php echo $category_item['car_url']; ?>">Editer</a>
-                        <a class="link-danger grid-download-item-a" href="car_admin/delete.php?id=<?php echo $category_item['car_id']; ?>&car_title=<?php echo $category_item['car_title']; ?>&car_photo=<?php echo $category_item['car_photo']; ?>&creator=<?php echo $variableName; ?>">Supprimer</a>
+                        <a class="link-warning grid-download-item-a" href="car_admin/update.php?id=<?php echo $category_item['car_id']; ?>&car_title=<?php echo $category_item['car_title']; ?>&car_photo=<?php echo $category_item['car_photo']; ?>&creator=zebra&car_url=<?php echo $category_item['car_url']; ?>&is_enabled=<?php echo $category_item['is_enabled']; ?>">Editer</a>
+                        <a class="link-danger grid-download-item-a" href="car_admin/delete.php?id=<?php echo $category_item['car_id']; ?>&car_title=<?php echo $category_item['car_title']; ?>&car_photo=<?php echo $category_item['car_photo']; ?>&creator=zebra">Supprimer</a>
                     </div>
                 <?php endforeach; ?>
                 <div class="grid-download-plus">
                     <div class="grid-download-item-plus">
-                        <a href="car_admin/create.php?creator=<?php echo $variableName; ?>">
+                        <a href="car_admin/create.php?creator=zebra">
+                            <img src="https://cdn-icons-png.flaticon.com/512/226/226974.png"
+                                 alt="Plus Image" loading="lazy">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </details>
+        <details open="true">
+            <summary>Decals</summary>
+            <div class="grid-download">
+                <?php foreach ($zebra as $category_item) : ?>
+                    <div class="grid-download-item">
+                        <div class="grid-download-item-img">
+                            <img src="<?php echo $category_item['car_photo']; ?>"
+                                 alt="<?php echo $category_item['car_title']; ?>" loading="lazy">
+                        </div>
+                        <a href="<?php echo $category_item['car_url']; ?>" target="_blank">
+                            <p><?php echo $category_item['car_title']; ?> | <?php echo $category_item['is_enabled']; ?></p>
+                        </a>
+                        <a class="link-warning grid-download-item-a" href="car_admin/update.php?id=<?php echo $category_item['car_id']; ?>&car_title=<?php echo $category_item['car_title']; ?>&car_photo=<?php echo $category_item['car_photo']; ?>&creator=decals&car_url=<?php echo $category_item['car_url']; ?>&is_enabled=<?php echo $category_item['is_enabled']; ?>">Editer</a>
+                        <a class="link-danger grid-download-item-a" href="car_admin/delete.php?id=<?php echo $category_item['car_id']; ?>&car_title=<?php echo $category_item['car_title']; ?>&car_photo=<?php echo $category_item['car_photo']; ?>&creator=decals">Supprimer</a>
+                    </div>
+                <?php endforeach; ?>
+                <div class="grid-download-plus">
+                    <div class="grid-download-item-plus">
+                        <a href="car_admin/create.php?creator=decals">
                             <img src="https://cdn-icons-png.flaticon.com/512/226/226974.png"
                                  alt="Plus Image" loading="lazy">
                         </a>
