@@ -1,4 +1,8 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
     $mysqlHost = $_ENV['MYSQL_HOST'];
     $mysqlUser = $_ENV['MYSQL_USERNAME'];
     $mysqlPassword = $_ENV['MYSQL_PASSWORD'];
