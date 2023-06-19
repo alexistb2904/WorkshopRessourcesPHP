@@ -29,7 +29,8 @@
             </div>
             <?php if(isset($loggedUser) && is_admin($loggedUser['email'])) : ?>
                 <a class="nav-link" href="<?php echo($rootUrl). 'admin/home.php'; ?>">Panel Administrateur</a>
-            <?php elseif(!isset($loggedUser)): ?>
+            <?php elseif(isset($loggedUser)): ?>
+                <button class="nav-link" onclick="function logout()">Logout</button>
                 <a class="nav-link" href="<?php echo($rootUrl). 'login.php'; ?>">Login</a>
             <?php endif; ?>
         </div>

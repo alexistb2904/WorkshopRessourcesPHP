@@ -15,6 +15,7 @@ function display_car(array $category) : string
 
     return $category_display;
 }
+
 function get_car(array $category) : array
 {
     $category_display = [];
@@ -54,3 +55,25 @@ function is_admin($email): bool
         return false;
     }
 }
+
+function logout() {
+    // Unset session variables
+    $_SESSION = [];
+
+    // Delete session cookie
+    if (isset($_COOKIE[session_name()])) {
+        setcookie(session_name(), '', time() - 3600, '/');
+    }
+
+    // Destroy the session
+    session_destroy();
+
+    // Delete the loggedUser cookie
+    setcookie('LOGGED_USER', '', time() - 3600, '/');
+
+    // Redirect to the login page or any other desired page
+    header('Location: home.php');
+    exit;
+}
+
+
