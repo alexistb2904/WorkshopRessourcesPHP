@@ -1,10 +1,15 @@
 <?php
+    $mysqlHost = $_ENV['MYSQL_HOST'];
+    $mysqlUser = $_ENV['MYSQL_USERNAME'];
+    $mysqlPassword = $_ENV['MYSQL_PASSWORD'];
+    $mysqlName = $_ENV['MYSQL_DATABASE'];
+    $mysqlPort = 3306;
 
-    const MYSQL_HOST = echo($_ENV['MYSQL_HOST']);
-    const MYSQL_USER = echo($_ENV['MYSQL_USERNAME']);
-    const MYSQL_PASSWORD = echo($_ENV['MYSQL_PASSWORD']);
-    const MYSQL_NAME = echo($_ENV['MYSQL_DATABASE']);
-    const MYSQL_PORT = 3306;
+    const MYSQL_HOST = $mysqlHost;
+    const MYSQL_USER = $mysqlUser;
+    const MYSQL_PASSWORD = $mysqlPassword;
+    const MYSQL_NAME = $mysqlName;
+    const MYSQL_PORT = $mysqlPort;
 
 try {
     $mysqlClient = new PDO(
@@ -16,5 +21,4 @@ try {
 } catch(Exception $exception) {
     die('Erreur : '.$exception->getMessage());
 }
-
 ?>
