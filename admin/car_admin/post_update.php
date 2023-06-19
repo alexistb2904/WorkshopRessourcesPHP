@@ -15,19 +15,17 @@ if (!is_admin($loggedUser['email'])) {
 $postData = $_POST;
 
 if (!isset($postData['creator'])) {
-    echo('Il faut remplir tous les champs pour pouvoir créer un véhicule.');
+    echo('Il faut remplir tous les champs pour pouvoir créer un véhicule ERROR1.');
     return;
 } else {
     if ($postData['creator'] === 'zebra' || $postData['creator'] === 'decals') {
-        if (
-            !isset($postData['car_title']) || !isset($postData['car_photo']) || !isset($postData['id']) || !isset($postData['is_enabled'])
-        ) {
-            echo('Il faut remplir tous les champs pour pouvoir créer un véhicule.');
+        if (!isset($postData['car_title']) || !isset($postData['car_photo']) || !isset($postData['id']) || !isset($postData['is_enabled'])) {
+            echo('Il faut remplir tous les champs pour pouvoir créer un véhicule ERROR2.');
             return;
         }
     } elseif ( !isset($postData['car_title']) || !isset($postData['car_url']) || !isset($postData['car_photo']) || !isset($postData['id']) )
     {
-        echo('Il faut remplir tous les champs pour pouvoir créer un véhicule.');
+        echo('Il faut remplir tous les champs pour pouvoir créer un véhicule ERROR3.');
         return;
     }
 }
