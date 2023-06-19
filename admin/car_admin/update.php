@@ -78,11 +78,12 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
         <form action="<?php echo($rootUrl . 'admin/car_admin/post_update.php'); ?>" method="POST">
             <h1>Mettre à jour <?php echo($getData['car_title']); ?></h1>
             <div class="part-form">
-                <label for="id" class="form-label">ID du contenu</label>
-                <input type="text" class="form-control" id="id" name="id" value="<?php echo($getData['id']); ?>" disabled>
+                <label for="fake-id" class="form-label">ID du contenu</label>
+                <input type="text" class="form-control" id="fake-id" name="fake-id" value="<?php echo($getData['id']); ?>" disabled>
+                <input type="text" class="form-control" id="id" name="id" value="<?php echo($getData['id']); ?>">
             </div>
             <div class="part-form">
-                <label for="creator-fake" class="form-label">Créateur du contenu</label>
+                <label for="creator-fake" class="form-label">Catégorie du contenu</label>
                 <input type="text" class="form-control" id="creator-fake" name="creator-fake" value="<?php echo($getData['creator']); ?>" disabled>
                 <input type="hidden" class="form-control" id="creator" name="creator" value="<?php echo($getData['creator']); ?>">
             </div>
