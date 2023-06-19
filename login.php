@@ -123,8 +123,8 @@ if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO
 <?php include_once('header.php'); ?>
 
 <?php if(!isset($loggedUser)): ?>
-    <div style="display: flex; align-items: center; justify-content: space-evenly;">
-        <div>
+    <div>
+        <div style="display: flex; align-items: center; justify-content: space-evenly;">
         <form action="" method="post">
             <p>Se connecter</p>
             <div class="part-form" style="display: flex; align-items: center; flex-direction: column">
