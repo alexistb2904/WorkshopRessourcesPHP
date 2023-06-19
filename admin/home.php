@@ -78,7 +78,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
     <main>
         <?php foreach ($creator_list as $variableName) : ?>
-            <details open="true">
+            <details open="false">
                 <?php $Cname = ucfirst($variableName);  ?>
                 <summary><?php echo $Cname; ?></summary>
                 <div class="grid-download">
@@ -106,7 +106,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                 </div>
             </details>
         <?php endforeach; ?>
-        <details open="true">
+        <details open="false">
             <summary>Zébra</summary>
             <div class="grid-download">
                 <?php foreach ($zebra as $category_item) : ?>
@@ -132,7 +132,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                 </div>
             </div>
         </details>
-        <details open="true">
+        <details open="false">
             <summary>Decals</summary>
             <div class="grid-download">
                 <?php foreach ($decals as $category_item) : ?>

@@ -91,8 +91,10 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
             <?php if($category_item['is_enabled'] == "1") { ?>
             <div class="grid-download-item">
                     <div class="grid-download-item-img">
+                        <a href="<?php echo($category_item['car_url']); ?>" style="display: inline">
                         <img src="../<?php echo($category_item['car_photo']); ?>"
-                             alt="<?php echo($category_item['car_title']); ?> <?php echo($Cname); ?>" loading="lazy";>
+                             alt="<?php echo($category_item['car_title']); ?> <?php echo($Cname); ?>" loading="lazy">
+                        </a>
                     </div>
                 <a href="<?php echo($category_item['car_url']); ?>" target="_blank">
                     <p><?php echo($category_item['car_title']); ?></p>
