@@ -27,10 +27,10 @@ function get_car(array $category) : array
 
 function is_admin($email): bool
 {
-    $host = $_SERVER['MYSQL_HOST'];
-    $username = $_SERVER['MYSQL_USERNAME'];
-    $password = $_SERVER['MYSQL_PASSWORD'];
-    $database = $_SERVER['MYSQL_DATABASE'];
+    $host = $_ENV['MYSQL_HOST'];
+    $username = $_ENV['MYSQL_USERNAME'];
+    $password = $_ENV['MYSQL_PASSWORD'];
+    $database = $_ENV['MYSQL_DATABASE'];
 
     $mysqlClient = mysqli_connect($host, $username, $password, $database);
 

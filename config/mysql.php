@@ -1,9 +1,9 @@
 <?php
 
-    const MYSQL_HOST = $_SERVER['MYSQL_HOST'];
-    const MYSQL_USER = $_SERVER['MYSQL_USERNAME'];
-    const MYSQL_PASSWORD = $_SERVER['MYSQL_PASSWORD'];
-    const MYSQL_NAME = $_SERVER['MYSQL_DATABASE'];
+    const MYSQL_HOST = $_ENV['MYSQL_HOST'];
+    const MYSQL_USER = $_ENV['MYSQL_USERNAME'];
+    const MYSQL_PASSWORD = $_ENV['MYSQL_PASSWORD'];
+    const MYSQL_NAME = $_ENV['MYSQL_DATABASE'];
     const MYSQL_PORT = 3306;
 
 try {
