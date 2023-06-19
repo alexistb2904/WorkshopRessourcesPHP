@@ -340,6 +340,8 @@ textarea {
     padding: 0.5vmax;
     border-radius: 3px;
     border: none;
+    width: 25vmax;
+    text-align: center;
 }
 
 textarea[name="message"] {
@@ -570,7 +572,7 @@ footer .foot-partenaire img {
     text-decoration: none;
     color: white;
     background-color: rgb(33, 47, 127);
-    width: 30%;
+    width: 25vmax;
     border-radius: 0.5vmax;
     padding: 1%;
     outline: none;
@@ -786,9 +788,6 @@ footer .foot-partenaire img {
 }
 
 @media screen and (min-width: 201px) and (max-width: 700px) {
-    * {
-        overflow: auto;
-    }
     .grid-download {
         grid-template-columns: 1fr;
         transition: 0.5s;
