@@ -101,7 +101,7 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
             <?php if(isset($getData['is_enabled'])) { ?>
                 <div class="part-form">
                     <label for="is_enabled" class="form-label">Activation</label>
-                    <input type="text" class="form-control" placeholder="Base : <?php echo strip_tags($getData['is_enabled']); ?>" id="is_enabled" name="is_enabled" value="<?php echo strip_tags($getData['is_enabled']); ?>" autocomplete="off">
+                    <input type="number" class="form-control" placeholder="Base : <?php echo strip_tags($getData['is_enabled']); ?>" id="is_enabled" name="is_enabled" value="<?php echo strip_tags($getData['is_enabled']); ?>" min="0" max="1" autocomplete="off">
                 </div>
             <?php } ?>
             <button type="submit" class="btn-up">Envoyer</button>
