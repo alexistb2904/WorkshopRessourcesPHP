@@ -79,8 +79,7 @@ $rootUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HT
             <h1>Mettre à jour <?php echo($getData['car_title']); ?></h1>
             <div class="part-form">
                 <label for="id" class="form-label">ID du contenu</label>
-                <input type="text" class="form-control" id="id" name="id" value="<?php echo($getData['id']); ?> " disabled>
-                <input type="hidden" class="form-control" id="creator" name="creator" value="<?php echo($getData['creator']); ?>">
+                <input type="text" class="form-control" id="id" name="id" value="<?php echo($getData['id']); ?>" disabled>
             </div>
             <div class="part-form">
                 <label for="id" class="form-label">Créateur du contenu</label>
