@@ -48,15 +48,11 @@ if (htmlspecialchars(isset($postData['login'])) &&  htmlspecialchars(isset($post
 
 // Si le cookie ou la session sont présentes
 if (isset($_COOKIE['LOGGED_USER_EMAIL']) || isset($_SESSION['LOGGED_USER_EMAIL'])) {
-    $loggedUser = [
-        'email' => $_COOKIE['LOGGED_USER_EMAIL'] ?? $_SESSION['LOGGED_USER_EMAIL'],
-    ];
+    $loggedUser['email'] = $_COOKIE['LOGGED_USER_EMAIL'] ?? $_SESSION['LOGGED_USER_EMAIL'];
 }
 
 if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO'])) {
-    $loggedUser = [
-        'pseudo' => $_COOKIE['LOGGED_USER_PSEUDO'] ?? $_SESSION['LOGGED_USER_PSEUDO'],
-    ];
+    $loggedUser['pseudo'] = $_COOKIE['LOGGED_USER_PSEUDO'] ?? $_SESSION['LOGGED_USER_PSEUDO'];
 }
 ?>
 
@@ -170,7 +166,7 @@ if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO
     </div>
 <?php else: ?>
     <div style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;' role="alert">
-        <h1>Bonjour <?php echo($_SESSION['LOGGED_USER_PSEUDO']); ?>  <?php echo($loggedUser); ?></h1>
+        <h1>Bonjour <?php echo($_SESSION['LOGGED_USER_PSEUDO']); ?>  <?php echo($loggedUser[1]); ?><?php echo($loggedUser[2]); ?></h1>
         <a class="grid-download-item-a" style="margin-bottom: 2vmax" href="index.php"><p>Accueil</p></a>
     </div>
 <?php endif; ?>
