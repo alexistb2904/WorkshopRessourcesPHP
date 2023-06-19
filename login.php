@@ -170,7 +170,7 @@ if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO
     </div>
 <?php else: ?>
     <div style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;' role="alert">
-        <h1>Bonjour <?php echo($loggedUser['pseudo']); ?> !</h1>
+        <h1>Bonjour <?php echo($loggedUser['pseudo']); ?>  <?php echo($loggedUser['email']); ?>!</h1>
         <a class="grid-download-item-a" style="margin-bottom: 2vmax" href="index.php"><p>Accueil</p></a>
     </div>
 <?php endif; ?>
