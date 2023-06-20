@@ -6,7 +6,7 @@ include_once('../config/user.php');
 include_once('../variables.php');
 include_once ('../functions.php');
 
-if (!is_admin($loggedUser['email'])) {
+if (!isset($loggedUser['email'])) {
     echo 'Vous n\'avez pas les droits pour accéder à cette page.';
     header("refresh:5;$rootUrl/index.php");
     exit();
@@ -38,8 +38,10 @@ $stmt->execute([
 ]);
 $count = $stmt->fetchColumn();
 
-if ($count = 0) {
+if ((int)$count == 0) {
     echo 'Ce n\'est pas possible de modifier un fichier que vous n\'avez pas crée.';
+    header("refresh:5;$rootUrl/index.php");
+    return;
 } else {
     $deleteRecipeStatement = $mysqlClient->prepare('DELETE FROM ' . $creator . ' WHERE id = :id');
     $deleteRecipeStatement->execute([

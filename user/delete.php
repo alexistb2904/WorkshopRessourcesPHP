@@ -5,7 +5,7 @@ include_once('../config/user.php');
 include_once('../variables.php');
 include_once ('../functions.php');
 
-if (!is_admin($loggedUser['email'])) {
+if (!isset($loggedUser['email'])) {
     echo 'Vous n\'avez pas les droits pour accéder à cette page.';
     header("refresh:5;$rootUrl/index.php");
     exit();

@@ -56,6 +56,7 @@ $count = $stmt->fetchColumn();
 
 if ((int)$count == 0) {
     echo 'Ce n\'est pas possible de modifier un fichier que vous n\'avez pas crée.';
+    header("refresh:5;$rootUrl/index.php");
     return;
 } else {
     $insertRecipeStatement = $mysqlClient->prepare('UPDATE ' . $creator . ' SET title = :title, url = :url, photo = :photo WHERE id = :id');
