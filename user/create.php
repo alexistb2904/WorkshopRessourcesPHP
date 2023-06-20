@@ -77,7 +77,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                 <input type="hidden" class="form-control" id="creator" name="creator" value="<?php echo($getData['creator']); ?>">
                 <input type="hidden" class="form-control" id="creator_name" name="creator_name" value="<?php echo($getData['creator_name']); ?>">
                 <label for="title" class="form-label">Titre du contenu</label>
-                <input type="text" class="form-control" id="title" name="title" aria-describedby="title-help" placeholder="Titre du contenu" autocomplete="off">
+                <input type="text" class="form-control" id="title" name="title" aria-describedby="title-help" placeholder="Titre du contenu" autocomplete="off" required>
             </div>
             <div class="part-form">
                 <label for="url" class="form-label">Url du contenu</label>
@@ -85,7 +85,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
             </div>
             <div class="part-form">
                 <label for="photo" class="form-label">Image du contenu</label>
-                <input type="text" class="form-control" placeholder="URL de l'image" id="photo" name="photo" autocomplete="off">
+                <input type="text" class="form-control" placeholder="URL de l'image" id="photo" name="photo" autocomplete="off" required>
             <button type="submit" class="btn-up">Envoyer</button>
         </form>
         <br />
