@@ -2,6 +2,9 @@
     include_once('config/mysql.php');
     include_once('variables.php');
     include_once('functions.php');
+
+    $rootPath = $_SERVER['DOCUMENT_ROOT'];
+    $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 ?>
 
 <header>
