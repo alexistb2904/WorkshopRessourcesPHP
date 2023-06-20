@@ -102,7 +102,7 @@ $other_c = $other_cFetch->fetchAll();
                     $Cname = "Zebra Communauté";
                 } else if($Cname == "Decals_c_p") {
                     $Cname = "Decals Communauté";
-                } else if($Cname == "Other_c") {
+                } else if($Cname == "Other_c") { 
                     $Cname = "Autre";
                 }
                 ?>
