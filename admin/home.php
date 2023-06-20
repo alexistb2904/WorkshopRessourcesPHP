@@ -100,7 +100,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                                     <img src="<?php echo($category_item['photo']) ?>"
                                          alt="<?php echo $category_item['title']; ?>" loading="lazy">
                                 <?php } else { ?>
-                                    <img src="../<?php echo ($rootUrl) . $category_item['photo']; ?>"
+                                    <img src="../<?php echo $category_item['photo']; ?>"
                                          alt="<?php echo $category_item['title']; ?>" loading="lazy">
                                 <?php } ?>
                             </div>
@@ -121,7 +121,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                                 <img src="<?php echo($category_item['car_photo']) ?>"
                                      alt="<?php echo $category_item['car_title']; ?> 1" loading="lazy">
                             <?php } else { ?>
-                                <img src="../<?php echo ($rootUrl) . $category_item['car_photo']; ?>"
+                                <img src="../<?php echo($category_item['car_photo']) ?>"
                                      alt="<?php echo $category_item['car_title']; ?> 2" loading="lazy">
                             <?php } ?>
                         </div>
@@ -184,7 +184,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                                     <img src="<?php echo($category_item['photo']) ?>"
                                          alt="<?php echo $category_item['title']; ?>" loading="lazy">
                                 <?php } else { ?>
-                                    <img src="<?php echo ($rootUrl) . $category_item['photo']; ?>"
+                                    <img src="<?php echo $category_item['photo']; ?>"
                                          alt="<?php echo $category_item['title']; ?>" loading="lazy">
                                 <?php } ?>
                             </div>
@@ -248,7 +248,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                                     <img src="<?php echo($category_item['photo']) ?>"
                                          alt="<?php echo $category_item['title']; ?>" loading="lazy">
                                 <?php } else { ?>
-                                    <img src="../<?php echo ($rootUrl) . $category_item['photo']; ?>"
+                                    <img src="../<?php echo $category_item['photo']; ?>"
                                          alt="<?php echo $category_item['title']; ?>" loading="lazy">
                                 <?php } ?>
                             </div>
