@@ -142,10 +142,10 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                         </div>
                         <a href="<?php echo $category_item['url']; ?>" target="_blank">
                             <p><?php echo $category_item['title']; ?> | <?php echo $category_item['is_enabled']; ?></p>
-                            <p><?php echo $category_item['creator_name']; ?>></p>
+                            <p><?php echo $category_item['creator_name']; ?></p>
                         </a>
-                        <a class="link-warning grid-download-item-a" href="car_admin/update.php?id=<?php echo $category_item['id']; ?>&car_title=<?php echo $category_item['title']; ?>&car_photo=<?php echo $category_item['photo']; ?>&creator=zebra_c&car_url=<?php echo $category_item['url']; ?>&is_enabled=<?php echo $category_item['is_enabled']; ?>">Editer</a>
-                        <a class="link-danger grid-download-item-a" href="car_admin/delete.php?id=<?php echo $category_item['id']; ?>&car_title=<?php echo $category_item['title']; ?>&car_photo=<?php echo $category_item['photo']; ?>&creator=zebra_c">Supprimer</a>
+                        <a class="link-warning grid-download-item-a" href="car_admin/update.php?id=<?php echo $category_item['id']; ?>&title=<?php echo $category_item['title']; ?>&photo=<?php echo $category_item['photo']; ?>&creator=zebra_c&url=<?php echo $category_item['url']; ?>&is_enabled=<?php echo $category_item['is_enabled']; ?>$creator_name=<?php echo $category_item['creator_name']; ?>">Editer</a>
+                        <a class="link-danger grid-download-item-a" href="car_admin/delete.php?id=<?php echo $category_item['id']; ?>&title=<?php echo $category_item['title']; ?>&photo=<?php echo $category_item['photo']; ?>&creator=zebra_c$creator_name=<?php echo $category_item['creator_name']; ?>">Supprimer</a>
                     </div>
                 <?php endforeach; ?>
                 <div class="grid-download-plus">
@@ -171,8 +171,8 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                         <a href="<?php echo $category_item['car_url']; ?>" target="_blank">
                             <p><?php echo $category_item['car_title']; ?> | <?php echo $category_item['is_enabled']; ?></p>
                         </a>
-                        <a class="link-warning grid-download-item-a" href="car_admin/update.php?id=<?php echo $category_item['car_id']; ?>&car_title=<?php echo $category_item['car_title']; ?>&car_photo=<?php echo $category_item['car_photo']; ?>&creator=decals&car_url=<?php echo $category_item['car_url']; ?>&is_enabled=<?php echo $category_item['is_enabled']; ?>">Editer</a>
-                        <a class="link-danger grid-download-item-a" href="car_admin/delete.php?id=<?php echo $category_item['car_id']; ?>&car_title=<?php echo $category_item['car_title']; ?>&car_photo=<?php echo $category_item['car_photo']; ?>&creator=decals">Supprimer</a>
+                        <a class="link-warning grid-download-item-a" href="car_admin/update.php?id=<?php echo $category_item['car_id']; ?>&title=<?php echo $category_item['car_title']; ?>&photo=<?php echo $category_item['car_photo']; ?>&creator=decals&url=<?php echo $category_item['car_url']; ?>&is_enabled=<?php echo $category_item['is_enabled']; ?>$creator_name=<?php echo $category_item['creator_name']; ?>">Editer</a>
+                        <a class="link-danger grid-download-item-a" href="car_admin/delete.php?id=<?php echo $category_item['car_id']; ?>&title=<?php echo $category_item['car_title']; ?>&photo=<?php echo $category_item['car_photo']; ?>&creator=decals$creator_name=<?php echo $category_item['creator_name']; ?>">Supprimer</a>
                     </div>
                 <?php endforeach; ?>
                 <div class="grid-download-plus">
@@ -194,7 +194,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                         </div>
                         <a href="<?php echo $category_item['url']; ?>" target="_blank">
                             <p><?php echo $category_item['title']; ?> | <?php echo $category_item['is_enabled']; ?></p>
-                            <p><?php echo $category_item['creator_name']; ?>></p>
+                            <p>Créateur : <?php echo $category_item['creator_name']; ?></p>
                         </a>
                         <a class="link-warning grid-download-item-a" href="car_admin/update.php?id=<?php echo $category_item['id']; ?>&car_title=<?php echo $category_item['title']; ?>&car_photo=<?php echo $category_item['photo']; ?>&creator=decals_c&car_url=<?php echo $category_item['url']; ?>&is_enabled=<?php echo $category_item['is_enabled']; ?>">Editer</a>
                         <a class="link-danger grid-download-item-a" href="car_admin/delete.php?id=<?php echo $category_item['id']; ?>&car_title=<?php echo $category_item['title']; ?>&car_photo=<?php echo $category_item['photo']; ?>&creator=decals_c">Supprimer</a>

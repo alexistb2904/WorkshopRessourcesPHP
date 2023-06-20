@@ -6,11 +6,15 @@ include_once('../../config/user.php');
 include_once('../../variables.php');
 include_once ('../../functions.php');
 
+$rootPath = $_SERVER['DOCUMENT_ROOT'];
+$rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
+
 if (!is_admin($loggedUser['email'])) {
     echo 'Vous n\'avez pas les droits pour accéder à cette page.';
     header("refresh:5;$rootUrl/index.php");
     exit();
 }
+
 
 $postData = $_POST;
 
@@ -18,48 +22,76 @@ if (!isset($postData['creator'])) {
     echo('Il faut remplir tous les champs pour pouvoir créer un véhicule ERROR1.' . $postData['creator'] . ' ');
     return;
 } else {
-    if ($postData['creator'] === 'zebra' || $postData['creator'] === 'decals') {
+    if ($postData['creator'] == 'zebra' || $postData['creator'] == 'decals') {
         if (!isset($postData['car_title']) || !isset($postData['car_photo']) || !isset($postData['id']) || !isset($postData['is_enabled'])) {
             echo('Il faut remplir tous les champs pour pouvoir créer un véhicule'. $postData['id'] . ' ERROR2.');
             return;
         }
-    } elseif ( !isset($postData['car_title']) || !isset($postData['car_url']) || !isset($postData['car_photo']) || !isset($postData['id']) )
+    } elseif ($postData['creator'] == 'zebra_c' || $postData['creator'] == 'decals_c') {
+            if (!isset($postData['title']) || !isset($postData['photo']) || !isset($postData['id']) || !isset($postData['creator_name']) || !isset($postData['is_enabled'])) {
+            echo('Il faut remplir tous les champs pour pouvoir créer un véhicule ERROR3.');
+            return;
+
+        } elseif ( !isset($postData['car_title']) || !isset($postData['car_url']) || !isset($postData['car_photo']) || !isset($postData['id']) )
     {
-        echo('Il faut remplir tous les champs pour pouvoir créer un véhicule ERROR3.');
+        echo('Il faut remplir tous les champs pour pouvoir créer un véhicule ERROR4.');
         return;
     }
 }
-
-$id = $postData['id'];
-$title = $postData['car_title'];
-$photo = $postData['car_photo'];
-if (!isset($postData['car_url'])){
-    $url = '';
-} else {
-    $url = $postData['car_url'];
-}
-if (isset($postData['is_enabled'])){
+if ($postData['creator'] == 'zebra_c' || $postData['creator'] == 'decals_c') {
+    $id = $postData['id'];
+    $title = $postData['title'];
+    $photo = $postData['photo'];
+    if (!isset($postData['url'])){
+        $url = '';
+    } else {
+        $url = $postData['url'];
+    }
     $is_enabled = $postData['is_enabled'];
-}
-$creator = $postData['creator'];
+    $creator = $postData['creator'];
+    $creator_name = $postData['creator_name'];
 
-if (!isset($postData['is_enabled'])) {
-    $insertRecipeStatement = $mysqlClient->prepare('UPDATE ' . $creator . ' SET car_title = :title, car_url = :url, car_photo = :photo WHERE car_id = :id');
+    $insertRecipeStatement = $mysqlClient->prepare('UPDATE ' . $creator . ' SET title = :title, url = :url, photo = :photo, creator_name = :creator_name, is_enabled = :is_enabled WHERE id = :id');
     $insertRecipeStatement->execute([
-        'title' => $title,
-        'photo' => $photo,
-        'url' => $url,
-        'id' => $id,
-    ]);
+            'title' => $title,
+            'photo' => $photo,
+            'url' => $url,
+            'id' => $id,
+            'creator_name' => $creator_name,
+            'is_enabled' => $is_enabled,
+        ]);
 } else {
-    $insertRecipeStatement = $mysqlClient->prepare('UPDATE ' . $creator . ' SET car_title = :title, car_url = :url, car_photo = :photo, is_enabled = :is_enabled WHERE car_id = :id');
-    $insertRecipeStatement->execute([
-        'title' => $title,
-        'photo' => $photo,
-        'url' => $url,
-        'is_enabled' => $is_enabled,
-        'id' => $id,
-    ]);
+    $id = $postData['id'];
+    $title = $postData['car_title'];
+    $photo = $postData['car_photo'];
+    if (!isset($postData['car_url'])) {
+        $url = '';
+    } else {
+        $url = $postData['car_url'];
+    }
+    if (isset($postData['is_enabled'])) {
+        $is_enabled = $postData['is_enabled'];
+    }
+    $creator = $postData['creator'];
+
+    if (!isset($postData['is_enabled'])) {
+        $insertRecipeStatement = $mysqlClient->prepare('UPDATE ' . $creator . ' SET car_title = :title, car_url = :url, car_photo = :photo WHERE car_id = :id');
+        $insertRecipeStatement->execute([
+            'title' => $title,
+            'photo' => $photo,
+            'url' => $url,
+            'id' => $id,
+        ]);
+    } else {
+        $insertRecipeStatement = $mysqlClient->prepare('UPDATE ' . $creator . ' SET car_title = :title, car_url = :url, car_photo = :photo, is_enabled = :is_enabled WHERE car_id = :id');
+        $insertRecipeStatement->execute([
+            'title' => $title,
+            'photo' => $photo,
+            'url' => $url,
+            'is_enabled' => $is_enabled,
+            'id' => $id,
+        ]);
+    }
 }
 
 ?>
@@ -135,6 +167,9 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
             </div>
             <?php if($creator == 'zebra' || $creator == 'decals' ) { ?>
                 <p>Status <?php echo($is_enabled); ?></p>
+            <?php } elseif($creator == 'zebra_c' || $creator == 'decals_c' )  { ?>
+                <p>Status <?php echo($is_enabled); ?></p>
+                <p>Créateur <?php echo($creator_name); ?></p>
             <?php } else { ?>
                 <a href="<?php echo($url); ?>">Lien Workshop</a>
             <?php } ?>
