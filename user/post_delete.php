@@ -50,5 +50,6 @@ if ((int)$count == 0) {
 }
 
 
-header('Location: '.$rootUrl.'home.php');
+echo 'La suppression de votre ressource a bien été effectuée. Vous allez être redirigé vers la page d\'accueil.';
+header("refresh:5;$rootUrl/index.php");
 ?>
