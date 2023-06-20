@@ -137,7 +137,6 @@ $decals_c_p = $decals_c_pFetch->fetchAll();
                 </div>
             </details>
         <?php endforeach; ?>
-        <a class="nav-link" href="<?php echo($rootUrl). 'user/home.php'; ?>">Panel User</a>
     </main>
 <?php } else { ?>
 

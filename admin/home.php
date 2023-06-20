@@ -14,17 +14,18 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 <head>
     <title><?php echo($Cname); ?> - Administrateur</title>
     <!-- Required meta tags -->
-    <link rel="stylesheet" href="<?php echo($rootUrl). 'style-admin.css'?>">
-    <link rel="icon" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.ico'?>">
-    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
-    <link rel="shortcut icon" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
+    <link rel="stylesheet" href="<?php echo ($rootUrl) . 'style-admin.css' ?>">
+    <link rel="icon" href="<?php echo ($rootUrl) . 'assets/img/Logo/LogoWS.ico' ?>">
+    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo ($rootUrl) . 'assets/img/Logo/LogoWS.png' ?>"
+          type="image/png"/>
+    <link rel="shortcut icon" href="<?php echo ($rootUrl) . 'assets/img/Logo/LogoWS.png' ?>" type="image/png"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="color-scheme" content="normal">
     <meta name="author" content="alexistb2904">
     <meta name="robots" content="index, follow">
     <meta http-equiv="content-language" content="fr-fr">
-    <link rel="canonical" href="https://<?php echo($currentURL); ?>" />
+    <link rel="canonical" href="https://<?php echo($currentURL); ?>"/>
 
     <!-- Base Meta Tags -->
     <meta name="title" content="<?php echo($Cname); ?> - WorkshopRessources">
@@ -38,7 +39,11 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-408NVZ99VY"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'G-408NVZ99VY');
@@ -46,9 +51,14 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
     <script type="text/javascript">
         (function (c, l, a, r, i, t, y) {
-            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+            c[a] = c[a] || function () {
+                (c[a].q = c[a].q || []).push(arguments)
+            };
+            t = l.createElement(r);
+            t.async = 1;
+            t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0];
+            y.parentNode.insertBefore(t, y);
         })(window, document, "clarity", "script", "g3iiq9rlyc");
     </script>
 
@@ -62,7 +72,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 <!-- Main -->
 <?php include_once('../variables.php'); ?>
 
-<?php if(is_admin($loggedUser['email'])) { ?>
+<?php if (is_admin($loggedUser['email'])) { ?>
 
     <?php
     $creator_list = [
@@ -79,7 +89,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
     <main>
         <?php foreach ($creator_list as $variableName) : ?>
             <details>
-                <?php $Cname = ucfirst($variableName);  ?>
+                <?php $Cname = ucfirst($variableName); ?>
                 <summary><?php echo $Cname; ?></summary>
                 <div class="grid-download">
                     <?php foreach ($$variableName as $category_item) : ?>
@@ -91,8 +101,10 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                             <a href="<?php echo $category_item['car_url']; ?>" target="_blank">
                                 <p><?php echo $category_item['car_title']; ?></p>
                             </a>
-                            <a class="link-warning grid-download-item-a" href="car_admin/update.php?id=<?php echo $category_item['car_id']; ?>&car_title=<?php echo $category_item['car_title']; ?>&car_photo=<?php echo $category_item['car_photo']; ?>&creator=<?php echo $variableName; ?>&car_url=<?php echo $category_item['car_url']; ?>">Editer</a>
-                            <a class="link-danger grid-download-item-a" href="car_admin/delete.php?id=<?php echo $category_item['car_id']; ?>&car_title=<?php echo $category_item['car_title']; ?>&car_photo=<?php echo $category_item['car_photo']; ?>&creator=<?php echo $variableName; ?>">Supprimer</a>
+                            <a class="link-warning grid-download-item-a"
+                               href="car_admin/update.php?id=<?php echo $category_item['car_id']; ?>&car_title=<?php echo $category_item['car_title']; ?>&car_photo=<?php echo $category_item['car_photo']; ?>&creator=<?php echo $variableName; ?>&car_url=<?php echo $category_item['car_url']; ?>">Editer</a>
+                            <a class="link-danger grid-download-item-a"
+                               href="car_admin/delete.php?id=<?php echo $category_item['car_id']; ?>&car_title=<?php echo $category_item['car_title']; ?>&car_photo=<?php echo $category_item['car_photo']; ?>&creator=<?php echo $variableName; ?>">Supprimer</a>
                         </div>
                     <?php endforeach; ?>
                     <div class="grid-download-plus">
@@ -116,10 +128,13 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                                  alt="<?php echo $category_item['car_title']; ?>" loading="lazy">
                         </div>
                         <a href="<?php echo $category_item['car_url']; ?>" target="_blank">
-                            <p><?php echo $category_item['car_title']; ?> | <?php echo $category_item['is_enabled']; ?></p>
+                            <p><?php echo $category_item['car_title']; ?>
+                                | <?php echo $category_item['is_enabled']; ?></p>
                         </a>
-                        <a class="link-warning grid-download-item-a" href="car_admin/update.php?id=<?php echo $category_item['car_id']; ?>&car_title=<?php echo $category_item['car_title']; ?>&car_photo=<?php echo $category_item['car_photo']; ?>&creator=zebra&car_url=<?php echo $category_item['car_url']; ?>&is_enabled=<?php echo $category_item['is_enabled']; ?>">Editer</a>
-                        <a class="link-danger grid-download-item-a" href="car_admin/delete.php?id=<?php echo $category_item['car_id']; ?>&car_title=<?php echo $category_item['car_title']; ?>&car_photo=<?php echo $category_item['car_photo']; ?>&creator=zebra">Supprimer</a>
+                        <a class="link-warning grid-download-item-a"
+                           href="car_admin/update.php?id=<?php echo $category_item['car_id']; ?>&car_title=<?php echo $category_item['car_title']; ?>&car_photo=<?php echo $category_item['car_photo']; ?>&creator=zebra&car_url=<?php echo $category_item['car_url']; ?>&is_enabled=<?php echo $category_item['is_enabled']; ?>">Editer</a>
+                        <a class="link-danger grid-download-item-a"
+                           href="car_admin/delete.php?id=<?php echo $category_item['car_id']; ?>&car_title=<?php echo $category_item['car_title']; ?>&car_photo=<?php echo $category_item['car_photo']; ?>&creator=zebra">Supprimer</a>
                     </div>
                 <?php endforeach; ?>
                 <div class="grid-download-plus">
@@ -132,36 +147,39 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                 </div>
             </div>
             <details>
-            <summary>Zébra Communauté</summary>
-            <div class="grid-download">
-                <?php foreach ($zebra_c as $category_item) : ?>
-                    <div class="grid-download-item">
-                        <div class="grid-download-item-img">
-                            <?php if(strpos($category_item['photo'], "http://") === 0 || strpos($category_item['photo'], "https://") === 0) { ?>
-                                <img src="<?php echo($category_item['photo']) ?>"
-                                     alt="<?php echo $category_item['title']; ?>" loading="lazy">
-                            <?php } else { ?>
-                                <img src="<?php echo($rootUrl).$category_item['photo']; ?>"
-                                     alt="<?php echo $category_item['title']; ?>" loading="lazy">
-                            <?php } ?>
+                <summary>Zébra Communauté</summary>
+                <div class="grid-download">
+                    <?php foreach ($zebra_c as $category_item) : ?>
+                        <div class="grid-download-item">
+                            <div class="grid-download-item-img">
+                                <?php if (strpos($category_item['photo'], "http://") === 0 || strpos($category_item['photo'], "https://") === 0) { ?>
+                                    <img src="<?php echo($category_item['photo']) ?>"
+                                         alt="<?php echo $category_item['title']; ?>" loading="lazy">
+                                <?php } else { ?>
+                                    <img src="<?php echo ($rootUrl) . $category_item['photo']; ?>"
+                                         alt="<?php echo $category_item['title']; ?>" loading="lazy">
+                                <?php } ?>
+                            </div>
+                            <a href="<?php echo $category_item['url']; ?>" target="_blank">
+                                <p><?php echo $category_item['title']; ?>
+                                    | <?php echo $category_item['is_enabled']; ?></p>
+                                <p><?php echo $category_item['creator_name']; ?></p>
+                            </a>
+                            <a class="link-warning grid-download-item-a"
+                               href="car_admin/update.php?id=<?php echo $category_item['id']; ?>&title=<?php echo $category_item['title']; ?>&photo=<?php echo $category_item['photo']; ?>&creator=zebra_c&url=<?php echo $category_item['url']; ?>&is_enabled=<?php echo $category_item['is_enabled']; ?>&creator_name=<?php echo $category_item['creator_name']; ?>">Editer</a>
+                            <a class="link-danger grid-download-item-a"
+                               href="car_admin/delete.php?id=<?php echo $category_item['id']; ?>&title=<?php echo $category_item['title']; ?>&photo=<?php echo $category_item['photo']; ?>&creator=zebra_c&creator_name=<?php echo $category_item['creator_name']; ?>">Supprimer</a>
                         </div>
-                        <a href="<?php echo $category_item['url']; ?>" target="_blank">
-                            <p><?php echo $category_item['title']; ?> | <?php echo $category_item['is_enabled']; ?></p>
-                            <p><?php echo $category_item['creator_name']; ?></p>
-                        </a>
-                        <a class="link-warning grid-download-item-a" href="car_admin/update.php?id=<?php echo $category_item['id']; ?>&title=<?php echo $category_item['title']; ?>&photo=<?php echo $category_item['photo']; ?>&creator=zebra_c&url=<?php echo $category_item['url']; ?>&is_enabled=<?php echo $category_item['is_enabled']; ?>&creator_name=<?php echo $category_item['creator_name']; ?>">Editer</a>
-                        <a class="link-danger grid-download-item-a" href="car_admin/delete.php?id=<?php echo $category_item['id']; ?>&title=<?php echo $category_item['title']; ?>&photo=<?php echo $category_item['photo']; ?>&creator=zebra_c&creator_name=<?php echo $category_item['creator_name']; ?>">Supprimer</a>
-                    </div>
-                <?php endforeach; ?>
-                <div class="grid-download-plus">
-                    <div class="grid-download-item-plus">
-                        <a href="car_admin/create.php?creator=zebra">
-                            <img src="https://cdn-icons-png.flaticon.com/512/226/226974.png"
-                                 alt="Plus Image" loading="lazy">
-                        </a>
+                    <?php endforeach; ?>
+                    <div class="grid-download-plus">
+                        <div class="grid-download-item-plus">
+                            <a href="car_admin/create.php?creator=zebra">
+                                <img src="https://cdn-icons-png.flaticon.com/512/226/226974.png"
+                                     alt="Plus Image" loading="lazy">
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
             </details>
         </details>
         <details>
@@ -174,10 +192,13 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                                  alt="<?php echo $category_item['car_title']; ?>" loading="lazy">
                         </div>
                         <a href="<?php echo $category_item['car_url']; ?>" target="_blank">
-                            <p><?php echo $category_item['car_title']; ?> | <?php echo $category_item['is_enabled']; ?></p>
+                            <p><?php echo $category_item['car_title']; ?>
+                                | <?php echo $category_item['is_enabled']; ?></p>
                         </a>
-                        <a class="link-warning grid-download-item-a" href="car_admin/update.php?id=<?php echo $category_item['car_id']; ?>&title=<?php echo $category_item['car_title']; ?>&photo=<?php echo $category_item['car_photo']; ?>&creator=decals&url=<?php echo $category_item['car_url']; ?>&is_enabled=<?php echo $category_item['is_enabled']; ?>">Editer</a>
-                        <a class="link-danger grid-download-item-a" href="car_admin/delete.php?id=<?php echo $category_item['car_id']; ?>&title=<?php echo $category_item['car_title']; ?>&photo=<?php echo $category_item['car_photo']; ?>&creator=decals">Supprimer</a>
+                        <a class="link-warning grid-download-item-a"
+                           href="car_admin/update.php?id=<?php echo $category_item['car_id']; ?>&title=<?php echo $category_item['car_title']; ?>&photo=<?php echo $category_item['car_photo']; ?>&creator=decals&url=<?php echo $category_item['car_url']; ?>&is_enabled=<?php echo $category_item['is_enabled']; ?>">Editer</a>
+                        <a class="link-danger grid-download-item-a"
+                           href="car_admin/delete.php?id=<?php echo $category_item['car_id']; ?>&title=<?php echo $category_item['car_title']; ?>&photo=<?php echo $category_item['car_photo']; ?>&creator=decals">Supprimer</a>
                     </div>
                 <?php endforeach; ?>
                 <div class="grid-download-plus">
@@ -189,42 +210,48 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                     </div>
                 </div>
             </div>
-            <summary>Decals Communauté</summary>
-            <div class="grid-download">
-                <?php foreach ($decals_c as $category_item) : ?>
-                    <div class="grid-download-item">
-                        <div class="grid-download-item-img">
-                            <?php if(strpos($category_item['photo'], "http://") === 0 || strpos($category_item['photo'], "https://") === 0) { ?>
-                                <img src="<?php echo($category_item['photo']) ?>"
-                                     alt="<?php echo $category_item['title']; ?>" loading="lazy">
-                            <?php } else { ?>
-                                <img src="../<?php echo($rootUrl).$category_item['photo']; ?>"
-                                     alt="<?php echo $category_item['title']; ?>" loading="lazy">
-                            <?php } ?>
+            <details>
+                <summary>Decals Communauté</summary>
+                <div class="grid-download">
+                    <?php foreach ($decals_c as $category_item) : ?>
+                        <div class="grid-download-item">
+                            <div class="grid-download-item-img">
+                                <?php if (strpos($category_item['photo'], "http://") === 0 || strpos($category_item['photo'], "https://") === 0) { ?>
+                                    <img src="<?php echo($category_item['photo']) ?>"
+                                         alt="<?php echo $category_item['title']; ?>" loading="lazy">
+                                <?php } else { ?>
+                                    <img src="../<?php echo ($rootUrl) . $category_item['photo']; ?>"
+                                         alt="<?php echo $category_item['title']; ?>" loading="lazy">
+                                <?php } ?>
+                            </div>
+                            <a href="<?php echo $category_item['url']; ?>" target="_blank">
+                                <p><?php echo $category_item['title']; ?>
+                                    | <?php echo $category_item['is_enabled']; ?></p>
+                                <p>Créateur : <?php echo $category_item['creator_name']; ?></p>
+                            </a>
+                            <a class="link-warning grid-download-item-a"
+                               href="car_admin/update.php?id=<?php echo $category_item['id']; ?>&car_title=<?php echo $category_item['title']; ?>&car_photo=<?php echo $category_item['photo']; ?>&creator=decals_c&car_url=<?php echo $category_item['url']; ?>&is_enabled=<?php echo $category_item['is_enabled']; ?>&creator_name=<?php echo $category_item['creator_name']; ?>">Editer</a>
+                            <a class="link-danger grid-download-item-a"
+                               href="car_admin/delete.php?id=<?php echo $category_item['id']; ?>&car_title=<?php echo $category_item['title']; ?>&car_photo=<?php echo $category_item['photo']; ?>&creator=decals_c&creator_name=<?php echo $category_item['creator_name']; ?>">Supprimer</a>
                         </div>
-                        <a href="<?php echo $category_item['url']; ?>" target="_blank">
-                            <p><?php echo $category_item['title']; ?> | <?php echo $category_item['is_enabled']; ?></p>
-                            <p>Créateur : <?php echo $category_item['creator_name']; ?></p>
-                        </a>
-                        <a class="link-warning grid-download-item-a" href="car_admin/update.php?id=<?php echo $category_item['id']; ?>&car_title=<?php echo $category_item['title']; ?>&car_photo=<?php echo $category_item['photo']; ?>&creator=decals_c&car_url=<?php echo $category_item['url']; ?>&is_enabled=<?php echo $category_item['is_enabled']; ?>&creator_name=<?php echo $category_item['creator_name']; ?>">Editer</a>
-                        <a class="link-danger grid-download-item-a" href="car_admin/delete.php?id=<?php echo $category_item['id']; ?>&car_title=<?php echo $category_item['title']; ?>&car_photo=<?php echo $category_item['photo']; ?>&creator=decals_c&creator_name=<?php echo $category_item['creator_name']; ?>">Supprimer</a>
-                    </div>
-                <?php endforeach; ?>
-                <div class="grid-download-plus">
-                    <div class="grid-download-item-plus">
-                        <a href="car_admin/create.php?creator=decals">
-                            <img src="https://cdn-icons-png.flaticon.com/512/226/226974.png"
-                                 alt="Plus Image" loading="lazy">
-                        </a>
+                    <?php endforeach; ?>
+                    <div class="grid-download-plus">
+                        <div class="grid-download-item-plus">
+                            <a href="car_admin/create.php?creator=decals">
+                                <img src="https://cdn-icons-png.flaticon.com/512/226/226974.png"
+                                     alt="Plus Image" loading="lazy">
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
             </details>
         </details>
+        <a class="nav-link" href="<?php echo ($rootUrl) . 'user/home.php'; ?>">Panel User</a>
     </main>
 <?php } else { ?>
 
-    <h1 style="color: white; margin-bottom: 20vmax; margin-top: 20vmax">Vous n'avez pas les droits pour accéder à cette page.</h1>
+    <h1 style="color: white; margin-bottom: 20vmax; margin-top: 20vmax">Vous n'avez pas les droits pour accéder à cette
+        page.</h1>
 
 <?php } ?>
 
