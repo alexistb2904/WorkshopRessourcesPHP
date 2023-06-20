@@ -71,7 +71,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
     <div style="display: flex; flex-direction: column">
 
     <?php include_once($rootPath.'/header.php'); ?>
-        <form action="<?php echo($rootUrl . 'post_create.php'); ?>" method="POST">
+        <form action="<?php echo($rootUrl . 'user/post_create.php'); ?>" method="POST">
             <h1>Création de contenu</h1>
             <div class="part-form">
                 <input type="hidden" class="form-control" id="creator" name="creator" value="<?php echo($getData['creator']); ?>">

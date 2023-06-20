@@ -14,13 +14,13 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
 $zebra_c_pFetch = $mysqlClient->prepare('SELECT * FROM zebra_c WHERE creator_name = :creator_name');
 $zebra_c_pFetch->execute([
-    'creator_name' => $loggedUser['pseudo']
+    'creator_name' => (string)$loggedUser['pseudo']
 ]);
 $zebra_c_p = $zebra_c_pFetch->fetchAll();
 
 $decals_c_pFetch = $mysqlClient->prepare('SELECT * FROM decals_c WHERE creator_name = :creator_name');
 $decals_c_pFetch->execute([
-    'creator_name' => $loggedUser['pseudo']
+    'creator_name' => (string)$loggedUser['pseudo']
 ]);
 $decals_c_p = $decals_c_pFetch->fetchAll();
 
@@ -30,7 +30,7 @@ $decals_c_p = $decals_c_pFetch->fetchAll();
 <head>
     <title><?php echo($Cname); ?> - Création</title>
     <!-- Required meta tags -->
-    <link rel="stylesheet" href="<?php echo($rootUrl). 'style-style.css'?>">
+    <link rel="stylesheet" href="<?php echo($rootUrl). 'style-admin.css'?>">
     <link rel="icon" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.ico'?>">
     <link rel="apple-touch-icon" sizes="114x114" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
     <link rel="shortcut icon" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
@@ -90,7 +90,13 @@ $decals_c_p = $decals_c_pFetch->fetchAll();
     <main>
         <?php foreach ($creator_list as $variableName) : ?>
             <details>
-                <?php $Cname = ucfirst($variableName);  ?>
+                <?php $Cname = ucfirst($variableName);
+                if($Cname == "Zebra_c_p") {
+                    $Cname = "Zebra Communauté";
+                } else if($Cname == "Decals_c_p") {
+                    $Cname = "Decals Communauté";
+                }
+                ?>
                 <summary><?php echo $Cname; ?></summary>
                 <div class="grid-download">
                     <?php foreach ($$variableName as $category_item) : ?>

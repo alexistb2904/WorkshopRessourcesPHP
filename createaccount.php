@@ -136,7 +136,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
     <form action="" method="POST">
         <div style="display: flex; align-items: center; flex-direction: column">
-            <h1><?php echo($username); ?> ton compte à bien été crée</h1>
+            <p><?php echo($username); ?> ton compte à bien été crée</p>
             <p>Email : <?php echo($email); ?></p>
         </div>
     </form>

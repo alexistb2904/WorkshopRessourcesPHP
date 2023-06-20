@@ -105,6 +105,30 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
         <?php endforeach ?>
         </div>
+        <div class="title-download">
+            <h1>Zébra Communauté</h1>
+            <p>Vous trouverez ici les Zébra de la communauté disponible</p>
+        </div>
+        <div class="grid-download">
+            <?php foreach (get_car($zebra_c) as $category_item) : ?>
+                <?php if($category_item['is_enabled'] == "1") { ?>
+                    <div class="grid-download-item">
+                        <div class="grid-download-item-img">
+                            <a href="<?php echo($category_item['url']); ?>" style="display: inline">
+                                <img src="../<?php echo($category_item['photo']); ?>"
+                                     alt="<?php echo($category_item['title']); ?> <?php echo($Cname); ?>" loading="lazy";>
+                            </a>
+                        </div>
+                        <a href="<?php echo $category_item['url']; ?>" target="_blank">
+                            <p><?php echo $category_item['title']; ?></p>
+                            <p style="color:gray"><?php echo $category_item['creator_name']; ?></p>
+                        </a>
+                        <a class="grid-download-item-a" href="../<?php echo($category_item['car_photo']); ?>" download>Télécharger</a>
+                    </div>
+                <?php } ?>
+
+            <?php endforeach ?>
+        </div>
     </main>
 <?php include_once('../footer.php'); ?>
     <script>
