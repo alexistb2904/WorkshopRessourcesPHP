@@ -102,16 +102,16 @@ $decals_c_p = $decals_c_pFetch->fetchAll();
                     <?php foreach ($$variableName as $category_item) : ?>
                         <div class="grid-download-item">
                             <div class="grid-download-item-img">
-                                <img src="../<?php echo $category_item['photo']; ?>"
+                                <img src="<?php echo($rootUrl).$category_item['photo']; ?>"
                                      alt="<?php echo $category_item['title']; ?>" loading="lazy">
                             </div>
                             <a href="<?php echo $category_item['url']; ?>" target="_blank">
                                 <p><?php echo $category_item['title']; ?></p>
-                                <p style="color:gray"><?php echo $category_item['creator_name']; ?></p>
+                                <p style="color:gray; font-size: 1vmax;"><?php echo $category_item['creator_name']; ?></p>
                                 <?php if($category_item['is_enabled']) { ?>
-                                    <p style="color:gray">Activé</p>
+                                    <p style="color:darkgreen">Activé</p>
                                 <?php } else { ?>
-                                    <p style="color:gray">En attente d'approbation | Désactivé</p>
+                                    <p style="color:darkred; font-size: 1vmax;">En attente d'approbation | Désactivé</p>
                                 <?php } ?>
                             </a>
                             <a class="link-warning grid-download-item-a" href="update.php?id=<?php echo $category_item['id']; ?>&title=<?php echo $category_item['title']; ?>&photo=<?php echo $category_item['photo']; ?>&creator=<?php echo $variableName; ?>&url=<?php echo $category_item['url']; ?>&creator_name=<?php echo $category_item['creator_name']; ?>">Editer</a>

@@ -1,9 +1,9 @@
 <?php session_start();
 
-include_once('../../config/mysql.php');
-include_once('../../config/user.php');
-include_once('../../variables.php');
-include_once ('../../functions.php');
+include_once('../config/mysql.php');
+include_once('../config/user.php');
+include_once('../variables.php');
+include_once ('../functions.php');
 
 if (!is_admin($loggedUser['email'])) {
     echo 'Vous n\'avez pas les droits pour accéder à cette page.';
@@ -76,10 +76,10 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
     <form action="post_delete.php" method="POST">
         <div style="display: flex; align-items: center; flex-direction: column">
-            <h1>Supprimer <?php echo($getData['car_title']); ?> ?</h1>
+            <h1>Supprimer <?php echo($getData['title']); ?> ?</h1>
             <div class="grid-img">
-            <img src="<?php echo($getData['car_photo']); ?>"
-                 alt="<?php echo($getData['car_title']); ?>" loading="lazy";>
+            <img src="<?php echo($getData['photo']); ?>"
+                 alt="<?php echo($getData['title']); ?>" loading="lazy">
             </div>
             <input type="hidden" class="form-control" id="id" name="id" value="<?php echo($getData['id']); ?>">
             <input type="hidden" class="form-control" id="creator" name="creator" value="<?php echo($getData['creator']); ?>">

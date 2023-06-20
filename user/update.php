@@ -78,33 +78,33 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
         <form action="<?php echo($rootUrl . 'admin/car_admin/post_update.php'); ?>" method="POST">
             <h1>Mettre à jour <?php echo($getData['car_title']); ?></h1>
             <div class="part-form">
-                <label for="fake-id" class="form-label">ID du contenu</label>
-                <input type="text" class="form-control" id="fake-id" name="fake-id" value="<?php echo($getData['id']); ?>" disabled>
-                <input type="hidden" class="form-control" id="id" name="id" value="<?php echo($getData['id']); ?>">
+                <input type="hidden" class="form-control" id="id" name="id" value="<?php echo($getData['id']); ?>" required>
+            </div>
+            <div class="part-form">
+                <label for="creator_name" class="form-label">Créateur du contenu</label>
+                <input type="text" class="form-control" id="creator_name" name="creator_name" value="<?php echo($getData['creator_name']); ?>" required>
             </div>
             <div class="part-form">
                 <label for="creator-fake" class="form-label">Catégorie du contenu</label>
-                <input type="text" class="form-control" id="creator-fake" name="creator-fake" value="<?php echo($getData['creator']); ?>" disabled>
-                <input type="hidden" class="form-control" id="creator" name="creator" value="<?php echo($getData['creator']); ?>">
+                <input type="text" class="form-control" id="creator-fake" name="creator-fake" value="<?php echo($getData['creator']); ?>" disabled required>
+                <input type="hidden" class="form-control" id="creator" name="creator" value="<?php echo($getData['creator']); ?>" required>
             </div>
             <div class="part-form">
-                <label for="car_title" class="form-label">Titre du contenu</label>
-                <input type="text" class="form-control" id="car_title" name="car_title" aria-describedby="title-help" value="<?php echo($getData['car_title']); ?>" placeholder="<?php echo($getData['car_title']); ?>" autocomplete="off">
+                <label for="title" class="form-label">Titre du contenu</label>
+                <input type="text" class="form-control" id="title" name="title" aria-describedby="title-help" value="<?php echo($getData['title']); ?>" placeholder="<?php echo($getData['title']); ?>" autocomplete="off" required>
             </div>
             <div class="part-form">
-                <label for="car_url" class="form-label">Url du workshop</label>
-                <input type="text" class="form-control" placeholder="URL Workshop du contenu" id="car_url" name="car_url" value="<?php echo strip_tags($getData['car_url']); ?>" autocomplete="off">
+                <label for="url" class="form-label">Url du workshop</label>
+                <input type="text" class="form-control" placeholder="URL du contenu" id="url" name="url" value="<?php echo strip_tags($getData['url']); ?>" autocomplete="off">
             </div>
             <div class="part-form">
-                <label for="car_photo" class="form-label">Template du contenu</label>
-                <input type="text" class="form-control" placeholder="URL de l'image" id="car_photo" name="car_photo" value="<?php echo strip_tags($getData['car_photo']); ?>" autocomplete="off">
+                <label for="photo" class="form-label">Template du contenu</label>
+                <input type="text" class="form-control" placeholder="URL de l'image" id="photo" name="photo" value="<?php echo strip_tags($getData['photo']); ?>" autocomplete="off" required>
             </div>
-            <?php if(isset($getData['is_enabled'])) { ?>
-                <div class="part-form">
-                    <label for="is_enabled" class="form-label">Activation</label>
-                    <input type="number" class="form-control" placeholder="Base : <?php echo strip_tags($getData['is_enabled']); ?>" id="is_enabled" name="is_enabled" value="<?php echo strip_tags($getData['is_enabled']); ?>" min="0" max="1" autocomplete="off">
-                </div>
-            <?php } ?>
+            <div class="part-form">
+                <label for="is_enabled" class="form-label">Activation</label>
+                <input type="number" class="form-control" placeholder="Base : <?php echo strip_tags($getData['is_enabled']); ?>" id="is_enabled" name="is_enabled" value="<?php echo strip_tags($getData['is_enabled']); ?>" min="0" max="1" autocomplete="off" required>
+            </div>
             <button type="submit" class="btn-up">Envoyer</button>
         </form>
         <br />
