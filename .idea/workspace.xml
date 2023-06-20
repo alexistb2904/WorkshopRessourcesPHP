@@ -6,14 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="99e47d32-5c25-4ae9-abe7-24cc3e09903b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/car_admin/post_create.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/car_admin/post_create.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/car_admin/post_update.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/car_admin/post_update.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/misc/decals.php" beforeDir="false" afterPath="$PROJECT_DIR$/misc/decals.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/misc/zebra.php" beforeDir="false" afterPath="$PROJECT_DIR$/misc/zebra.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/delete.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/delete.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/post_create.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/post_create.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/post_update.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/post_update.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/update.php" afterDir="false" />
     </list>
@@ -121,7 +113,7 @@
       <workItem from="1687261251229" duration="1904000" />
       <workItem from="1687275638564" duration="245000" />
       <workItem from="1687276692597" duration="1812000" />
-      <workItem from="1687278710258" duration="2258000" />
+      <workItem from="1687278710258" duration="2746000" />
     </task>
     <servers />
   </component>

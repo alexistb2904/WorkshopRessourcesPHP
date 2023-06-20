@@ -24,7 +24,7 @@ if (!isset($postData['creator'])) {
 } else {
     if ($postData['creator'] == 'zebra_c_p' || $postData['creator'] == 'decals_c_p') {
         if (!isset($postData['title']) || !isset($postData['photo']) || !isset($postData['id'])) {
-            echo('Il faut remplir tous les champs pour pouvoir editer un véhicule ERROR3.');
+            echo('Il faut remplir tous les champs pour pouvoir editer un véhicule ERROR2.');
             return;
         }
     }
@@ -137,7 +137,7 @@ $currentURL = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 
     <form action="" method="POST">
         <div style="display: flex; align-items: center; flex-direction: column">
-            <h1><?php echo($title); ?> à été mis à jour</h1>
+            <h1><?php echo($loggedUser['pseudo']); ?> à été mis à jour</h1>
             <p>Catégorie : <?php echo($creator); ?></p>
             <div class="grid-img">
                 <?php if(strpos($photo, "http://") === 0 || strpos($photo, "https://") === 0) { ?>
