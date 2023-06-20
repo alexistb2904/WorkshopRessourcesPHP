@@ -84,6 +84,7 @@ $decals_c_p = $decals_c_pFetch->fetchAll();
     $creator_list = [
         'zebra_c_p',
         'decals_c_p',
+        'other',
     ];
     ?>
 
@@ -95,6 +96,8 @@ $decals_c_p = $decals_c_pFetch->fetchAll();
                     $Cname = "Zebra Communauté";
                 } else if($Cname == "Decals_c_p") {
                     $Cname = "Decals Communauté";
+                } else if($Cname == "Other") {
+                    $Cname = "Autre";
                 }
                 ?>
                 <summary><?php echo $Cname; ?></summary>

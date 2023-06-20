@@ -27,6 +27,14 @@ if (!isset($postData['creator'])) {
             echo('Il faut remplir tous les champs pour pouvoir editer un véhicule ERROR2.');
             return;
         }
+    } elseif ($postData['creator'] == 'other') {
+        if (!isset($postData['title']) || !isset($postData['photo']) || !isset($postData['url']) || !isset($postData['id'])) {
+            echo('Il faut remplir tous les champs pour pouvoir editer un véhicule ERROR3.');
+            return;
+        }
+    } else {
+        echo('Catégorie de création inconnue. ERROR4.');
+        return;
     }
 }
 
@@ -42,12 +50,14 @@ if ($postData['creator'] == 'zebra_c_p') {
     $creator = 'zebra_c';
 } elseif ($postData['creator'] == 'decals_c_p') {
     $creator = 'decals_c';
+} elseif ($postData['creator'] == 'other') {
+    $creator = 'other';
 } else {
     echo 'Il faut remplir tous les champs pour pouvoir editer un véhicule ERROR4.';
     return;
 }
 
-$stmt = $mysqlClient->prepare('SELECT COUNT(*) FROM '. $creator .' WHERE creator_name = :creator_name AND id = :id');
+$stmt = $mysqlClient->prepare('SELECT COUNT(*) FROM ' . $creator . ' WHERE creator_name = :creator_name AND id = :id');
 $stmt->execute([
     'creator_name' => $loggedUser['pseudo'],
     'id' => $id,
@@ -142,12 +152,12 @@ $currentURL = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
             <h1><?php echo($count); ?> à été mis à jour</h1>
             <p>Catégorie : <?php echo($creator); ?></p>
             <div class="grid-img">
-                <?php if(strpos($photo, "http://") === 0 || strpos($photo, "https://") === 0) { ?>
+                <?php if (strpos($photo, "http://") === 0 || strpos($photo, "https://") === 0) { ?>
                     <img src="<?php echo($photo) ?>"
-                         alt="<?php echo ($title) ?>" loading="lazy">
+                         alt="<?php echo($title) ?>" loading="lazy">
                 <?php } else { ?>
                     <img src="../<?php echo($photo) ?>"
-                         alt="<?php echo ($title) ?>" loading="lazy">
+                         alt="<?php echo($title) ?>" loading="lazy">
                 <?php } ?>
             </div>
         </div>

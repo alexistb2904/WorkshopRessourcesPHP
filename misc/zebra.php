@@ -128,7 +128,11 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                             <p><?php echo $category_item['title']; ?></p>
                             <p style="color:gray; margin-top: 0px; font-size: 1vmax">Créateur : <?php echo $category_item['creator_name']; ?></p>
                         </a>
-                        <a class="grid-download-item-a" href="../<?php echo($category_item['car_photo']); ?>" download>Télécharger</a>
+                        <?php if(strpos($category_item['photo'], "http://") === 0 || strpos($category_item['photo'], "https://") === 0) { ?>
+                            <a class="grid-download-item-a" href="<?php echo($category_item['photo']); ?>" download>Télécharger</a>
+                        <?php } else { ?>
+                            <a class="grid-download-item-a" href="../<?php echo($category_item['photo']); ?>" download>Télécharger</a>
+                        <?php } ?>
                     </div>
                 <?php } ?>
 

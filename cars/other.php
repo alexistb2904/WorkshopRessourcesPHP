@@ -83,20 +83,29 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
     <main class="main-download">
         <div class="title-download">
-            <h1><?php echo($Cname); ?></h1>
-            <p>Vous trouverez ici les templates de <?php echo($Cname); ?></p>
+            <h1>Autres</h1>
+            <p>Vous trouverez ici les templates des autres créateurs par la communauté</p>
         </div>
         <div class="grid-download">
         <?php foreach (get_car($$name) as $category_item) : ?>
             <div class="grid-download-item">
                     <div class="grid-download-item-img">
-                        <img src="../<?php echo($category_item['car_photo']); ?>"
-                             alt="<?php echo($category_item['car_title']); ?> <?php echo($Cname); ?>" loading="lazy";>
+                        <?php if(strpos($category_item['photo'], "http://") === 0 || strpos($category_item['photo'], "https://") === 0) { ?>
+                            <img src="<?php echo($category_item['photo']) ?>"
+                                 alt="<?php echo $category_item['title']; ?>" loading="lazy">
+                        <?php } else { ?>
+                            <img src="../<?php echo($rootUrl).$category_item['photo']; ?>"
+                                 alt="<?php echo $category_item['title']; ?>" loading="lazy">
+                        <?php } ?>
                     </div>
-                <a href="<?php echo($category_item['car_url']); ?>" target="_blank">
-                    <p><?php echo($category_item['car_title']); ?></p>
+                <a href="<?php echo($category_item['url']); ?>" target="_blank">
+                    <p><?php echo($category_item['title']); ?></p>
                 </a>
-                    <a class="grid-download-item-a" href="../<?php echo($category_item['car_photo']); ?>" download>Télécharger</a>
+                <?php if(strpos($category_item['photo'], "http://") === 0 || strpos($category_item['photo'], "https://") === 0) { ?>
+                    <a class="grid-download-item-a" href="<?php echo($category_item['photo']); ?>" download>Télécharger</a>
+                <?php } else { ?>
+                    <a class="grid-download-item-a" href="../<?php echo($category_item['photo']); ?>" download>Télécharger</a>
+                <?php } ?>
             </div>
 
         <?php endforeach ?>
@@ -104,13 +113,13 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
     </main>
 <?php include_once('../footer.php'); ?>
     <script>
-        var dropdown = document.getElementsByClassName("btn-dropdown-ws");
-        var i;
+        let dropdown = document.getElementsByClassName("btn-dropdown-ws");
+        let i;
 
         for (i = 0; i < dropdown.length; i++) {
             dropdown[i].addEventListener("click", function () {
                 this.classList.toggle("active");
-                var dropdownContent = this.nextElementSibling;
+                let dropdownContent = this.nextElementSibling;
                 if (dropdownContent.style.display === "block") {
                     dropdownContent.style.display = "none";
                 } else {

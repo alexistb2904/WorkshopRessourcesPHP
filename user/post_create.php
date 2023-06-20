@@ -4,7 +4,7 @@ session_start();
 include_once('../config/mysql.php');
 include_once('../config/user.php');
 include_once('../variables.php');
-include_once ('../functions.php');
+include_once('../functions.php');
 
 $postData = $_POST;
 
@@ -15,28 +15,41 @@ if (!isset($loggedUser)) {
 }
 
 if (!isset($postData['creator']) || !isset($postData['creator_name'])) {
-    echo('Il faut remplir tous les champs pour pouvoir créer un véhicule.');
+    echo('Il faut remplir tous les champs pour pouvoir créer un véhicule. ERROR1.');
+    header("refresh:5;$rootUrl/index.php");
     return;
-} elseif ( !isset($postData['title']) || !isset($postData['photo']) ) {
-
-        echo('Il faut remplir tous les champs pour pouvoir créer un véhicule.');
+} elseif ($postData['creator'] == 'zebra_c_p' || $postData['creator'] == 'decals_c_p') {
+    if (!isset($postData['title']) || !isset($postData['photo'])) {
+        echo('Il faut remplir tous les champs pour pouvoir créer un véhicule. ERROR2.');
+        header("refresh:5;$rootUrl/index.php");
         return;
     }
+} elseif ($postData['creator'] == 'other') {
+    if (!isset($postData['title']) || !isset($postData['photo']) || !isset($postData['url'])) {
+        echo('Il faut remplir tous les champs pour pouvoir créer un véhicule. ERROR3.');
+        header("refresh:5;$rootUrl/index.php");
+        return;
+
+    }
+} else {
+    echo('Catégorie de création inconnue. ERROR4.');
+    header("refresh:5;$rootUrl/index.php");
+    return;
+}
 
 $title = htmlspecialchars($postData['title']);
-if (!isset($postData['url'])){
+if (!isset($postData['url'])) {
     $url = '';
 } else {
     $url = htmlspecialchars($postData['url']);
 }
 $photo = htmlspecialchars($postData['photo']);
-if ($postData['creator'] == 'zebra_c_p'){
+if ($postData['creator'] == 'zebra_c_p') {
     $creator = 'zebra_c';
-} elseif ($postData['creator'] == 'decals_c_p'){
+} elseif ($postData['creator'] == 'decals_c_p') {
     $creator = 'decals_c';
 } else {
-    echo('Catégorie de création inconnue.');
-    return;
+    $creator = 'other';
 }
 $creator_name = htmlspecialchars($postData['creator_name']);
 
@@ -65,22 +78,23 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 <head>
     <title><?php echo($Cname); ?> - WorkshopRessources</title>
     <!-- Required meta tags -->
-    <link rel="stylesheet" href="<?php echo($rootUrl). 'style-admin.css'?>">
-    <link rel="icon" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.ico'?>">
-    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
-    <link rel="shortcut icon" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
+    <link rel="stylesheet" href="<?php echo ($rootUrl) . 'style-admin.css' ?>">
+    <link rel="icon" href="<?php echo ($rootUrl) . 'assets/img/Logo/LogoWS.ico' ?>">
+    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo ($rootUrl) . 'assets/img/Logo/LogoWS.png' ?>"
+          type="image/png"/>
+    <link rel="shortcut icon" href="<?php echo ($rootUrl) . 'assets/img/Logo/LogoWS.png' ?>" type="image/png"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="color-scheme" content="normal">
     <meta name="author" content="alexistb2904">
     <meta name="robots" content="index, follow">
     <meta http-equiv="content-language" content="fr-fr">
-    <link rel="canonical" href="https://<?php echo($currentURL); ?>" />
+    <link rel="canonical" href="https://<?php echo($currentURL); ?>"/>
 
     <!-- Base Meta Tags -->
     <meta name="title" content="<?php echo($Cname); ?> - WorkshopRessources">
     <meta name="description"
-          content="Panel Administrateur">
+          content="Panel Création">
     <meta name="keywords"
           content="<?php echo($Cname); ?>,workshop,ressources,steam,download,template,gratuit,free,vehicle,véhicule,voiture,3D,police,secours,pompiers,png,jpeg,jpg,alexistb2904">
 
@@ -89,7 +103,11 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-408NVZ99VY"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'G-408NVZ99VY');
@@ -97,9 +115,14 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
     <script type="text/javascript">
         (function (c, l, a, r, i, t, y) {
-            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+            c[a] = c[a] || function () {
+                (c[a].q = c[a].q || []).push(arguments)
+            };
+            t = l.createElement(r);
+            t.async = 1;
+            t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0];
+            y.parentNode.insertBefore(t, y);
         })(window, document, "clarity", "script", "g3iiq9rlyc");
     </script>
 
@@ -109,7 +132,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
 <!-- Main -->
 <main>
-    <?php include_once($rootPath.'/header.php'); ?>
+    <?php include_once($rootPath . '/header.php'); ?>
 
     <form action="" method="POST">
         <div style="display: flex; align-items: center; flex-direction: column">
@@ -117,17 +140,17 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
             <p>Catégorie : <?php echo($creator); ?></p>
             <p>Crée par <?php echo($creator_name); ?></p>
             <div class="grid-img">
-                <?php if(strpos($photo, "http://") === 0 || strpos($photo, "https://") === 0) { ?>
+                <?php if (strpos($photo, "http://") === 0 || strpos($photo, "https://") === 0) { ?>
                     <img src="<?php echo($photo) ?>"
-                         alt="<?php echo ($title) ?>" loading="lazy">
+                         alt="<?php echo($title) ?>" loading="lazy">
                 <?php } else { ?>
                     <img src="../<?php echo($photo) ?>"
-                         alt="<?php echo ($title) ?>" loading="lazy">
+                         alt="<?php echo($title) ?>" loading="lazy">
                 <?php } ?>
 
             </div>
-            <?php if(!empty($url)) { ?>
-            <a href="<?php echo($url); ?>">Lien</a>
+            <?php if (!empty($url)) { ?>
+                <a href="<?php echo($url); ?>">Lien</a>
             <?php } ?>
         </div>
     </form>
