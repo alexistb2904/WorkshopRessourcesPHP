@@ -78,7 +78,7 @@ $decals_c_p = $decals_c_pFetch->fetchAll();
 <!-- Main -->
 <?php include_once('../variables.php'); ?>
 
-<?php if(true == false) { ?>
+<?php if(!isset$loggedUser) { ?>
 
     <?php
     $creator_list = [
@@ -133,7 +133,6 @@ $decals_c_p = $decals_c_pFetch->fetchAll();
 <?php } else { ?>
 
     <h1 style="color: white; margin-bottom: 20vmax; margin-top: 20vmax">Vous n'avez pas les droits pour accéder à cette page.</h1>
-    <h1 style="color: white; margin-bottom: 20vmax; margin-top: 20vmax">Maintenance</h1>
 
 <?php } ?>
 
