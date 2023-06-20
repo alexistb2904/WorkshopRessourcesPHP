@@ -83,7 +83,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
         <div class="part-form">
             <label for="creator_name_fake" class="form-label">Créateur du contenu</label>
             <input type="text" class="form-control" id="creator_name_fake" name="creator_name_fake" value="<?php echo($getData['creator_name']); ?>" required disabled>
-            <input type="text" class="form-control" id="creator_name" name="creator_name" value="<?php echo($getData['creator_name']); ?>" required>
+            <input type="hidden" class="form-control" id="creator_name" name="creator_name" value="<?php echo($getData['creator_name']); ?>" required>
         </div>
         <div class="part-form">
             <label for="creator-fake" class="form-label">Catégorie du contenu</label>
