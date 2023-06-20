@@ -5,12 +5,40 @@ include_once('functions.php');
 
 $postData = $_POST;
 
-if (htmlspecialchars(isset($postData['login'])) &&  htmlspecialchars(isset($postData['password']))) {
+if (isset($postData['login']) &&  isset($postData['password'])) {
     $passhash = htmlspecialchars(password_hash($postData['password'], PASSWORD_DEFAULT));
     foreach ($users as $user) {
-        if (
-            htmlspecialchars($user['email']) || htmlspecialchars($user['username']) === htmlspecialchars($postData['login']) && password_verify(htmlspecialchars($user['password']), $passhash)
-        ) {
+        if (htmlspecialchars($user['email']) === htmlspecialchars($postData['login']) && password_verify(htmlspecialchars($user['password']), $passhash)) {
+            $loggedUser = [
+                'email' => htmlspecialchars($user['email']),
+                'pseudo' => htmlspecialchars($user['username'])
+            ];
+
+            /**
+             * Cookie qui expire dans un an
+             */
+            setcookie(
+                'LOGGED_USER_EMAIL',
+                $loggedUser['email'],
+                [
+                    'expires' => time() + 1*24*3600,
+                    'secure' => true,
+                    'httponly' => true,
+                ]
+            );
+            setcookie(
+                'LOGGED_USER_PSEUDO',
+                $loggedUser['pseudo'],
+                [
+                    'expires' => time() + 1*24*3600,
+                    'secure' => true,
+                    'httponly' => true,
+                ]
+            );
+
+            $_SESSION['LOGGED_USER_EMAIL'] = $loggedUser['email'];
+            $_SESSION['LOGGED_USER_PSEUDO'] = $loggedUser['pseudo'];
+        } elseif (htmlspecialchars($user['username']) === htmlspecialchars($postData['login']) && password_verify(htmlspecialchars($user['password']), $passhash)) {
             $loggedUser = [
                 'email' => htmlspecialchars($user['email']),
                 'pseudo' => htmlspecialchars($user['username'])
