@@ -94,15 +94,15 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                 </div>
                 <div class="part-form">
                     <label for="title" class="form-label">Titre du contenu</label>
-                    <input type="text" class="form-control" id="title" name="title" aria-describedby="title-help" value="<?php echo($getData['car_title']); ?>" placeholder="<?php echo($getData['car_title']); ?>" autocomplete="off" required>
+                    <input type="text" class="form-control" id="title" name="title" aria-describedby="title-help" value="<?php echo($getData['title']); ?>" placeholder="<?php echo($getData['title']); ?>" autocomplete="off" required>
                 </div>
                 <div class="part-form">
                     <label for="url" class="form-label">Url du workshop</label>
-                    <input type="text" class="form-control" placeholder="URL du contenu" id="url" name="url" value="<?php echo strip_tags($getData['car_url']); ?>" autocomplete="off">
+                    <input type="text" class="form-control" placeholder="URL du contenu" id="url" name="url" value="<?php echo strip_tags($getData['url']); ?>" autocomplete="off">
                 </div>
                 <div class="part-form">
                     <label for="photo" class="form-label">Template du contenu</label>
-                    <input type="text" class="form-control" placeholder="URL de l'image" id="photo" name="photo" value="<?php echo strip_tags($getData['car_photo']); ?>" autocomplete="off" required>
+                    <input type="text" class="form-control" placeholder="URL de l'image" id="photo" name="photo" value="<?php echo strip_tags($getData['photo']); ?>" autocomplete="off" required>
                 </div>
                 <div class="part-form">
                     <label for="is_enabled" class="form-label">Activation</label>

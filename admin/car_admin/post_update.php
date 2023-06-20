@@ -38,6 +38,7 @@ if (!isset($postData['creator'])) {
         return;
     }
 }
+
 if ($postData['creator'] == 'zebra_c' || $postData['creator'] == 'decals_c') {
     $id = $postData['id'];
     $title = $postData['title'];
