@@ -76,8 +76,8 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
     <?php include_once($rootPath.'/header.php'); ?>
         <form action="<?php echo($rootUrl . 'admin/car_admin/post_update.php'); ?>" method="POST">
-            <?php if($getData['creator'] == 'zebra_c' || $getData['creator'] == 'decals_c') { ?>
-                <h1>Mettre à jour <?php echo($getData['car_title']); ?></h1>
+            <?php if($getData['creator'] == 'zebra_c' || $getData['creator'] == 'decals_c' || $getData['creator'] == 'other') { ?>
+                <h1>Mettre à jour <?php echo($getData['title']); ?></h1>
                 <div class="part-form">
                     <label for="fake-id" class="form-label">ID du contenu</label>
                     <input type="text" class="form-control" id="fake-id" name="fake-id" value="<?php echo($getData['id']); ?>" disabled required>

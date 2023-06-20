@@ -15,19 +15,21 @@ if (!is_admin($loggedUser['email'])) {
 }
 
 if (!isset($postData['creator'])) {
-    echo('Il faut remplir tous les champs pour pouvoir créer un véhicule.');
+    echo('Il faut remplir tous les champs pour pouvoir créer un véhicule. ERROR1.');
     return;
 } else {
     if ($postData['creator'] === 'zebra' || $postData['creator'] === 'decals') {
-        if (
-            !isset($postData['car_title']) || !isset($postData['car_photo'])
-        ) {
-            echo('Il faut remplir tous les champs pour pouvoir créer un véhicule.');
+        if (!isset($postData['car_title']) || !isset($postData['car_photo'])) {
+            echo('Il faut remplir tous les champs pour pouvoir créer un véhicule. ERROR2.');
             return;
         }
-    } elseif ( !isset($postData['car_title']) || !isset($postData['car_url']) || !isset($postData['car_photo']) )
-    {
-        echo('Il faut remplir tous les champs pour pouvoir créer un véhicule.');
+    } elseif($postData['creator'] === 'other'){
+        if(!isset($postData['car_title']) || !isset($postData['car_url']) || !isset($postData['car_photo']) || !isset($postData['car_workshop'])){
+            echo('Il faut remplir tous les champs pour pouvoir créer un véhicule. ERROR3.');
+            return;
+        }
+    } elseif(!isset($postData['car_title']) || !isset($postData['car_url']) || !isset($postData['car_photo'])){
+        echo('Il faut remplir tous les champs pour pouvoir créer un véhicule. ERROR4.');
         return;
     }
 }
@@ -40,14 +42,29 @@ if (!isset($postData['car_url'])){
 }
 $photo = $postData['car_photo'];
 $creator = $postData['creator'];
+if (!isset($postData['car_workshop'])){
+    $workshop_name = '';
+} else {
+    $workshop_name = $postData['car_workshop'];
+}
 
-$insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $creator . '(car_title, car_url, car_photo) VALUES (:title, :url, :photo)');
-$insertRecipe->execute([
-    'title' => $title,
-    'url' => $url,
-    'photo' => $photo,
-]);
-
+if ($creator == 'other') {
+    $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $creator . ' (title, url, photo, workshop_name, creator_name) VALUES (:title, :url, :photo, :workshop_name, :creator_name)');
+    $insertRecipe->execute([
+        'title' => $title,
+        'url' => $url,
+        'photo' => $photo,
+        'workshop_name' => $workshop_name,
+        'creator_name' => $loggedUser['username'],
+    ]);
+} else {
+    $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $creator . '(car_title, car_url, car_photo) VALUES (:title, :url, :photo)');
+    $insertRecipe->execute([
+        'title' => $title,
+        'url' => $url,
+        'photo' => $photo,
+    ]);
+}
 ?>
 
 <?php

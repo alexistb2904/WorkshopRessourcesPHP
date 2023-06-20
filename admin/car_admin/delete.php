@@ -3,7 +3,7 @@
 include_once('../../config/mysql.php');
 include_once('../../config/user.php');
 include_once('../../variables.php');
-include_once ('../../functions.php');
+include_once('../../functions.php');
 
 if (!is_admin($loggedUser['email'])) {
     echo 'Vous n\'avez pas les droits pour accéder à cette page.';
@@ -25,20 +25,22 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
 ?>
 
+<html lang="fr">
 <head>
     <title><?php echo($Cname); ?> - WorkshopRessources</title>
     <!-- Required meta tags -->
-    <link rel="stylesheet" href="<?php echo($rootUrl). 'style-admin.css'?>">
-    <link rel="icon" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.ico'?>">
-    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
-    <link rel="shortcut icon" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
+    <link rel="stylesheet" href="<?php echo ($rootUrl) . 'style-admin.css' ?>">
+    <link rel="icon" href="<?php echo ($rootUrl) . 'assets/img/Logo/LogoWS.ico' ?>">
+    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo ($rootUrl) . 'assets/img/Logo/LogoWS.png' ?>"
+          type="image/png"/>
+    <link rel="shortcut icon" href="<?php echo ($rootUrl) . 'assets/img/Logo/LogoWS.png' ?>" type="image/png"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="color-scheme" content="normal">
     <meta name="author" content="alexistb2904">
     <meta name="robots" content="index, follow">
     <meta http-equiv="content-language" content="fr-fr">
-    <link rel="canonical" href="https://<?php echo($currentURL); ?>" />
+    <link rel="canonical" href="https://<?php echo($currentURL); ?>"/>
 
     <!-- Base Meta Tags -->
     <meta name="title" content="<?php echo($Cname); ?> - WorkshopRessources">
@@ -52,7 +54,11 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-408NVZ99VY"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'G-408NVZ99VY');
@@ -60,9 +66,14 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
     <script type="text/javascript">
         (function (c, l, a, r, i, t, y) {
-            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+            c[a] = c[a] || function () {
+                (c[a].q = c[a].q || []).push(arguments)
+            };
+            t = l.createElement(r);
+            t.async = 1;
+            t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0];
+            y.parentNode.insertBefore(t, y);
         })(window, document, "clarity", "script", "g3iiq9rlyc");
     </script>
 
@@ -72,22 +83,38 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
 <!-- Main -->
 <main>
-    <?php include_once($rootPath.'/header.php'); ?>
+    <?php include_once($rootPath . '/header.php'); ?>
 
     <form action="post_delete.php" method="POST">
+        <?php if ($getData['creator'] == 'other' || $getData['creator'] == 'zebra_c' || $getData['creator'] == 'decals_c') { ?>
+            <div style="display: flex; align-items: center; flex-direction: column">
+                <h1>Supprimer <?php echo($getData['title']); ?> ?</h1>
+                <div class="grid-img">
+                    <img src="<?php echo($getData['photo']); ?>"
+                         alt="<?php echo($getData['title']); ?>" loading="lazy" ;>
+                </div>
+                <input type="hidden" class="form-control" id="id" name="id" value="<?php echo($getData['id']); ?>">
+                <input type="hidden" class="form-control" id="creator" name="creator"
+                       value="<?php echo($getData['creator']); ?>">
+            </div>
+
+            <button type="submit" class="btn">La suppression est définitive</button>
+        <?php } else { ?>
         <div style="display: flex; align-items: center; flex-direction: column">
             <h1>Supprimer <?php echo($getData['car_title']); ?> ?</h1>
             <div class="grid-img">
-            <img src="<?php echo($getData['car_photo']); ?>"
-                 alt="<?php echo($getData['car_title']); ?>" loading="lazy";>
+                <img src="<?php echo($getData['car_photo']); ?>"
+                     alt="<?php echo($getData['car_title']); ?>" loading="lazy" ;>
             </div>
             <input type="hidden" class="form-control" id="id" name="id" value="<?php echo($getData['id']); ?>">
-            <input type="hidden" class="form-control" id="creator" name="creator" value="<?php echo($getData['creator']); ?>">
+            <input type="hidden" class="form-control" id="creator" name="creator"
+                   value="<?php echo($getData['creator']); ?>">
         </div>
 
         <button type="submit" class="btn">La suppression est définitive</button>
+        <?php } ?>
     </form>
-    <br />
+    <br/>
 </main>
 <?php include_once('../../footer.php'); ?>
 <script>

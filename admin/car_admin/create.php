@@ -95,6 +95,10 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                 <input type="text" class="form-control" placeholder="URL Workshop du contenu | Sauf zébra & decals" id="car_url" name="car_url" autocomplete="off">
             </div>
             <div class="part-form">
+                <label for="car_workshop" class="form-label">Nom Workshop</label>
+                <input type="text" class="form-control" placeholder="Nom Workshop du créateur | Sauf zébra & decals" id="car_workshop" name="car_workshop" autocomplete="off">
+            </div>
+            <div class="part-form">
                 <label for="car_photo" class="form-label">Template/Image du contenu</label>
                 <input type="text" class="form-control" placeholder="URL de l'image" id="car_photo" name="car_photo" autocomplete="off">
             <button type="submit" class="btn-up">Envoyer</button>
