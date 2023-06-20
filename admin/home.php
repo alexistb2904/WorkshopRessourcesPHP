@@ -131,6 +131,33 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                     </div>
                 </div>
             </div>
+            <details>
+            <summary>Zébra Communauté</summary>
+            <div class="grid-download">
+                <?php foreach ($zebra_c as $category_item) : ?>
+                    <div class="grid-download-item">
+                        <div class="grid-download-item-img">
+                            <img src="../<?php echo $category_item['photo']; ?>"
+                                 alt="<?php echo $category_item['title']; ?>" loading="lazy">
+                        </div>
+                        <a href="<?php echo $category_item['url']; ?>" target="_blank">
+                            <p><?php echo $category_item['title']; ?> | <?php echo $category_item['is_enabled']; ?></p>
+                            <p><?php echo $category_item['creator_name']; ?>></p>
+                        </a>
+                        <a class="link-warning grid-download-item-a" href="car_admin/update.php?id=<?php echo $category_item['id']; ?>&car_title=<?php echo $category_item['title']; ?>&car_photo=<?php echo $category_item['photo']; ?>&creator=zebra_c&car_url=<?php echo $category_item['url']; ?>&is_enabled=<?php echo $category_item['is_enabled']; ?>">Editer</a>
+                        <a class="link-danger grid-download-item-a" href="car_admin/delete.php?id=<?php echo $category_item['id']; ?>&car_title=<?php echo $category_item['title']; ?>&car_photo=<?php echo $category_item['photo']; ?>&creator=zebra_c">Supprimer</a>
+                    </div>
+                <?php endforeach; ?>
+                <div class="grid-download-plus">
+                    <div class="grid-download-item-plus">
+                        <a href="car_admin/create.php?creator=zebra">
+                            <img src="https://cdn-icons-png.flaticon.com/512/226/226974.png"
+                                 alt="Plus Image" loading="lazy">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            </details>
         </details>
         <details>
             <summary>Decals</summary>
@@ -157,6 +184,32 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                     </div>
                 </div>
             </div>
+            <summary>Decals Communauté</summary>
+            <div class="grid-download">
+                <?php foreach ($decals_c as $category_item) : ?>
+                    <div class="grid-download-item">
+                        <div class="grid-download-item-img">
+                            <img src="../<?php echo $category_item['photo']; ?>"
+                                 alt="<?php echo $category_item['title']; ?>" loading="lazy">
+                        </div>
+                        <a href="<?php echo $category_item['url']; ?>" target="_blank">
+                            <p><?php echo $category_item['title']; ?> | <?php echo $category_item['is_enabled']; ?></p>
+                            <p><?php echo $category_item['creator_name']; ?>></p>
+                        </a>
+                        <a class="link-warning grid-download-item-a" href="car_admin/update.php?id=<?php echo $category_item['id']; ?>&car_title=<?php echo $category_item['title']; ?>&car_photo=<?php echo $category_item['photo']; ?>&creator=decals_c&car_url=<?php echo $category_item['url']; ?>&is_enabled=<?php echo $category_item['is_enabled']; ?>">Editer</a>
+                        <a class="link-danger grid-download-item-a" href="car_admin/delete.php?id=<?php echo $category_item['id']; ?>&car_title=<?php echo $category_item['title']; ?>&car_photo=<?php echo $category_item['photo']; ?>&creator=decals_c">Supprimer</a>
+                    </div>
+                <?php endforeach; ?>
+                <div class="grid-download-plus">
+                    <div class="grid-download-item-plus">
+                        <a href="car_admin/create.php?creator=decals">
+                            <img src="https://cdn-icons-png.flaticon.com/512/226/226974.png"
+                                 alt="Plus Image" loading="lazy">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            </details>
         </details>
     </main>
 <?php } else { ?>
