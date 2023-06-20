@@ -97,6 +97,10 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                     <input type="text" class="form-control" id="title" name="title" aria-describedby="title-help" value="<?php echo($getData['title']); ?>" placeholder="<?php echo($getData['title']); ?>" autocomplete="off" required>
                 </div>
                 <div class="part-form">
+                    <label for="workshop_name" class="form-label">Nom du créateur workshop</label>
+                    <input type="text" class="form-control" placeholder="Nom du créateur de contenu" id="url" name="workshop_name" value="<?php echo strip_tags($getData['workshop_name']); ?>" autocomplete="off">
+                </div>
+                <div class="part-form">
                     <label for="url" class="form-label">Url du workshop</label>
                     <input type="text" class="form-control" placeholder="URL du contenu" id="url" name="url" value="<?php echo strip_tags($getData['url']); ?>" autocomplete="off">
                 </div>

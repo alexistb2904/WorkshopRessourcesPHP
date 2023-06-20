@@ -4,7 +4,7 @@ session_start();
 include_once('../../config/mysql.php');
 include_once('../../config/user.php');
 include_once('../../variables.php');
-include_once ('../../functions.php');
+include_once('../../functions.php');
 
 $rootPath = $_SERVER['DOCUMENT_ROOT'];
 $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
@@ -30,36 +30,54 @@ if (!isset($postData['creator'])) {
             if (!isset($postData['title']) || !isset($postData['photo']) || !isset($postData['id']) || !isset($postData['creator_name']) || !isset($postData['is_enabled'])) {
                 echo('Il faut remplir tous les champs pour pouvoir créer un véhicule ERROR3.');
                 return;
-            } elseif (!isset($postData['car_title']) || !isset($postData['car_url']) || !isset($postData['car_photo']) || !isset($postData['id'])) {
+            }
+        } elseif ($postData['creator'] == 'other') {
+            if (!isset($postData['title']) || !isset($postData['photo']) || !isset($postData['id']) || !isset($postData['creator_name']) || !isset($postData['is_enabled']) || !isset($postData['workshop_name'])) {
                 echo('Il faut remplir tous les champs pour pouvoir créer un véhicule ERROR4.');
                 return;
             }
+        } elseif (!isset($postData['car_title']) || !isset($postData['car_url']) || !isset($postData['car_photo']) || !isset($postData['id'])) {
+            echo('Il faut remplir tous les champs pour pouvoir créer un véhicule ERROR5.');
+            return;
         }
     }
 }
 
-if ($postData['creator'] == 'zebra_c' || $postData['creator'] == 'decals_c') {
+if ($postData['creator'] == 'zebra_c' || $postData['creator'] == 'decals_c' || $postData['creator'] == 'other') {
     $id = $postData['id'];
     $title = $postData['title'];
     $photo = $postData['photo'];
-    if (!isset($postData['url'])){
+    if (!isset($postData['url'])) {
         $url = '';
     } else {
         $url = $postData['url'];
     }
-    $is_enabled = $postData['is_enabled'];
-    $creator = $postData['creator'];
     $creator_name = $postData['creator_name'];
+    $creator = $postData['creator'];
+    $workshop_name = $postData['workshop_name'];
+    $is_enabled = $postData['is_enabled'];
 
-    $insertRecipeStatement = $mysqlClient->prepare('UPDATE ' . $creator . ' SET title = :title, url = :url, photo = :photo, creator_name = :creator_name, is_enabled = :is_enabled WHERE id = :id');
-    $insertRecipeStatement->execute([
+    if ($postData['creator'] == 'other'){
+        $insertRecipeStatement = $mysqlClient->prepare('UPDATE ' . $creator . ' SET title = :title, url = :url, photo = :photo, creator_name = :creator_name, is_enabled = :is_enabled , workshop_name = :workshop_name WHERE id = :id');
+        $insertRecipeStatement->execute([
             'title' => $title,
             'photo' => $photo,
             'url' => $url,
             'id' => $id,
             'creator_name' => $creator_name,
             'is_enabled' => $is_enabled,
+            'workshop_name' => $workshop_name,
         ]);
+    } else {
+    $insertRecipeStatement = $mysqlClient->prepare('UPDATE ' . $creator . ' SET title = :title, url = :url, photo = :photo, creator_name = :creator_name, is_enabled = :is_enabled WHERE id = :id');
+    $insertRecipeStatement->execute([
+        'title' => $title,
+        'photo' => $photo,
+        'url' => $url,
+        'id' => $id,
+        'creator_name' => $creator_name,
+        'is_enabled' => $is_enabled,
+    ]);}
 } else {
     $id = $postData['id'];
     $title = $postData['car_title'];
@@ -111,17 +129,18 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 <head>
     <title><?php echo($Cname); ?> - WorkshopRessources</title>
     <!-- Required meta tags -->
-    <link rel="stylesheet" href="<?php echo($rootUrl). 'style-admin.css'?>">
-    <link rel="icon" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.ico'?>">
-    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
-    <link rel="shortcut icon" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
+    <link rel="stylesheet" href="<?php echo ($rootUrl) . 'style-admin.css' ?>">
+    <link rel="icon" href="<?php echo ($rootUrl) . 'assets/img/Logo/LogoWS.ico' ?>">
+    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo ($rootUrl) . 'assets/img/Logo/LogoWS.png' ?>"
+          type="image/png"/>
+    <link rel="shortcut icon" href="<?php echo ($rootUrl) . 'assets/img/Logo/LogoWS.png' ?>" type="image/png"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="color-scheme" content="normal">
     <meta name="author" content="alexistb2904">
     <meta name="robots" content="index, follow">
     <meta http-equiv="content-language" content="fr-fr">
-    <link rel="canonical" href="https://<?php echo($currentURL); ?>" />
+    <link rel="canonical" href="https://<?php echo($currentURL); ?>"/>
 
     <!-- Base Meta Tags -->
     <meta name="title" content="<?php echo($Cname); ?> - WorkshopRessources">
@@ -135,7 +154,11 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-408NVZ99VY"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'G-408NVZ99VY');
@@ -143,9 +166,14 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
     <script type="text/javascript">
         (function (c, l, a, r, i, t, y) {
-            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+            c[a] = c[a] || function () {
+                (c[a].q = c[a].q || []).push(arguments)
+            };
+            t = l.createElement(r);
+            t.async = 1;
+            t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0];
+            y.parentNode.insertBefore(t, y);
         })(window, document, "clarity", "script", "g3iiq9rlyc");
     </script>
 
@@ -155,25 +183,25 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
 <!-- Main -->
 <main>
-    <?php include_once($rootPath.'/header.php'); ?>
+    <?php include_once($rootPath . '/header.php'); ?>
 
     <form action="" method="POST">
         <div style="display: flex; align-items: center; flex-direction: column">
             <h1><?php echo($title); ?> à été mis à jour</h1>
             <p>Catégorie : <?php echo($creator); ?></p>
             <div class="grid-img">
-                <?php if(strpos($photo, "http://") === 0 || strpos($photo, "https://") === 0) { ?>
+                <?php if (strpos($photo, "http://") === 0 || strpos($photo, "https://") === 0) { ?>
                     <img src="<?php echo($photo) ?>"
-                         alt="<?php echo ($title) ?>" loading="lazy">
+                         alt="<?php echo($title) ?>" loading="lazy">
                 <?php } else { ?>
                     <img src="../../<?php echo($photo) ?>"
-                         alt="<?php echo ($title) ?>" loading="lazy">
+                         alt="<?php echo($title) ?>" loading="lazy">
                 <?php } ?>
 
             </div>
-            <?php if($creator == 'zebra' || $creator == 'decals' ) { ?>
+            <?php if ($creator == 'zebra' || $creator == 'decals') { ?>
                 <p>Status <?php echo($is_enabled); ?></p>
-            <?php } elseif($creator == 'zebra_c' || $creator == 'decals_c' )  { ?>
+            <?php } elseif ($creator == 'zebra_c' || $creator == 'decals_c') { ?>
                 <p>Status <?php echo($is_enabled); ?></p>
                 <p>Créateur <?php echo($creator_name); ?></p>
             <?php } else { ?>

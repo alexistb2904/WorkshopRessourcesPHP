@@ -110,16 +110,16 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                                 <p><?php echo $category_item['creator_name']; ?></p>
                             </a>
                             <a class="link-warning grid-download-item-a"
-                               href="car_admin/update.php?id=<?php echo $category_item['id']; ?>&title=<?php echo $category_item['title']; ?>&photo=<?php echo $category_item['photo']; ?>&creator=other&url=<?php echo $category_item['url']; ?>&is_enabled=<?php echo $category_item['is_enabled']; ?>&creator_name=<?php echo $category_item['creator_name']; ?>">Editer</a>
+                               href="car_admin/update.php?id=<?php echo $category_item['id']; ?>&title=<?php echo $category_item['title']; ?>&photo=<?php echo $category_item['photo']; ?>&creator=other&url=<?php echo $category_item['url']; ?>&is_enabled=<?php echo $category_item['is_enabled']; ?>&creator_name=<?php echo $category_item['creator_name']; ?>&workshop_name=<?php echo $category_item['workshop_name']; ?>">Editer</a>
                             <a class="link-danger grid-download-item-a"
                                href="car_admin/delete.php?id=<?php echo $category_item['id']; ?>&title=<?php echo $category_item['title']; ?>&photo=<?php echo $category_item['photo']; ?>&creator=other&creator_name=<?php echo $category_item['creator_name']; ?>">Supprimer</a>
                         </div>
                     <?php } else { ?>
                     <div class="grid-download-item">
                         <div class="grid-download-item-img">
-                            <?php if (strpos($category_item['car_photo'], "http://") === 0 || strpos($category_item['car_photo'], "https://") === 0) { ?>
+                            <?php if (strpos($category_item['car_photo'], "http://") == 0 || strpos($category_item['car_photo'], "https://") == 0) { ?>
                                 <img src="<?php echo($category_item['car_photo']) ?>"
-                                     alt="<?php echo $category_item['car_title']; ?>" loading="lazy">
+                                     alt="<?php echo $category_item['car_title']; ?> 1" loading="lazy">
                             <?php } else { ?>
                                 <img src="../<?php echo ($rootUrl) . $category_item['car_photo']; ?>"
                                      alt="<?php echo $category_item['car_title']; ?>" loading="lazy">
