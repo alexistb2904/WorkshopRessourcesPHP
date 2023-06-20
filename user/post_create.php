@@ -25,7 +25,7 @@ if (!isset($postData['creator']) || !isset($postData['creator_name'])) {
         return;
     }
 } elseif ($postData['creator'] == 'other') {
-    if (!isset($postData['title']) || !isset($postData['photo']) || !isset($postData['url'])) {
+    if (!isset($postData['title']) || !isset($postData['photo']) || !isset($postData['url']) || !isset($postData['workshop_name'])) {
         echo('Il faut remplir tous les champs pour pouvoir créer un véhicule. ERROR3.');
         header("refresh:5;$rootUrl/index.php");
         return;
@@ -43,6 +43,11 @@ if (!isset($postData['url'])) {
 } else {
     $url = htmlspecialchars($postData['url']);
 }
+if (!isset($postData['workshop_name'])) {
+    $workshop_name = '';
+} else {
+    $workshop_name = htmlspecialchars($postData['workshop_name']);
+}
 $photo = htmlspecialchars($postData['photo']);
 if ($postData['creator'] == 'zebra_c_p') {
     $creator = 'zebra_c';
@@ -51,8 +56,18 @@ if ($postData['creator'] == 'zebra_c_p') {
 } else {
     $creator = 'other';
 }
-$creator_name = htmlspecialchars($postData['creator_name']);
+$creator_name = htmlspecialchars($loggedUser['pseudo']);
 
+if ($creator == 'other') {
+    $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $creator . '(title, url, photo, creator_name, workshop_name) VALUES (:title, :url, :photo, :creator_name, :workshop_name)');
+    $insertRecipe->execute([
+        'title' => $title,
+        'url' => $url,
+        'photo' => $photo,
+        'creator_name' => $creator_name,
+        'workshop_name' => $workshop_name,
+    ]);
+} else {
 $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $creator . '(title, url, photo, creator_name) VALUES (:title, :url, :photo, :creator_name)');
 $insertRecipe->execute([
     'title' => $title,
@@ -60,7 +75,7 @@ $insertRecipe->execute([
     'photo' => $photo,
     'creator_name' => $creator_name,
 ]);
-
+}
 ?>
 
 <?php

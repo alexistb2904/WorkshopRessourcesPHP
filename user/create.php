@@ -80,6 +80,10 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                 <input type="text" class="form-control" id="title" name="title" aria-describedby="title-help" placeholder="Titre du contenu" autocomplete="off" required>
             </div>
             <div class="part-form">
+                <label for="workshop_name" class="form-label">Nom du créateur workshop | NE PEUT PAS ÊTRE MODIFIER |</label>
+                <input type="text" class="form-control" placeholder="Nom du créateur workshop | Sauf zébra & decals" id="workshop_name" name="workshop_name" autocomplete="off">
+            </div>
+            <div class="part-form">
                 <label for="url" class="form-label">Url du contenu</label>
                 <input type="text" class="form-control" placeholder="URL du contenu | Sauf zébra & decals" id="url" name="url" autocomplete="off">
             </div>
