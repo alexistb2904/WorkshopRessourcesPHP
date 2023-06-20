@@ -119,10 +119,10 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                         <div class="grid-download-item-img">
                             <?php if (strpos($category_item['car_photo'], "http://") === 0|| strpos($category_item['car_photo'], "https://") === 0) { ?>
                                 <img src="<?php echo($category_item['car_photo']) ?>"
-                                     alt="<?php echo $category_item['car_title']; ?>" loading="lazy">
+                                     alt="<?php echo $category_item['car_title']; ?> 1" loading="lazy">
                             <?php } else { ?>
                                 <img src="../<?php echo ($rootUrl) . $category_item['car_photo']; ?>"
-                                     alt="<?php echo $category_item['car_title']; ?>" loading="lazy">
+                                     alt="<?php echo $category_item['car_title']; ?> 2" loading="lazy">
                             <?php } ?>
                         </div>
                         <a href="<?php echo $category_item['car_url']; ?>" target="_blank">
