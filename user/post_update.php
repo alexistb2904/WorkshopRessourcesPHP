@@ -9,7 +9,7 @@ include_once('../functions.php');
 $rootPath = $_SERVER['DOCUMENT_ROOT'];
 $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
-if (!is_admin($loggedUser['email'])) {
+if (!isset($loggedUser['email'])) {
     echo 'Vous n\'avez pas les droits pour accéder à cette page.';
     header("refresh:5;$rootUrl/index.php");
     exit();
@@ -57,7 +57,7 @@ $count = $stmt->fetchColumn();
 if ($count = 0) {
     echo 'Ce n\'est pas possible de modifier un fichier que vous n\'avez pas crée.';
 } else {
-    $insertRecipeStatement = $mysqlClient->prepare('UPDATE ' . $creator . ' SET title = :title, url = :url, photo = :photo, creator_name = :creator_name, is_enabled = :is_enabled WHERE id = :id');
+    $insertRecipeStatement = $mysqlClient->prepare('UPDATE ' . $creator . ' SET title = :title, url = :url, photo = :photo WHERE id = :id');
     $insertRecipeStatement->execute([
         'title' => $title,
         'photo' => $photo,
@@ -72,9 +72,6 @@ $nameExtension = basename(__FILE__);
 $name = pathinfo($nameExtension, PATHINFO_FILENAME);
 $Cname = ucfirst($name);
 $currentURL = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-
-$rootPath = $_SERVER['DOCUMENT_ROOT'];
-$rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
 ?>
 
@@ -147,7 +144,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                     <img src="<?php echo($photo) ?>"
                          alt="<?php echo ($title) ?>" loading="lazy">
                 <?php } else { ?>
-                    <img src="<?php echo($photo) ?>"
+                    <img src="../<?php echo($photo) ?>"
                          alt="<?php echo ($title) ?>" loading="lazy">
                 <?php } ?>
             </div>
@@ -155,7 +152,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
     </form>
     <br/>
 </main>
-<?php include_once('../../footer.php'); ?>
+<?php include_once('../footer.php'); ?>
 <script>
     var dropdown = document.getElementsByClassName("btn-dropdown-ws");
     var i;

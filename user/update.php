@@ -1,12 +1,12 @@
 <?php session_start();
-    include_once('../../config/mysql.php');
-    include_once('../../config/user.php');
-    include_once('../../variables.php');
-    include_once ('../../functions.php');
+include_once('../config/mysql.php');
+include_once('../config/user.php');
+include_once('../variables.php');
+include_once ('../functions.php');
 
-if (!is_admin($loggedUser['email'])) {
+if (!isset($loggedUser['email'])) {
     echo 'Vous n\'avez pas les droits pour accéder à cette page.';
-    header("refresh:5;$rootUrl/index.php");
+    header("refresh:5;$rootUrl login.php");
     exit();
 }
 
@@ -75,40 +75,36 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 <main>
 
     <?php include_once($rootPath.'/header.php'); ?>
-        <form action="<?php echo($rootUrl . 'admin/car_admin/post_update.php'); ?>" method="POST">
-            <h1>Mettre à jour <?php echo($getData['car_title']); ?></h1>
-            <div class="part-form">
-                <input type="hidden" class="form-control" id="id" name="id" value="<?php echo($getData['id']); ?>" required>
-            </div>
-            <div class="part-form">
-                <label for="creator_name" class="form-label">Créateur du contenu</label>
-                <input type="text" class="form-control" id="creator_name" name="creator_name" value="<?php echo($getData['creator_name']); ?>" required>
-            </div>
-            <div class="part-form">
-                <label for="creator-fake" class="form-label">Catégorie du contenu</label>
-                <input type="text" class="form-control" id="creator-fake" name="creator-fake" value="<?php echo($getData['creator']); ?>" disabled required>
-                <input type="hidden" class="form-control" id="creator" name="creator" value="<?php echo($getData['creator']); ?>" required>
-            </div>
-            <div class="part-form">
-                <label for="title" class="form-label">Titre du contenu</label>
-                <input type="text" class="form-control" id="title" name="title" aria-describedby="title-help" value="<?php echo($getData['title']); ?>" placeholder="<?php echo($getData['title']); ?>" autocomplete="off" required>
-            </div>
-            <div class="part-form">
-                <label for="url" class="form-label">Url du workshop</label>
-                <input type="text" class="form-control" placeholder="URL du contenu" id="url" name="url" value="<?php echo strip_tags($getData['url']); ?>" autocomplete="off">
-            </div>
-            <div class="part-form">
-                <label for="photo" class="form-label">Template du contenu</label>
-                <input type="text" class="form-control" placeholder="URL de l'image" id="photo" name="photo" value="<?php echo strip_tags($getData['photo']); ?>" autocomplete="off" required>
-            </div>
-            <div class="part-form">
-                <label for="is_enabled" class="form-label">Activation</label>
-                <input type="number" class="form-control" placeholder="Base : <?php echo strip_tags($getData['is_enabled']); ?>" id="is_enabled" name="is_enabled" value="<?php echo strip_tags($getData['is_enabled']); ?>" min="0" max="1" autocomplete="off" required>
-            </div>
-            <button type="submit" class="btn-up">Envoyer</button>
-        </form>
-        <br />
+    <form action="<?php echo($rootUrl . 'user/post_update.php'); ?>" method="POST">
+        <h1>Mettre à jour <?php echo($getData['title']); ?></h1>
+        <div class="part-form">
+            <input type="hidden" class="form-control" id="id" name="id" value="<?php echo($getData['id']); ?>" required>
+        </div>
+        <div class="part-form">
+            <label for="creator_name" class="form-label">Créateur du contenu</label>
+            <input type="text" class="form-control" id="creator_name" name="creator_name" value="<?php echo($getData['creator_name']); ?>" required>
+        </div>
+        <div class="part-form">
+            <label for="creator-fake" class="form-label">Catégorie du contenu</label>
+            <input type="text" class="form-control" id="creator-fake" name="creator-fake" value="<?php echo($getData['creator']); ?>" disabled required>
+            <input type="hidden" class="form-control" id="creator" name="creator" value="<?php echo($getData['creator']); ?>" required>
+        </div>
+        <div class="part-form">
+            <label for="title" class="form-label">Titre du contenu</label>
+            <input type="text" class="form-control" id="title" name="title" aria-describedby="title-help" value="<?php echo($getData['title']); ?>" placeholder="<?php echo($getData['title']); ?>" autocomplete="off" required>
+        </div>
+        <div class="part-form">
+            <label for="url" class="form-label">Url du workshop</label>
+            <input type="text" class="form-control" placeholder="URL du contenu" id="url" name="url" value="<?php echo strip_tags($getData['url']); ?>" autocomplete="off">
+        </div>
+        <div class="part-form">
+            <label for="photo" class="form-label">Template du contenu</label>
+            <input type="text" class="form-control" placeholder="URL de l'image" id="photo" name="photo" value="<?php echo strip_tags($getData['photo']); ?>" autocomplete="off" required>
+        </div>
+        <button type="submit" class="btn-up">Envoyer</button>
+    </form>
+    <br />
 </main>
-    <?php include_once($rootPath.'/footer.php'); ?>
+<?php include_once($rootPath.'/footer.php'); ?>
 </body>
 </html>

@@ -198,7 +198,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                                 <img src="<?php echo($category_item['photo']) ?>"
                                      alt="<?php echo $category_item['title']; ?>" loading="lazy">
                             <?php } else { ?>
-                                <img src="<?php echo($rootUrl).$category_item['photo']; ?>"
+                                <img src="../<?php echo($rootUrl).$category_item['photo']; ?>"
                                      alt="<?php echo $category_item['title']; ?>" loading="lazy">
                             <?php } ?>
                         </div>

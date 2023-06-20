@@ -121,7 +121,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                     <img src="<?php echo($photo) ?>"
                          alt="<?php echo ($title) ?>" loading="lazy">
                 <?php } else { ?>
-                    <img src="<?php echo($photo) ?>"
+                    <img src="../<?php echo($photo) ?>"
                          alt="<?php echo ($title) ?>" loading="lazy">
                 <?php } ?>
 

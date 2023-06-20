@@ -116,8 +116,13 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
             <h1><?php echo($title); ?> à été crée</h1>
             <p>Catégorie : <?php echo($creator); ?></p>
             <div class="grid-img">
-                <img src="../../<?php echo($photo); ?>"
-                     alt="<?php echo($title); ?>" loading="lazy";>
+                <?php if(strpos($photo, "http://") === 0 || strpos($photo, "https://") === 0) { ?>
+                    <img src="<?php echo($photo) ?>"
+                         alt="<?php echo ($title) ?>" loading="lazy">
+                <?php } else { ?>
+                    <img src="../../<?php echo($photo) ?>"
+                         alt="<?php echo ($title) ?>" loading="lazy">
+                <?php } ?>
 
             </div>
             <?php if($creator == 'zebra' || $creator == 'decals' ) { ?>

@@ -78,8 +78,13 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
         <div style="display: flex; align-items: center; flex-direction: column">
             <h1>Supprimer <?php echo($getData['title']); ?> ?</h1>
             <div class="grid-img">
-            <img src="<?php echo($getData['photo']); ?>"
-                 alt="<?php echo($getData['title']); ?>" loading="lazy">
+                <?php if(strpos($getData['photo'], "http://") === 0 || strpos($getData['photo'], "https://") === 0) { ?>
+                    <img src="<?php echo($getData['photo']) ?>"
+                         alt="<?php echo $getData['title']; ?>" loading="lazy">
+                <?php } else { ?>
+                    <img src="../<?php echo($rootUrl).$getData['photo']; ?>"
+                         alt="<?php echo $getData['title']; ?>" loading="lazy">
+                <?php } ?>
             </div>
             <input type="hidden" class="form-control" id="id" name="id" value="<?php echo($getData['id']); ?>">
             <input type="hidden" class="form-control" id="creator" name="creator" value="<?php echo($getData['creator']); ?>">
