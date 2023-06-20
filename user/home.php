@@ -102,8 +102,13 @@ $decals_c_p = $decals_c_pFetch->fetchAll();
                     <?php foreach ($$variableName as $category_item) : ?>
                         <div class="grid-download-item">
                             <div class="grid-download-item-img">
-                                <img src="<?php echo($rootUrl).$category_item['photo']; ?>"
+                                <?php if(strpos($category_item['photo'], "http://") === 0 || strpos($category_item['photo'], "https://") === 0) { ?>
+                                <img src="<?php echo($category_item['photo']) ?>"
                                      alt="<?php echo $category_item['title']; ?>" loading="lazy">
+                                <?php } else { ?>
+                                    <img src="<?php echo($rootUrl).$category_item['photo']; ?>"
+                                         alt="<?php echo $category_item['title']; ?>" loading="lazy">
+                                <?php } ?>
                             </div>
                             <a href="<?php echo $category_item['url']; ?>" target="_blank">
                                 <p><?php echo $category_item['title']; ?></p>

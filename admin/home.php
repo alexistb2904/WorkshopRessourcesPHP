@@ -137,8 +137,13 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                 <?php foreach ($zebra_c as $category_item) : ?>
                     <div class="grid-download-item">
                         <div class="grid-download-item-img">
-                            <img src="../<?php echo $category_item['photo']; ?>"
-                                 alt="<?php echo $category_item['title']; ?>" loading="lazy">
+                            <?php if(strpos($category_item['photo'], "http://") === 0 || strpos($category_item['photo'], "https://") === 0) { ?>
+                                <img src="<?php echo($category_item['photo']) ?>"
+                                     alt="<?php echo $category_item['title']; ?>" loading="lazy">
+                            <?php } else { ?>
+                                <img src="<?php echo($rootUrl).$category_item['photo']; ?>"
+                                     alt="<?php echo $category_item['title']; ?>" loading="lazy">
+                            <?php } ?>
                         </div>
                         <a href="<?php echo $category_item['url']; ?>" target="_blank">
                             <p><?php echo $category_item['title']; ?> | <?php echo $category_item['is_enabled']; ?></p>
@@ -189,8 +194,13 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                 <?php foreach ($decals_c as $category_item) : ?>
                     <div class="grid-download-item">
                         <div class="grid-download-item-img">
-                            <img src="../<?php echo $category_item['photo']; ?>"
-                                 alt="<?php echo $category_item['title']; ?>" loading="lazy">
+                            <?php if(strpos($category_item['photo'], "http://") === 0 || strpos($category_item['photo'], "https://") === 0) { ?>
+                                <img src="<?php echo($category_item['photo']) ?>"
+                                     alt="<?php echo $category_item['title']; ?>" loading="lazy">
+                            <?php } else { ?>
+                                <img src="<?php echo($rootUrl).$category_item['photo']; ?>"
+                                     alt="<?php echo $category_item['title']; ?>" loading="lazy">
+                            <?php } ?>
                         </div>
                         <a href="<?php echo $category_item['url']; ?>" target="_blank">
                             <p><?php echo $category_item['title']; ?> | <?php echo $category_item['is_enabled']; ?></p>

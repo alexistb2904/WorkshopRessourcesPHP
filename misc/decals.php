@@ -114,8 +114,13 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                     <div class="grid-download-item">
                         <div class="grid-download-item-img">
                             <a href="<?php echo($category_item['url']); ?>" style="display: inline">
-                                <img src="../<?php echo($category_item['photo']); ?>"
-                                     alt="<?php echo($category_item['title']); ?> <?php echo($Cname); ?>" loading="lazy">
+                                <?php if(strpos($category_item['photo'], "http://") === 0 || strpos($category_item['photo'], "https://") === 0) { ?>
+                                    <img src="<?php echo($category_item['photo']) ?>"
+                                         alt="<?php echo $category_item['title']; ?>" loading="lazy">
+                                <?php } else { ?>
+                                    <img src="<?php echo($rootUrl).$category_item['photo']; ?>"
+                                         alt="<?php echo $category_item['title']; ?>" loading="lazy">
+                                <?php } ?>
                             </a>
                         </div>
                         <a href="<?php echo $category_item['url']; ?>" target="_blank">
