@@ -78,7 +78,7 @@ $decals_c_p = $decals_c_pFetch->fetchAll();
 <!-- Main -->
 <?php include_once('../variables.php'); ?>
 
-<?php if(!isset($loggedUser)) { ?>
+<?php if(isset($loggedUser)) { ?>
 
     <?php
     $creator_list = [
