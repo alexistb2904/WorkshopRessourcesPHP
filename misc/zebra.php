@@ -121,7 +121,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                         </div>
                         <a href="<?php echo $category_item['url']; ?>" target="_blank">
                             <p><?php echo $category_item['title']; ?></p>
-                            <p style="color:gray"><?php echo $category_item['creator_name']; ?></p>
+                            <p style="color:gray; margin-top: 0px; font-size: 2rem">Créateur : <?php echo $category_item['creator_name']; ?></p>
                         </a>
                         <a class="grid-download-item-a" href="../<?php echo($category_item['car_photo']); ?>" download>Télécharger</a>
                     </div>

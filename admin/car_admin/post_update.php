@@ -24,18 +24,17 @@ if (!isset($postData['creator'])) {
 } else {
     if ($postData['creator'] == 'zebra' || $postData['creator'] == 'decals') {
         if (!isset($postData['car_title']) || !isset($postData['car_photo']) || !isset($postData['id']) || !isset($postData['is_enabled'])) {
-            echo('Il faut remplir tous les champs pour pouvoir créer un véhicule'. $postData['id'] . ' ERROR2.');
+            echo('Il faut remplir tous les champs pour pouvoir créer un véhicule' . $postData['id'] . ' ERROR2.');
             return;
-        }
-    } elseif ($postData['creator'] == 'zebra_c' || $postData['creator'] == 'decals_c') {
+        } elseif ($postData['creator'] == 'zebra_c' || $postData['creator'] == 'decals_c') {
             if (!isset($postData['title']) || !isset($postData['photo']) || !isset($postData['id']) || !isset($postData['creator_name']) || !isset($postData['is_enabled'])) {
-            echo('Il faut remplir tous les champs pour pouvoir créer un véhicule ERROR3.');
-            return;
-
-        } elseif ( !isset($postData['car_title']) || !isset($postData['car_url']) || !isset($postData['car_photo']) || !isset($postData['id']) )
-    {
-        echo('Il faut remplir tous les champs pour pouvoir créer un véhicule ERROR4.');
-        return;
+                echo('Il faut remplir tous les champs pour pouvoir créer un véhicule ERROR3.');
+                return;
+            } elseif (!isset($postData['car_title']) || !isset($postData['car_url']) || !isset($postData['car_photo']) || !isset($postData['id'])) {
+                echo('Il faut remplir tous les champs pour pouvoir créer un véhicule ERROR4.');
+                return;
+            }
+        }
     }
 }
 
@@ -108,6 +107,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
 ?>
 
+<html lang="fr">
 <head>
     <title><?php echo($Cname); ?> - WorkshopRessources</title>
     <!-- Required meta tags -->
