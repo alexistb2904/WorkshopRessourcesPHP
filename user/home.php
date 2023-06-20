@@ -24,6 +24,12 @@ $decals_c_pFetch->execute([
 ]);
 $decals_c_p = $decals_c_pFetch->fetchAll();
 
+$other_cFetch = $mysqlClient->prepare('SELECT * FROM other WHERE creator_name = :creator_name');
+$other_cFetch->execute([
+    'creator_name' => (string)$loggedUser['pseudo']
+]);
+$other_c = $other_cFetch->fetchAll();
+
 ?>
 <!doctype html>
 <html lang="fr">
@@ -84,7 +90,7 @@ $decals_c_p = $decals_c_pFetch->fetchAll();
     $creator_list = [
         'zebra_c_p',
         'decals_c_p',
-        'other',
+        'other_p',
     ];
     ?>
 
