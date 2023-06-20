@@ -40,6 +40,14 @@ $decalsFetch = $mysqlClient->prepare('SELECT * FROM decals');
 $decalsFetch->execute();
 $decals = $decalsFetch->fetchAll();
 
+$zebra_cFetch = $mysqlClient->prepare('SELECT * FROM zebra_c');
+$zebra_cFetch->execute();
+$zebra_c = $zebra_cFetch->fetchAll();
+
+$decals_cFetch = $mysqlClient->prepare('SELECT * FROM decals_c');
+$decals_cFetch->execute();
+$decals_c = $decals_cFetch->fetchAll();
+
 // Si le cookie est présent
 if (isset($_COOKIE['LOGGED_USER_EMAIL']) || isset($_SESSION['LOGGED_USER_EMAIL'])) {
     $loggedUser['email'] = $_COOKIE['LOGGED_USER_EMAIL'] ?? $_SESSION['LOGGED_USER_EMAIL'];
