@@ -110,7 +110,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                         <?php } ?>
                     </div>
                     <a href="<?php echo($category_item['url']); ?>" target="_blank">
-                        <p style="color:gray; margin-bottom: 0;"><?php echo $category_item['title']; ?></p>
+                        <p style="color:white; margin-bottom: 0;"><?php echo $category_item['title']; ?></p>
                         <p style="color:gray; margin-top: 0; font-size: 1vmax;">Upload par : <?php echo $category_item['creator_name']; ?></p>
                     </a>
                     <a style="color:white; margin-top: 0; font-size: 1vmax;" href="<?php echo($category_item['url']); ?>" target="_blank">Crée par <?php echo $category_item['workshop_name']; ?></a>

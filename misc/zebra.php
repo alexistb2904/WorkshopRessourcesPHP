@@ -125,7 +125,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                             </a>
                         </div>
                         <a href="<?php echo $category_item['url']; ?>" target="_blank">
-                            <p><?php echo $category_item['title']; ?></p>
+                            <p style="color:white; margin-bottom: 0;"><?php echo $category_item['title']; ?></p>
                             <p style="color:gray; margin-top: 0px; font-size: 1vmax">Créateur : <?php echo $category_item['creator_name']; ?></p>
                         </a>
                         <?php if(strpos($category_item['photo'], "http://") === 0 || strpos($category_item['photo'], "https://") === 0) { ?>
