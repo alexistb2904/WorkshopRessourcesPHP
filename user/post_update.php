@@ -137,7 +137,7 @@ $currentURL = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 
     <form action="" method="POST">
         <div style="display: flex; align-items: center; flex-direction: column">
-            <h1><?php echo($loggedUser['pseudo']); ?> à été mis à jour</h1>
+            <h1><?php echo($count); ?> à été mis à jour</h1>
             <p>Catégorie : <?php echo($creator); ?></p>
             <div class="grid-img">
                 <?php if(strpos($photo, "http://") === 0 || strpos($photo, "https://") === 0) { ?>
