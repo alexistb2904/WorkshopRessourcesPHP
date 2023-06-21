@@ -117,7 +117,7 @@
         <section class="section-ressources">
             <h2 class="ressources">Ressources</h2>
             <div class="grid-select">
-                <a href="template/start" class="template">
+                <a href="cars/start.php" class="template">
                     <div>
                         <p class="h3card">Template</p>
                     </div>
@@ -137,7 +137,7 @@
                         <p class="h3card">Aide</p>
                     </div>
                 </a>
-                <a href="misc/vmt.vtf.php" class="vmt_vtf">
+                <a href="" class="vmt_vtf">
                     <div>
                         <p class="h3card">Vmt / Vtf</p>
                     </div>
