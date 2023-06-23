@@ -98,7 +98,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                     </div>
                 <a href="<?php echo($category_item['car_url']); ?>" target="_blank">
                     <p><?php echo($category_item['car_title']); ?></p>
-                </a>a
+                </a>
                     <a class="grid-download-item-a" href="../<?php echo($category_item['car_photo']); ?>" download>Télécharger</a>
             </div>
             <?php } ?>
