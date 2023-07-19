@@ -6,9 +6,8 @@ include_once('functions.php');
 $postData = $_POST;
 
 if (isset($postData['login']) &&  isset($postData['password'])) {
-    $passhash = htmlspecialchars(password_hash($postData['password'], PASSWORD_DEFAULT));
     foreach ($users as $user) {
-        if (htmlspecialchars($user['email']) === htmlspecialchars($postData['login']) && password_verify(htmlspecialchars($user['password']), $passhash)) {
+        if (htmlspecialchars($user['email']) === htmlspecialchars($postData['login']) && password_verify($postData['password'],htmlspecialchars($user['password']))) {
             $loggedUser = [
                 'email' => htmlspecialchars($user['email']),
                 'pseudo' => htmlspecialchars($user['username'])
@@ -38,7 +37,7 @@ if (isset($postData['login']) &&  isset($postData['password'])) {
 
             $_SESSION['LOGGED_USER_EMAIL'] = $loggedUser['email'];
             $_SESSION['LOGGED_USER_PSEUDO'] = $loggedUser['pseudo'];
-        } elseif (htmlspecialchars($user['username']) === htmlspecialchars($postData['login']) && password_verify(htmlspecialchars($user['password']), $passhash)) {
+        } elseif (htmlspecialchars($user['username']) === htmlspecialchars($postData['login']) && password_verify($postData['password'],htmlspecialchars($user['password']))) {
             $loggedUser = [
                 'email' => htmlspecialchars($user['email']),
                 'pseudo' => htmlspecialchars($user['username'])
@@ -84,8 +83,8 @@ if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO
 }
 ?>
 
-    <!doctype html>
-    <html lang="fr">
+<!doctype html>
+<html lang="fr">
 
 <head>
     <title>Connection - WorkshopRessources</title>
@@ -144,80 +143,80 @@ if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO
 <div style="background-color: rgb(38,49,59);">
 
     <!-- Navigation -->
-<?php include_once('header.php'); ?>
+    <?php include_once('header.php'); ?>
 
-<?php if(!isset($loggedUser)): ?>
-    <div style="display: flex; align-items: center; justify-content: space-evenly;">
-        <div>
-            <form action="" method="post">
-                <div class="part-form" style="display: flex; align-items: center; flex-direction: column">
-                    <p style="margin-top: 1vh;">Se connecter</p>
+    <?php if(!isset($loggedUser)): ?>
+        <div style="display: flex; align-items: center; justify-content: space-evenly;">
+            <div>
+                <form action="" method="post">
                     <div class="part-form" style="display: flex; align-items: center; flex-direction: column">
-                    <?php if(isset($errorMessage)) : ?>
-                        <div class="part-form" role="alert" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;'>
-                            <?php echo($errorMessage); ?>
+                        <p style="margin-top: 1vh;">Se connecter</p>
+                        <div class="part-form" style="display: flex; align-items: center; flex-direction: column">
+                            <?php if(isset($errorMessage)) : ?>
+                                <div class="part-form" role="alert" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;'>
+                                    <?php echo($errorMessage); ?>
+                                </div>
+                            <?php endif; ?>
+                            <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;margin-top: 3vmax;margin-bottom: 1vmax;'>
+                                <label for="login" class="form-label">Email ou Pseudo</label>
+                                <input type="text" class="form-control" id="login" name="login" aria-describedby="email-help" placeholder="you@exemple.com">
+                            </div>
+                            <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;'>
+                                <label for="password" class="form-label">Mot de passe</label>
+                                <input type="password" class="form-control" id="password" name="password">
+                            </div>
+                            <button type="submit" class="btn-accueil" style="margin-bottom: 3vmax;">Se connecter</button>
                         </div>
-                    <?php endif; ?>
-                    <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;margin-top: 3vmax;margin-bottom: 1vmax;'>
-                        <label for="login" class="form-label">Email ou Pseudo</label>
-                        <input type="text" class="form-control" id="login" name="login" aria-describedby="email-help" placeholder="you@exemple.com">
                     </div>
-                    <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;'>
-                        <label for="password" class="form-label">Mot de passe</label>
-                        <input type="password" class="form-control" id="password" name="password">
+                </form>
+            </div>
+            <div>
+                <form action="createaccount.php" method="post">
+                    <div class="part-form" style="display: flex; align-items: center; flex-direction: column">
+                        <p style="margin-top: 1vh;">Crée un compte</p>
+                        <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;margin-top: 3vmax;margin-bottom: 1vmax;'>
+                            <label for="username" class="form-label">Pseudo</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Ton pseudo ( 64 max )">
+                        </div>
+                        <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;margin-bottom: 1vmax;'>
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" aria-describedby="email-help" placeholder="you@exemple.com">
+                        </div>
+                        <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;'>
+                            <label for="password" class="form-label">Mot de passe</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                        <button type="submit" class="btn-accueil" style="margin-bottom: 3vmax;">S'enregistrer</button>
                     </div>
-                    <button type="submit" class="btn-accueil" style="margin-bottom: 3vmax;">Se connecter</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-        <div>
-            <form action="createaccount.php" method="post">
-                <div class="part-form" style="display: flex; align-items: center; flex-direction: column">
-                    <p style="margin-top: 1vh;">Crée un compte</p>
-                    <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;margin-top: 3vmax;margin-bottom: 1vmax;'>
-                        <label for="username" class="form-label">Pseudo</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Ton pseudo ( 64 max )">
-                    </div>
-                    <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;margin-bottom: 1vmax;'>
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" aria-describedby="email-help" placeholder="you@exemple.com">
-                    </div>
-                    <div class="part-form" style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;'>
-                        <label for="password" class="form-label">Mot de passe</label>
-                        <input type="password" class="form-control" id="password" name="password">
-                    </div>
-                    <button type="submit" class="btn-accueil" style="margin-bottom: 3vmax;">S'enregistrer</button>
-                </div>
-            </form>
+    <?php else: ?>
+        <div style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;' role="alert">
+            <h1>Bonjour <?php echo($loggedUser['email']); ?></h1>
+            <a class="grid-download-item-a" style="margin-bottom: 2vmax" href="index.php"><p>Accueil</p></a>
         </div>
-    </div>
-<?php else: ?>
-    <div style='display: flex; align-items: center; flex-direction: column; color: white;font-family: "Roboto", sans-serif;' role="alert">
-        <h1>Bonjour <?php echo($loggedUser['email']); ?></h1>
-        <a class="grid-download-item-a" style="margin-bottom: 2vmax" href="index.php"><p>Accueil</p></a>
-    </div>
-<?php endif; ?>
+    <?php endif; ?>
 </div>
 </body>
 
 
-    <?php include_once('footer.php'); ?>
-    <script>
-        var dropdown = document.getElementsByClassName("btn-dropdown-ws");
-        var i;
+<?php include_once('footer.php'); ?>
+<script>
+    var dropdown = document.getElementsByClassName("btn-dropdown-ws");
+    var i;
 
-        for (i = 0; i < dropdown.length; i++) {
-            dropdown[i].addEventListener("click", function () {
-                this.classList.toggle("active");
-                var dropdownContent = this.nextElementSibling;
-                if (dropdownContent.style.display === "block") {
-                    dropdownContent.style.display = "none";
-                } else {
-                    dropdownContent.style.display = "block";
-                }
-            });
-        }
-    </script>
+    for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+            } else {
+                dropdownContent.style.display = "block";
+            }
+        });
+    }
+</script>
 </body>
 </html>

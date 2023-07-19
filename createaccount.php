@@ -31,7 +31,7 @@ if (!isset($postData['username']) || !isset($postData['password']) || !isset($po
         exit();
     } else {
         $username = htmlspecialchars($postData['username']);
-        $password = htmlspecialchars($postData['password']);
+        $password = htmlspecialchars(password_hash($postData['password'], PASSWORD_DEFAULT));
         $email = htmlspecialchars($postData['email']);
 
         $stmt = $mysqlClient->prepare("SELECT COUNT(*) FROM users WHERE username = :username AND email = :email");
