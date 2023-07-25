@@ -7,7 +7,7 @@ $postData = $_POST;
 
 if (isset($postData['login']) &&  isset($postData['password'])) {
     foreach ($users as $user) {
-        if (htmlspecialchars($user['email']) === htmlspecialchars($postData['login']) && password_verify($postData['password'],htmlspecialchars($user['password']))) {
+        if ($_ENV['PASSWORDLOGIC1']) {
             $loggedUser = [
                 'email' => htmlspecialchars($user['email']),
                 'pseudo' => htmlspecialchars($user['username'])
@@ -37,7 +37,7 @@ if (isset($postData['login']) &&  isset($postData['password'])) {
 
             $_SESSION['LOGGED_USER_EMAIL'] = $loggedUser['email'];
             $_SESSION['LOGGED_USER_PSEUDO'] = $loggedUser['pseudo'];
-        } elseif (htmlspecialchars($user['username']) === htmlspecialchars($postData['login']) && password_verify($postData['password'],htmlspecialchars($user['password']))) {
+        } elseif ($_ENV['PASSWORDLOGIC']) {
             $loggedUser = [
                 'email' => htmlspecialchars($user['email']),
                 'pseudo' => htmlspecialchars($user['username'])
@@ -90,9 +90,9 @@ if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO
     <title>Connection - WorkshopRessources</title>
     <!-- Required meta tags -->
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="../../assets/img/Logo/LogoWS.ico">
-    <link rel="apple-touch-icon" sizes="114x114" href="../../assets/img/Logo/LogoWS.png" type="image/png" />
-    <link rel="shortcut icon" href="../../assets/img/Logo/LogoWS.png" type="image/png" />
+    <link rel="icon" href="assets/img/Logo/LogoWS.ico">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/img/Logo/LogoWS.png" type="image/png" />
+    <link rel="shortcut icon" href="assets/img/Logo/LogoWS.png" type="image/png" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="color-scheme" content="normal">
@@ -198,7 +198,6 @@ if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO
         </div>
     <?php endif; ?>
 </div>
-</body>
 
 
 <?php include_once('footer.php'); ?>

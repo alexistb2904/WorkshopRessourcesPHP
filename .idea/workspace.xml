@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99e47d32-5c25-4ae9-abe7-24cc3e09903b" name="Changes" comment="Update Img">
+    <list default="true" id="99e47d32-5c25-4ae9-abe7-24cc3e09903b" name="Changes" comment="Update Login">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cars/alexcars.php" beforeDir="false" afterPath="$PROJECT_DIR$/cars/alexcars.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cars/azok30.php" beforeDir="false" afterPath="$PROJECT_DIR$/cars/azok30.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cars/itzdannio25.php" beforeDir="false" afterPath="$PROJECT_DIR$/cars/itzdannio25.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cars/rytrak.php" beforeDir="false" afterPath="$PROJECT_DIR$/cars/rytrak.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cars/sgm.php" beforeDir="false" afterPath="$PROJECT_DIR$/cars/sgm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cars/w4nou.php" beforeDir="false" afterPath="$PROJECT_DIR$/cars/w4nou.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/login.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +124,7 @@
       <workItem from="1688038421048" duration="29000" />
       <workItem from="1689778137571" duration="1739000" />
       <workItem from="1689939820414" duration="4000" />
-      <workItem from="1690321089414" duration="2497000" />
+      <workItem from="1690321089414" duration="2900000" />
     </task>
     <task id="LOCAL-00001" summary="Update">
       <option name="closed" value="true" />
@@ -172,7 +166,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690323228108</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Update Img final">
+      <option name="closed" value="true" />
+      <created>1690323641434</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1690323641434</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,6 +183,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update" />
     <MESSAGE value="Update Img" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Img" />
+    <MESSAGE value="Update Img final" />
+    <MESSAGE value="Update Login" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Login" />
   </component>
 </project>
