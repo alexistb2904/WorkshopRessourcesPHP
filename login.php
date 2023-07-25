@@ -7,7 +7,7 @@ $postData = $_POST;
 
 if (isset($postData['login']) &&  isset($postData['password'])) {
     foreach ($users as $user) {
-        if ($_ENV['PASSWORDLOGIC1']) {
+        if (htmlspecialchars($user['email']) === htmlspecialchars($postData['login']) && password_verify($postData['password'],htmlspecialchars($user['password']))) {
             $loggedUser = [
                 'email' => htmlspecialchars($user['email']),
                 'pseudo' => htmlspecialchars($user['username'])
@@ -37,7 +37,7 @@ if (isset($postData['login']) &&  isset($postData['password'])) {
 
             $_SESSION['LOGGED_USER_EMAIL'] = $loggedUser['email'];
             $_SESSION['LOGGED_USER_PSEUDO'] = $loggedUser['pseudo'];
-        } elseif ($_ENV['PASSWORDLOGIC']) {
+        } elseif (htmlspecialchars($user['username']) === htmlspecialchars($postData['login']) && password_verify($postData['password'],htmlspecialchars($user['password']))) {
             $loggedUser = [
                 'email' => htmlspecialchars($user['email']),
                 'pseudo' => htmlspecialchars($user['username'])
@@ -198,6 +198,7 @@ if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO
         </div>
     <?php endif; ?>
 </div>
+</body>
 
 
 <?php include_once('footer.php'); ?>
