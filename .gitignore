@@ -1,6 +1,6 @@
 
 *.xml
 *.iml
-*.xml
 .idea/workspace.xml
-*.xml
+.idea
+.idea/*
