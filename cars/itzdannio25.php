@@ -90,7 +90,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
         <?php foreach (get_car($$name) as $category_item) : ?>
             <div class="grid-download-item">
                     <div class="grid-download-item-img">
-                        <?php if (strpos($category_item['car_photo'], "http://") == 0 || strpos($category_item['car_photo'], "https://") == 0) { ?>
+                        <?php if (strpos($category_item['car_photo'], "http://") === 0 || strpos($category_item['car_photo'], "https://") === 0) { ?>
 							<img src="<?php echo($category_item['car_photo']) ?>"
 								 alt="<?php echo $category_item['car_title']; ?>" loading="lazy">
                         <?php } else { ?>

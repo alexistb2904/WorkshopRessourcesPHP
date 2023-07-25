@@ -96,7 +96,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
                     <?php if ($variableName == 'other') { ?>
                         <div class="grid-download-item">
                             <div class="grid-download-item-img">
-                                <?php if (strpos($category_item['photo'], "http://") == 0 || strpos($category_item['photo'], "https://") == 0) { ?>
+                                <?php if (strpos($category_item['photo'], "http://") === 0 || strpos($category_item['photo'], "https://") === 0) { ?>
                                     <img src="<?php echo($category_item['photo']) ?>"
                                          alt="<?php echo $category_item['title']; ?>" loading="lazy">
                                 <?php } else { ?>
