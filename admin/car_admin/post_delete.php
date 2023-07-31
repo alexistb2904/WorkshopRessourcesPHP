@@ -23,11 +23,22 @@ if (!isset($postData['id']) || !isset($postData['creator']))
 $id = $postData['id'];
 $creator = $postData['creator'];
 
+if ($creator == 'zebra_c' || $creator == 'decals_c') {
+    $deleteRecipeStatement = $mysqlClient->prepare('DELETE FROM ' . $creator . ' WHERE id = :id');
+    $deleteRecipeStatement->execute([
+        'id' => $id,
+    ]);
+
+    echo('Véhicule supprimé avec succès. Redirection en cours...');
+    return;
+} else {
 $deleteRecipeStatement = $mysqlClient->prepare('DELETE FROM ' . $creator . ' WHERE car_id = :id');
 $deleteRecipeStatement->execute([
     'id' => $id,
 ]);
-
+    echo('Véhicule supprimé avec succès. Redirection en cours...');
+    return;
+}
 
 header('Location: '.$rootUrl.'home.php');
 ?>
