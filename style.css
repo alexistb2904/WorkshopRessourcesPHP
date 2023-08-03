@@ -144,6 +144,7 @@ nav a:hover {
     top: 2vmax;
     background-color: #212529;
     border-radius: 5px;
+    flex-direction: column;
 }
 
 .active {

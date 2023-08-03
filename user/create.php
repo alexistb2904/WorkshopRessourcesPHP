@@ -5,7 +5,6 @@
     include_once('../functions.php');
 
     $getData = $_GET;
-	$rootUrl = $GLOBALS['rooturl'];
 
 if (!isset($loggedUser)) {
     echo 'Vous devez être connecté pour accéder à cette page.';
@@ -20,6 +19,7 @@ $Cname = ucfirst($name);
 $currentURL = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 
 $rootPath = $_SERVER['DOCUMENT_ROOT'];
+$rootUrl = $GLOBALS['rooturl'];
 
 ?>
 

@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php session_start();
+include_once ('../functions.php');?>
 
 <?php
 $nameExtension = basename(__FILE__);
@@ -85,12 +86,12 @@ $rootUrl = $GLOBALS['rooturl'];
     <section>
         <h1 class="creator">Les Créateurs</h1>
             <div class="grid-creator">
-                <a href="azok30.php" class="azok30">
+                <a href="azok30.php.php" class="azok30">
                     <div>
                         <p class="h3card">Azok30</p>
                     </div>
                 </a>
-                <a href="rytrak.php" class="rytrak">
+                <a href="rytrak.php.php" class="rytrak">
                     <div>
                         <p class="h3card">Rytrak</p>
                     </div>

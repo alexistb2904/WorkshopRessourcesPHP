@@ -6,7 +6,6 @@ include_once('../config/user.php');
 include_once('../variables.php');
 include_once('../functions.php');
 
-$rootUrl = $GLOBALS['rooturl'];
 $postData = $_POST;
 
 if (!isset($loggedUser)) {
@@ -86,6 +85,7 @@ $Cname = ucfirst($name);
 $currentURL = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 
 $rootPath = $_SERVER['DOCUMENT_ROOT'];
+$rootUrl = $GLOBALS['rooturl'];
 
 ?>
 <!doctype html>

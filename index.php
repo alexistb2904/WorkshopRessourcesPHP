@@ -16,7 +16,7 @@ include_once('functions.php');?>
     <meta name="author" content="alexistb2904">
     <meta name="robots" content="index, follow">
     <meta http-equiv="content-language" content="fr-fr">
-    <link rel="canonical" href="https://<?php echo($GLOBALS['currentURL']); ?>" />
+    <link rel="canonical" href="https://<?php echo($currentURL); ?>" />
 
     <!-- Base Meta Tags -->
     <meta name="title" content="Accueil - WorkshopRessources">
@@ -30,7 +30,7 @@ include_once('functions.php');?>
     <meta property="og:description"
           content="WorkshopRessources est une plateforme qui propose une variété de ressources utiles aux reskinneurs et développeurs de Garry's Mod." />
     <meta property="og:image" content="<?php echo($GLOBALS['rooturl'] ). 'assets/img/Logo/LogoWS.png'?>">
-    <meta property="og:url" content="https://<?php echo($GLOBALS['currentURL']); ?>" />
+    <meta property="og:url" content="https://<?php echo($currentURL); ?>" />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:type" content="website">
 
