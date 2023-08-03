@@ -7,7 +7,7 @@ $Cname = ucfirst($name);
 $currentURL = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 
 $rootPath = $_SERVER['DOCUMENT_ROOT'];
-$rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
+$rootUrl = $GLOBALS['rooturl'];
 
 ?>
 
@@ -85,12 +85,12 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
     <section>
         <h1 class="creator">Les Créateurs</h1>
             <div class="grid-creator">
-                <a href="azok30.php.php" class="azok30">
+                <a href="azok30.php" class="azok30">
                     <div>
                         <p class="h3card">Azok30</p>
                     </div>
                 </a>
-                <a href="rytrak.php.php" class="rytrak">
+                <a href="rytrak.php" class="rytrak">
                     <div>
                         <p class="h3card">Rytrak</p>
                     </div>
@@ -135,21 +135,5 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 </main>
 
 <?php include_once('../footer.php'); ?>
-<script>
-    var dropdown = document.getElementsByClassName("btn-dropdown-ws");
-    var i;
-
-    for (i = 0; i < dropdown.length; i++) {
-        dropdown[i].addEventListener("click", function () {
-            this.classList.toggle("active");
-            var dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === "block") {
-                dropdownContent.style.display = "none";
-            } else {
-                dropdownContent.style.display = "block";
-            }
-        });
-    }
-</script>
 </body>
 </html>

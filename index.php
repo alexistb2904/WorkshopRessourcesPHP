@@ -1,21 +1,22 @@
-<?php session_start(); ?>
+<?php session_start();
+include_once('functions.php');?>
 <!doctype html>
 <html lang="fr">
 
 <head>
-    <title>Accueil - WorkshopRessources</title>
+    <title><?php echo($GLOBALS['rooturl'] )?></title>
     <!-- Required meta tags -->
-    <link rel="stylesheet" href="<?php echo($rootUrl). 'style.css'?>">
-    <link rel="icon" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.ico'?>">
-    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
-    <link rel="shortcut icon" href="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
+    <link rel="stylesheet" href="<?php echo($GLOBALS['rooturl'] ). 'style.css'?>">
+    <link rel="icon" href="<?php echo($GLOBALS['rooturl'] ). 'assets/img/Logo/LogoWS.ico'?>">
+    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo($GLOBALS['rooturl'] ). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
+    <link rel="shortcut icon" href="<?php echo($GLOBALS['rooturl'] ). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="color-scheme" content="normal">
     <meta name="author" content="alexistb2904">
     <meta name="robots" content="index, follow">
     <meta http-equiv="content-language" content="fr-fr">
-    <link rel="canonical" href="https://<?php echo($currentURL); ?>" />
+    <link rel="canonical" href="https://<?php echo($GLOBALS['currentURL']); ?>" />
 
     <!-- Base Meta Tags -->
     <meta name="title" content="Accueil - WorkshopRessources">
@@ -28,8 +29,8 @@
     <meta property="og:title" content="Accueil - WorkshopRessources" />
     <meta property="og:description"
           content="WorkshopRessources est une plateforme qui propose une variété de ressources utiles aux reskinneurs et développeurs de Garry's Mod." />
-    <meta property="og:image" content="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>">
-    <meta property="og:url" content="https://<?php echo($currentURL); ?>" />
+    <meta property="og:image" content="<?php echo($GLOBALS['rooturl'] ). 'assets/img/Logo/LogoWS.png'?>">
+    <meta property="og:url" content="https://<?php echo($GLOBALS['currentURL']); ?>" />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:type" content="website">
 
@@ -39,7 +40,7 @@
     <meta property="twitter:title" content="Accueil - WorkshopRessources">
     <meta property="twitter:description"
           content="WorkshopRessources est une plateforme qui propose une variété de ressources utiles aux reskinneurs et développeurs de Garry's Mod.">
-    <meta property="twitter:image" content="<?php echo($rootUrl). 'assets/img/Logo/LogoWS.png'?>">
+    <meta property="twitter:image" content="<?php echo($GLOBALS['rooturl'] ). 'assets/img/Logo/LogoWS.png'?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
@@ -100,7 +101,7 @@
     <main>
         <div class="start">
             <div class="start-img">
-                <img src="<?php echo($rootUrl). 'assets/img/gmodimage/ImgAccueil/gmodaccueil.webp'?>" alt="Peugeot 208 Gendamerie" width="1366" height="768" loading="lazy">
+                <img src="<?php echo($GLOBALS['rooturl'] ). 'assets/img/gmodimage/ImgAccueil/gmodaccueil.webp'?>" alt="Peugeot 208 Gendamerie" width="1366" height="768" loading="lazy">
             </div>
             <div class="start-text">
                 <?php if(isset($loggedUser)) : ?>
@@ -146,21 +147,5 @@
         </section>
     </main>
 <?php include_once('footer.php'); ?>
-    <script>
-        var dropdown = document.getElementsByClassName("btn-dropdown-ws");
-        var i;
-
-        for (i = 0; i < dropdown.length; i++) {
-            dropdown[i].addEventListener("click", function () {
-                this.classList.toggle("active");
-                var dropdownContent = this.nextElementSibling;
-                if (dropdownContent.style.display === "block") {
-                    dropdownContent.style.display = "none";
-                } else {
-                    dropdownContent.style.display = "block";
-                }
-            });
-        }
-    </script>
 </body>
 </html>

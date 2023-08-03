@@ -5,6 +5,8 @@ include_once('../../config/user.php');
 include_once('../../variables.php');
 include_once('../../functions.php');
 
+$rootUrl = $GLOBALS['rooturl'];
+
 if (!is_admin($loggedUser['email'])) {
     echo 'Vous n\'avez pas les droits pour accéder à cette page.';
     header("refresh:5;$rootUrl/index.php");
@@ -12,16 +14,12 @@ if (!is_admin($loggedUser['email'])) {
 }
 
 $getData = $_GET;
-?>
-
-<?php
 $nameExtension = basename(__FILE__);
 $name = pathinfo($nameExtension, PATHINFO_FILENAME);
 $Cname = ucfirst($name);
 $currentURL = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 
 $rootPath = $_SERVER['DOCUMENT_ROOT'];
-$rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
 ?>
 
@@ -117,22 +115,6 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
     <br/>
 </main>
 <?php include_once('../../footer.php'); ?>
-<script>
-    var dropdown = document.getElementsByClassName("btn-dropdown-ws");
-    var i;
-
-    for (i = 0; i < dropdown.length; i++) {
-        dropdown[i].addEventListener("click", function () {
-            this.classList.toggle("active");
-            var dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === "block") {
-                dropdownContent.style.display = "none";
-            } else {
-                dropdownContent.style.display = "block";
-            }
-        });
-    }
-</script>
 </body>
 </html>
 

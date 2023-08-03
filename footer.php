@@ -23,7 +23,7 @@ include_once('functions.php');
     <div class="foot-partenaire">
         <p>Partenaires</p>
         <a href="https://discord.gg/fb3FTumBCP" target="_blank" rel="noopener"><img
-                    src="<?php echo($rootUrl). 'assets/img/Logo/c27d4892779e366d738fc0b57d1bcdb4.webp'?>" width="64" height="64"
+                    src="<?php echo($GLOBALS['rooturl']). 'assets/img/Logo/c27d4892779e366d738fc0b57d1bcdb4.webp'?>" width="64" height="64"
                     alt="Logo Serveur ifive"></a>
     </div>
     <p class="foot-credit" style="font-family: Roboto, sans-serif;">Copyright © WorkshopRessources 2023 |

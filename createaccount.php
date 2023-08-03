@@ -9,7 +9,7 @@ include_once('functions.php');
 $postData = $_POST;
 
 $rootPath = $_SERVER['DOCUMENT_ROOT'];
-$rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
+$rootUrl = $GLOBALS['rooturl'];
 
 if (isset($loggedUser['email']) || isset($loggedUser['pseudo'])) {
     echo 'Vous êtes déjà connecté.';
@@ -143,22 +143,6 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
     <br/>
 </main>
 <?php include_once($rootPath.'/footer.php'); ?>
-<script>
-    var dropdown = document.getElementsByClassName("btn-dropdown-ws");
-    var i;
-
-    for (i = 0; i < dropdown.length; i++) {
-        dropdown[i].addEventListener("click", function () {
-            this.classList.toggle("active");
-            var dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === "block") {
-                dropdownContent.style.display = "none";
-            } else {
-                dropdownContent.style.display = "block";
-            }
-        });
-    }
-</script>
 </body>
 </html>
 

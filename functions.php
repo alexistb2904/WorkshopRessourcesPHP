@@ -28,6 +28,12 @@ function get_car(array $category) : array
 
 function is_admin($email): bool
 {
+    if ($_SERVER['HTTP_HOST'] === 'localhost') {
+        $_ENV['MYSQL_HOST'] = $_SERVER['MYSQL_HOST'];
+        $_ENV['MYSQL_USERNAME'] = $_SERVER['MYSQL_USERNAME'];
+        $_ENV['MYSQL_PASSWORD'] = $_SERVER['MYSQL_PASSWORD'];
+        $_ENV['MYSQL_DATABASE'] = $_SERVER['MYSQL_DATABASE'];
+    }
     $host = $_ENV['MYSQL_HOST'];
     $username = $_ENV['MYSQL_USERNAME'];
     $password = $_ENV['MYSQL_PASSWORD'];
@@ -55,5 +61,15 @@ function is_admin($email): bool
         return false;
     }
 }
+
+
+$GLOBALS['rooturl']  = $_SERVER['DOCUMENT_ROOT'];
+if ($_SERVER['HTTP_HOST'] === 'localhost') {
+    $GLOBALS['rooturl'] = 'http://' . $_SERVER['HTTP_HOST'] . '/';
+} else {
+    $GLOBALS['rooturl']  = 'https://' . $_SERVER['HTTP_HOST'] . '/';
+}
+
+$GLOBALS['currentURL'] = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 
 

@@ -1,24 +1,21 @@
-<?php session_start(); ?>
-<?php
+<?php session_start();
+include_once('../functions.php');
+
 $nameExtension = basename(__FILE__);
 $name = pathinfo($nameExtension, PATHINFO_FILENAME);
 $Cname = ucfirst($name);
-$currentURL = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-
-$rootPath = $_SERVER['DOCUMENT_ROOT'];
-$rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
-
+$currentURL = $GLOBALS['currentURL'];
 ?>
 <!doctype html>
 <html lang="fr">
 <head>
 	<title><?php echo($Cname); ?> - Administrateur</title>
 	<!-- Required meta tags -->
-	<link rel="stylesheet" href="<?php echo ($rootUrl) . 'style-admin.css' ?>">
-	<link rel="icon" href="<?php echo ($rootUrl) . 'assets/img/Logo/LogoWS.ico' ?>">
-	<link rel="apple-touch-icon" sizes="114x114" href="<?php echo ($rootUrl) . 'assets/img/Logo/LogoWS.png' ?>"
+	<link rel="stylesheet" href="<?php echo ($GLOBALS['rooturl']) . 'style-admin.css' ?>">
+	<link rel="icon" href="<?php echo ($GLOBALS['rooturl']) . 'assets/img/Logo/LogoWS.ico' ?>">
+	<link rel="apple-touch-icon" sizes="114x114" href="<?php echo ($GLOBALS['rooturl']) . 'assets/img/Logo/LogoWS.png' ?>"
 		  type="image/png"/>
-	<link rel="shortcut icon" href="<?php echo ($rootUrl) . 'assets/img/Logo/LogoWS.png' ?>" type="image/png"/>
+	<link rel="shortcut icon" href="<?php echo ($GLOBALS['rooturl']) . 'assets/img/Logo/LogoWS.png' ?>" type="image/png"/>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="color-scheme" content="normal">
@@ -275,7 +272,7 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 				</div>
 			</div>
 		</details>
-		<a class="nav-link" href="<?php echo ($rootUrl) . 'user/home.php'; ?>" style='text-decoration: none; color: white; font-family: "Roboto", sans-serif; text-align: center; font-size: 2rem;'><p style="padding: 0.5rem; margin: 0 20vw 2vmax 20vw;">Panel User</p></a>
+		<a class="nav-link" href="<?php echo ($GLOBALS['rooturl']) . 'user/home.php'; ?>" style='text-decoration: none; color: white; font-family: "Roboto", sans-serif; text-align: center; font-size: 2rem;'><p style="padding: 0.5rem; margin: 0 20vw 2vmax 20vw;">Panel User</p></a>
 	</main>
 <?php } else { ?>
 
@@ -285,21 +282,5 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 <?php } ?>
 
 <?php include_once('../footer.php'); ?>
-<script>
-    var dropdown = document.getElementsByClassName("btn-dropdown-ws");
-    var i;
-
-    for (i = 0; i < dropdown.length; i++) {
-        dropdown[i].addEventListener("click", function () {
-            this.classList.toggle("active");
-            var dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === "block") {
-                dropdownContent.style.display = "none";
-            } else {
-                dropdownContent.style.display = "block";
-            }
-        });
-    }
-</script>
 </body>
 </html>

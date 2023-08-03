@@ -16,6 +16,55 @@ nav {
     justify-content: space-between;
     background-color: rgb(40, 45, 50);
 }
+.nav-burger {
+    display: none;
+}
+
+.burger-icon {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.line {
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    margin: 5px 0;
+}
+
+.menu-items {
+    display: none;
+    gap: 1vmax;
+}
+
+.menu-items-a:hover {
+    background-color: rgb(33, 37, 42);
+}
+
+.menu-items-a {
+    margin-left: 0;
+    font-size: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.show-menu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
 
 nav a {
     margin-left: 1.2rem;
@@ -431,6 +480,10 @@ form input {
         flex-direction: column;
     }
 
+    .nav-burger {
+        display:flex;
+    }
+
     nav * {
         transition: 0.5s;
     }
@@ -449,6 +502,7 @@ form input {
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: space-between;
     }
 
     .btn-dropdown-ws {
@@ -461,21 +515,58 @@ form input {
         margin: auto;
     }
 
+    .show-menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
     .nav-bar {
+        display: none;
+    }
+
+    nav {
+        display: block;
+    }
+
+    .dropdown button:hover {
+        background-color: rgb(33, 37, 42);
+    }
+
+    .dropdown button {
+        width: 100%;
+    }
+
+    .dropdown {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 10px;
+        gap: 1vmax;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .dropdown-content a {
+        display: flex;
+        margin: auto;
+        color: #ffffff;
+        padding: 5px;
+        text-decoration: none;
+        font-size: 2vmax;
     }
 
     .dropdown-content {
-        display: none;
-        position: absolute;
-        left: 1vmax;
-        top: 4vmax;
-        background-color: #212529;
-        border-radius: 5px;
+        flex-direction: column;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        left: 0;
+        top: 0;
+        background-color: rgb(40, 45, 50);
+        margin: 0 1vmax 0 1vmax;
     }
 
 
@@ -607,56 +698,67 @@ form input {
         justify-content: center;
     }
 
-    nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        flex-direction: column;
-    }
-
     nav * {
         transition: 0.5s;
     }
 
-    nav a {
-        font-size: 2vmax;
-    }
-
-    nav img {
-        width: 50%;
-        margin: auto;
-        margin-bottom: 10px;
-    }
-
-    nav div {
+    .show-menu {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
     }
 
-    .btn-dropdown-ws {
-        margin: 0px;
-        padding: 0px;
+
+    nav {
+        display: block;
+    }
+
+    .nav-burger {
+        display:flex;
+    }
+
+    .nav-flex {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        background-color: rgb(40, 45, 50);
+    }
+
+    .nav-flex a {
         font-size: 2vmax;
     }
 
-    nav div a {
+    .btn-dropdown-ws {
+        margin: 0;
+        padding: 0;
+        font-size: 2vmax;
+    }
+
+    .nav-flex div a {
         margin: auto;
     }
 
     .nav-bar {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
+        display: none;
+    }
+
+    .dropdown button:hover {
+        background-color: rgb(33, 37, 42);
+    }
+
+    .dropdown button {
+        width: 100%;
     }
 
     .dropdown {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         justify-content: center;
-        gap: 10px;
+        gap: 1vmax;
+        width: 100%;
+        cursor: pointer;
     }
 
     .dropdown-content a {
@@ -666,6 +768,18 @@ form input {
         padding: 5px;
         text-decoration: none;
         font-size: 2vmax;
+    }
+
+    .dropdown-content {
+        flex-direction: row;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        left: 0;
+        top: 0;
+        background-color: rgb(40, 45, 50);
+        margin: 0 1vmax 0 1vmax;
     }
 
     footer .foot-credit {
@@ -727,56 +841,67 @@ form input {
         justify-content: center;
     }
 
-    nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        flex-direction: column;
-    }
-
     nav * {
         transition: 0.5s;
     }
 
-    nav a {
-        font-size: 2vmax;
-    }
-
-    nav img {
-        width: 50%;
-        margin: auto;
-        margin-bottom: 10px;
-    }
-
-    nav div {
+    .show-menu {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
     }
 
-    .btn-dropdown-ws {
-        margin: 0px;
-        padding: 0px;
+
+    nav {
+        display: block;
+    }
+
+    .nav-burger {
+        display:flex;
+    }
+
+    .nav-flex {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        background-color: rgb(40, 45, 50);
+    }
+
+    .nav-flex a {
         font-size: 2vmax;
     }
 
-    nav div a {
+    .btn-dropdown-ws {
+        margin: 0;
+        padding: 0;
+        font-size: 2vmax;
+    }
+
+    .nav-flex div a {
         margin: auto;
     }
 
     .nav-bar {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
+        display: none;
+    }
+
+    .dropdown button:hover {
+        background-color: rgb(33, 37, 42);
+    }
+
+    .dropdown button {
+        width: 100%;
     }
 
     .dropdown {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         justify-content: center;
-        gap: 10px;
+        gap: 1vmax;
+        width: 100%;
+        cursor: pointer;
     }
 
     .dropdown-content a {
@@ -785,7 +910,19 @@ form input {
         color: #ffffff;
         padding: 5px;
         text-decoration: none;
-        font-size: 1.5vmax;
+        font-size: 2vmax;
+    }
+
+    .dropdown-content {
+        flex-direction: row;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        left: 0;
+        top: 0;
+        background-color: rgb(40, 45, 50);
+        margin: 0 1vmax 0 1vmax;
     }
 
     footer .foot-credit {

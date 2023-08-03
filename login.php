@@ -89,7 +89,7 @@ if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO
 <head>
     <title>Connection - WorkshopRessources</title>
     <!-- Required meta tags -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="<?php echo($GLOBALS['rooturl']). 'style.css'; ?>">
     <link rel="icon" href="assets/img/Logo/LogoWS.ico">
     <link rel="apple-touch-icon" sizes="114x114" href="assets/img/Logo/LogoWS.png" type="image/png" />
     <link rel="shortcut icon" href="assets/img/Logo/LogoWS.png" type="image/png" />
@@ -202,21 +202,5 @@ if (isset($_COOKIE['LOGGED_USER_PSEUDO']) || isset($_SESSION['LOGGED_USER_PSEUDO
 
 
 <?php include_once('footer.php'); ?>
-<script>
-    var dropdown = document.getElementsByClassName("btn-dropdown-ws");
-    var i;
-
-    for (i = 0; i < dropdown.length; i++) {
-        dropdown[i].addEventListener("click", function () {
-            this.classList.toggle("active");
-            var dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === "block") {
-                dropdownContent.style.display = "none";
-            } else {
-                dropdownContent.style.display = "block";
-            }
-        });
-    }
-</script>
 </body>
 </html>

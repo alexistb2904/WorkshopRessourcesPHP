@@ -7,6 +7,7 @@ include_once('../../variables.php');
 include_once ('../../functions.php');
 
 $postData = $_POST;
+$rootUrl = $GLOBALS['rooturl'];
 
 if (!is_admin($loggedUser['email'])) {
     echo 'Vous n\'avez pas les droits pour accéder à cette page.';
@@ -151,22 +152,6 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
     <br/>
 </main>
 <?php include_once('../../footer.php'); ?>
-<script>
-    var dropdown = document.getElementsByClassName("btn-dropdown-ws");
-    var i;
-
-    for (i = 0; i < dropdown.length; i++) {
-        dropdown[i].addEventListener("click", function () {
-            this.classList.toggle("active");
-            var dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === "block") {
-                dropdownContent.style.display = "none";
-            } else {
-                dropdownContent.style.display = "block";
-            }
-        });
-    }
-</script>
 </body>
 </html>
 

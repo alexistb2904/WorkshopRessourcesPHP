@@ -7,7 +7,7 @@ $Cname = ucfirst($name);
 $currentURL = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 
 $rootPath = $_SERVER['DOCUMENT_ROOT'];
-$rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
+$rootUrl = $GLOBALS['rooturl'];
 
 ?>
 
@@ -126,21 +126,5 @@ $rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
     </div>
 </main>
 <?php include_once('../footer.php'); ?>
-<script>
-    let dropdown = document.getElementsByClassName("btn-dropdown-ws");
-    let i;
-
-    for (i = 0; i < dropdown.length; i++) {
-        dropdown[i].addEventListener("click", function () {
-            this.classList.toggle("active");
-            let dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === "block") {
-                dropdownContent.style.display = "none";
-            } else {
-                dropdownContent.style.display = "block";
-            }
-        });
-    }
-</script>
 </body>
 </html>

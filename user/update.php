@@ -4,6 +4,9 @@ include_once('../config/user.php');
 include_once('../variables.php');
 include_once ('../functions.php');
 
+$rootPath = $_SERVER['DOCUMENT_ROOT'];
+$rootUrl = $GLOBALS['rooturl'];
+
 if (!isset($loggedUser['email'])) {
     echo 'Vous n\'avez pas les droits pour accéder à cette page.';
     header("refresh:5;$rootUrl login.php");
@@ -18,9 +21,6 @@ $nameExtension = basename(__FILE__);
 $name = pathinfo($nameExtension, PATHINFO_FILENAME);
 $Cname = ucfirst($name);
 $currentURL = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-
-$rootPath = $_SERVER['DOCUMENT_ROOT'];
-$rootUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/';
 
 ?>
 
