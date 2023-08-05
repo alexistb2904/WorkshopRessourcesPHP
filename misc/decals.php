@@ -92,10 +92,15 @@ $rootUrl = $GLOBALS['rooturl'];
             <?php if($category_item['is_enabled'] == "1") { ?>
             <div class="grid-download-item">
                     <div class="grid-download-item-img">
-                        <a href="<?php echo($category_item['car_url']); ?>" style="display: inline">
-                        <img src="../<?php echo($category_item['car_photo']); ?>"
-                             alt="<?php echo($category_item['car_title']); ?> <?php echo($Cname); ?>" loading="lazy">
-                        </a>
+						<a href="<?php echo($category_item['car_url']); ?>" style="display: inline">
+                            <?php if(strpos($category_item['car_photo'], "http://") === 0 || strpos($category_item['car_photo'], "https://") === 0) { ?>
+								<img src="<?php echo($category_item['car_photo']) ?>"
+									 alt="<?php echo $category_item['car_title']; ?> <?php echo($Cname); ?>" loading="lazy">
+                            <?php } else { ?>
+								<img src="../<?php echo $category_item['car_photo']; ?>"
+									 alt="<?php echo $category_item['car_title']; ?> <?php echo($Cname); ?>" loading="lazy">
+                            <?php } ?>
+						</a>
                     </div>
                 <a href="<?php echo($category_item['car_url']); ?>" target="_blank">
                     <p><?php echo($category_item['car_title']); ?></p>

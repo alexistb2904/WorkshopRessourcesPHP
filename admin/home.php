@@ -149,8 +149,13 @@ $currentURL = $GLOBALS['currentURL'];
                 <?php foreach ($zebra as $category_item) : ?>
 					<div class="grid-download-item">
 						<div class="grid-download-item-img">
-							<img src="../<?php echo $category_item['car_photo']; ?>"
-								 alt="<?php echo $category_item['car_title']; ?>" loading="lazy">
+                            <?php if (strpos($category_item['car_photo'], "http://") === 0 || strpos($category_item['car_photo'], "https://") === 0) { ?>
+								<img src="<?php echo($category_item['car_photo']) ?>"
+									 alt="<?php echo $category_item['car_title']; ?>" loading="lazy">
+                            <?php } else { ?>
+								<img src="../<?php echo $category_item['car_photo']; ?>"
+									 alt="<?php echo $category_item['car_title']; ?>" loading="lazy">
+                            <?php } ?>
 						</div>
 						<a href="<?php echo $category_item['car_url']; ?>" target="_blank">
 							<p><?php echo $category_item['car_title']; ?>
@@ -178,8 +183,13 @@ $currentURL = $GLOBALS['currentURL'];
                 <?php foreach ($decals as $category_item) : ?>
 					<div class="grid-download-item">
 						<div class="grid-download-item-img">
-							<img src="../<?php echo $category_item['car_photo']; ?>"
-								 alt="<?php echo $category_item['car_title']; ?>" loading="lazy">
+                            <?php if (strpos($category_item['car_photo'], "http://") === 0 || strpos($category_item['car_photo'], "https://") === 0) { ?>
+								<img src="<?php echo($category_item['car_photo']) ?>"
+									 alt="<?php echo $category_item['car_title']; ?>" loading="lazy">
+                            <?php } else { ?>
+								<img src="../<?php echo $category_item['car_photo']; ?>"
+									 alt="<?php echo $category_item['car_title']; ?>" loading="lazy">
+                            <?php } ?>
 						</div>
 						<a href="<?php echo $category_item['car_url']; ?>" target="_blank">
 							<p><?php echo $category_item['car_title']; ?>
