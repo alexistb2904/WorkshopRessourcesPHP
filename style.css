@@ -1,6 +1,10 @@
+* {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: #161a1c;
-    margin: 0px;
+    margin: 0;
 }
 
 header {
@@ -145,7 +149,7 @@ nav a:hover {
     background-color: #212529;
     border-radius: 5px;
     flex-direction: column;
-} 
+}
 
 .active {
     color: #d4d4d4;
@@ -528,6 +532,31 @@ footer .foot-partenaire img {
     text-align: center;
     margin-bottom: 25px;
     font-family: "Archivo", sans-serif;
+}
+
+.title-download {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button-goto {
+    font-family: "Archivo", sans-serif;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    border: none;
+    padding: 1% 2%;
+    background-color: rgb(40, 45, 50);
+    border-radius: 0.5vmax;
+    box-shadow: 0.3vmax 0.3vmax 0.2vmax rgb(36, 41, 45);
+}
+
+.button-goto:hover {
+    background-color: rgb(50, 55, 60);
+    transition: 0.3s;
+    box-shadow: 0.1vmax 0.1vmax 0.2vmax rgb(36, 41, 45);
+    color: white;
 }
 
 .grid-download {
