@@ -24,11 +24,11 @@ $decals_c_pFetch->execute([
 ]);
 $decals_c_p = $decals_c_pFetch->fetchAll();
 
-$other_cFetch = $mysqlClient->prepare('SELECT * FROM other WHERE creator_name = :creator_name');
-$other_cFetch->execute([
+$other_pFetch = $mysqlClient->prepare('SELECT * FROM other WHERE creator_name = :creator_name');
+$other_pFetch->execute([
     'creator_name' => (string)$loggedUser['pseudo']
 ]);
-$other_c = $other_cFetch->fetchAll();
+$other_p = $other_pFetch->fetchAll();
 
 ?>
 <!doctype html>
@@ -128,8 +128,12 @@ $other_c = $other_cFetch->fetchAll();
                                     <p style="color:darkred; font-size: 1vmax;">En attente d'approbation | Désactivé</p>
                                 <?php } ?>
                             </a>
-                            <a class="link-warning grid-download-item-a" href="update.php?id=<?php echo $category_item['id']; ?>&title=<?php echo $category_item['title']; ?>&photo=<?php echo $category_item['photo']; ?>&creator=<?php echo $variableName; ?>&url=<?php echo $category_item['url']; ?>&creator_name=<?php echo $category_item['creator_name']; ?>">Editer</a>
-                            <a class="link-danger grid-download-item-a" href="delete.php?id=<?php echo $category_item['id']; ?>&title=<?php echo $category_item['title']; ?>&photo=<?php echo $category_item['photo']; ?>&creator=<?php echo $variableName; ?>&creator_name=<?php echo $category_item['creator_name']; ?>">Supprimer</a>
+							<?php if ($category_item[$variableName] == "zebra_c_p" || $category_item[$variableName] == "decals_c_p") { ?>
+							<a class="link-warning grid-download-item-a" href="update.php?id=<?php echo $category_item['id']; ?>&title=<?php echo $category_item['title']; ?>&photo=<?php echo $category_item['photo']; ?>&creator=<?php echo $variableName; ?>&creator_name=<?php echo $category_item['creator_name']; ?>&workshop_name=<?php echo $category_item['workshop_name']; ?>">Editer</a>
+							<?php } else { ?>
+                            <a class="link-warning grid-download-item-a" href="update.php?id=<?php echo $category_item['id']; ?>&title=<?php echo $category_item['title']; ?>&photo=<?php echo $category_item['photo']; ?>&creator=<?php echo $variableName; ?>&url=<?php echo $category_item['url']; ?>&creator_name=<?php echo $category_item['creator_name']; ?>&workshop_name=<?php echo $category_item['workshop_name']; ?>">Editer</a>
+                            <?php } ?>
+							<a class="link-danger grid-download-item-a" href="delete.php?id=<?php echo $category_item['id']; ?>&title=<?php echo $category_item['title']; ?>&photo=<?php echo $category_item['photo']; ?>&creator=<?php echo $variableName; ?>&creator_name=<?php echo $category_item['creator_name']; ?>">Supprimer</a>
                         </div>
                     <?php endforeach; ?>
                     <div class="grid-download-plus">

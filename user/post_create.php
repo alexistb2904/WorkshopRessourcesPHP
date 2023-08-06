@@ -5,7 +5,7 @@ include_once('../config/mysql.php');
 include_once('../config/user.php');
 include_once('../variables.php');
 include_once('../functions.php');
-
+$rootUrl = $GLOBALS['rooturl'];
 $postData = $_POST;
 
 if (!isset($loggedUser)) {
@@ -44,7 +44,7 @@ if (!isset($postData['url'])) {
     $url = htmlspecialchars($postData['url']);
 }
 if (!isset($postData['workshop_name'])) {
-    $workshop_name = '';
+    $workshop_name = 'Inconnu';
 } else {
     $workshop_name = htmlspecialchars($postData['workshop_name']);
 }
@@ -68,12 +68,13 @@ if ($creator == 'other') {
         'workshop_name' => $workshop_name,
     ]);
 } else {
-$insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $creator . '(title, url, photo, creator_name) VALUES (:title, :url, :photo, :creator_name)');
+$insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $creator . '(title, url, photo, creator_name, workshop_name) VALUES (:title, :url, :photo, :creator_name, :workshop_name)');
 $insertRecipe->execute([
     'title' => $title,
     'url' => $url,
     'photo' => $photo,
     'creator_name' => $creator_name,
+    'workshop_name' => $workshop_name,
 ]);
 }
 ?>
@@ -153,7 +154,8 @@ $rootUrl = $GLOBALS['rooturl'];
         <div style="display: flex; align-items: center; flex-direction: column">
             <h1><?php echo($title); ?> à été crée</h1>
             <p>Catégorie : <?php echo($creator); ?></p>
-            <p>Crée par <?php echo($creator_name); ?></p>
+			<p>Crée par : <?php echo($workshop_name); ?></p>
+            <p>Upload par <?php echo($creator_name); ?></p>
             <div class="grid-img">
                 <?php if (strpos($photo, "http://") === 0 || strpos($photo, "https://") === 0) { ?>
                     <img src="<?php echo($photo) ?>"

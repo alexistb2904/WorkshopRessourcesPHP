@@ -3,7 +3,7 @@ include_once('../config/mysql.php');
 include_once('../config/user.php');
 include_once('../variables.php');
 include_once ('../functions.php');
-
+$rootUrl = $GLOBALS['rooturl'];
 if (!isset($loggedUser['email'])) {
     echo 'Vous n\'avez pas les droits pour accéder à cette page.';
     header("refresh:5;$rootUrl login.php");
@@ -11,16 +11,14 @@ if (!isset($loggedUser['email'])) {
 }
 
 $getData = $_GET;
-?>
 
-<?php
 $nameExtension = basename(__FILE__);
 $name = pathinfo($nameExtension, PATHINFO_FILENAME);
 $Cname = ucfirst($name);
 $currentURL = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 
 $rootPath = $_SERVER['DOCUMENT_ROOT'];
-$rootUrl = $GLOBALS['rooturl'];
+
 
 ?>
 
@@ -81,10 +79,14 @@ $rootUrl = $GLOBALS['rooturl'];
             <input type="hidden" class="form-control" id="id" name="id" value="<?php echo($getData['id']); ?>" required>
         </div>
         <div class="part-form">
-            <label for="creator_name_fake" class="form-label">Créateur du contenu</label>
+            <label for="creator_name_fake" class="form-label">Uploadeur du contenu</label>
             <input type="text" class="form-control" id="creator_name_fake" name="creator_name_fake" value="<?php echo($getData['creator_name']); ?>" disabled>
             <input type="hidden" class="form-control" id="creator_name" name="creator_name" value="<?php echo($getData['creator_name']); ?>" required>
         </div>
+		<div class="part-form">
+			<label for="workshop_name_fake" class="form-label">Créateur du contenu</label>
+			<input type="text" class="form-control" id="workshop_name_fake" name="workshop_name_fake" value="<?php echo($getData['workshop_name']); ?>" disabled>
+		</div>
         <div class="part-form">
             <label for="creator-fake" class="form-label">Catégorie du contenu</label>
             <input type="text" class="form-control" id="creator-fake" name="creator-fake" value="<?php echo($getData['creator']); ?>" disabled>
@@ -94,10 +96,12 @@ $rootUrl = $GLOBALS['rooturl'];
             <label for="title" class="form-label">Titre du contenu</label>
             <input type="text" class="form-control" id="title" name="title" aria-describedby="title-help" value="<?php echo($getData['title']); ?>" placeholder="<?php echo($getData['title']); ?>" autocomplete="off" required>
         </div>
+        <?php if($getData['creator'] !== 'zebra_c' || 'decals_c') { ?>
         <div class="part-form">
             <label for="url" class="form-label">Url du workshop</label>
-            <input type="text" class="form-control" placeholder="URL Workshop du contenu | Sauf decals et zébra" id="url" name="url" value="<?php echo strip_tags($getData['url']); ?>" autocomplete="off">
+            <input type="text" class="form-control" placeholder="URL Workshop du contenu" id="url" name="url" value="<?php echo strip_tags($getData['url']); ?>" autocomplete="off">
         </div>
+		<?php } ?>
         <div class="part-form">
             <label for="photo" class="form-label">Template du contenu</label>
             <input type="text" class="form-control" placeholder="URL de l'image" id="photo" name="photo" value="<?php echo strip_tags($getData['photo']); ?>" autocomplete="off" required>

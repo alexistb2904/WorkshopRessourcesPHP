@@ -5,21 +5,20 @@
     include_once('../functions.php');
 
     $getData = $_GET;
-
+$rootUrl = $GLOBALS['rooturl'];
 if (!isset($loggedUser)) {
     echo 'Vous devez être connecté pour accéder à cette page.';
     header("refresh:5;$rootUrl/login.php");
     exit();
 }
-?>
-<?php
+
 $nameExtension = basename(__FILE__);
 $name = pathinfo($nameExtension, PATHINFO_FILENAME);
 $Cname = ucfirst($name);
 $currentURL = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 
 $rootPath = $_SERVER['DOCUMENT_ROOT'];
-$rootUrl = $GLOBALS['rooturl'];
+
 
 ?>
 
@@ -71,7 +70,7 @@ $rootUrl = $GLOBALS['rooturl'];
     <div style="display: flex; flex-direction: column">
 
     <?php include_once($rootPath.'/header.php'); ?>
-        <form action="<?php echo($rootUrl . 'user/post_create.php'); ?>" method="POST">
+        <form action="<?php echo($rootUrl . 'user/post_create.php'); ?>" method="POST" id="form-create">
             <h1>Création de contenu</h1>
             <div class="part-form">
                 <input type="hidden" class="form-control" id="creator" name="creator" value="<?php echo($getData['creator']); ?>">
@@ -80,21 +79,36 @@ $rootUrl = $GLOBALS['rooturl'];
                 <input type="text" class="form-control" id="title" name="title" aria-describedby="title-help" placeholder="Titre du contenu" autocomplete="off" required>
             </div>
             <div class="part-form">
-                <label for="workshop_name" class="form-label">Nom du créateur workshop | NE PEUT PAS ÊTRE MODIFIER |</label>
-                <input type="text" class="form-control" placeholder="Nom du créateur workshop | Sauf zébra & decals" id="workshop_name" name="workshop_name" autocomplete="off">
+                <label for="workshop_name" class="form-label">Nom du créateur</label>
+                <input type="text" class="form-control" placeholder="Nom du créateur original" id="workshop_name" name="workshop_name" autocomplete="off">
             </div>
-            <div class="part-form">
-                <label for="url" class="form-label">Url du contenu</label>
-                <input type="text" class="form-control" placeholder="URL du contenu | Sauf zébra & decals" id="url" name="url" autocomplete="off">
-            </div>
+			<?php if($getData['creator'] == 'other_p') { ?>
+				<div class="part-form">
+					<label for="url" class="form-label">Url du contenu</label>
+					<input type="text" class="form-control" placeholder="URL du contenu" id="url" name="url" autocomplete="off">
+				</div>
+			<?php } ?>
             <div class="part-form">
                 <label for="photo" class="form-label">Image du contenu</label>
                 <input type="text" class="form-control" placeholder="URL de l'image" id="photo" name="photo" autocomplete="off" required>
+				<p>Upload uniquement sur <a style="color: red; text-decoration:underline" href="https://imgur.com/upload">Imgur</a ></p>
             <button type="submit" class="btn-up">Envoyer</button>
         </form>
         <br />
     </div>
 
     <?php include_once($rootPath.'/footer.php'); ?>
+	<script>
+        document.getElementById("form-create").addEventListener("submit", function(event) {
+            const photoInput = document.getElementById("photo");
+            const photoValue = photoInput.value.trim();
+
+            // Check if the value does not start with "https://i.imgur.com"
+            if (!photoValue.startsWith("https://i.imgur.com")) {
+                alert("L'url de l'image doit commencer par 'https://i.imgur.com'");
+                event.preventDefault(); // Prevent form submission
+            }
+        });
+	</script>
 </body>
 </html>
