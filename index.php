@@ -1,151 +1,148 @@
-<?php session_start();
-include_once('functions.php');?>
-<!doctype html>
+<?php
+const BY_SERVER = true;
+include_once 'util/functions.php';
+include_once 'util/variables.php';
+?>
+
+<!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <title><?php echo($GLOBALS['rooturl'] )?></title>
-    <!-- Required meta tags -->
-    <link rel="stylesheet" href="<?php echo($GLOBALS['rooturl'] ). 'style.css'?>">
-    <link rel="icon" href="<?php echo($GLOBALS['rooturl'] ). 'assets/img/Logo/LogoWS.ico'?>">
-    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo($GLOBALS['rooturl'] ). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
-    <link rel="shortcut icon" href="<?php echo($GLOBALS['rooturl'] ). 'assets/img/Logo/LogoWS.png'?>" type="image/png" />
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="color-scheme" content="normal">
-    <meta name="author" content="alexistb2904">
-    <meta name="robots" content="index, follow">
-    <meta http-equiv="content-language" content="fr-fr">
-    <link rel="canonical" href="https://<?php echo($currentURL); ?>" />
-
-    <!-- Base Meta Tags -->
-    <meta name="title" content="Accueil - WorkshopRessources">
-    <meta name="description"
-          content="WorkshopRessources est une plateforme qui propose une variété de ressources utiles aux reskinneurs et développeurs de Garry's Mod.">
-    <meta name="keywords"
-          content="Accueil,workshop,ressources,steam,download,template,gratuit,free,vehicle,véhicule,voiture,3D,police,secours,pompiers,png,jpeg,jpg,alexistb2904,decals,zebra">
-
-    <!-- Facebook Meta Tags -->
-    <meta property="og:title" content="Accueil - WorkshopRessources" />
-    <meta property="og:description"
-          content="WorkshopRessources est une plateforme qui propose une variété de ressources utiles aux reskinneurs et développeurs de Garry's Mod." />
-    <meta property="og:image" content="<?php echo($GLOBALS['rooturl'] ). 'assets/img/Logo/LogoWS.png'?>">
-    <meta property="og:url" content="https://<?php echo($currentURL); ?>" />
-    <meta property="og:locale" content="fr_FR" />
-    <meta property="og:type" content="website">
-
-    <!-- Twitter Meta Tags -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://<?php echo($currentURL); ?>">
-    <meta property="twitter:title" content="Accueil - WorkshopRessources">
-    <meta property="twitter:description"
-          content="WorkshopRessources est une plateforme qui propose une variété de ressources utiles aux reskinneurs et développeurs de Garry's Mod.">
-    <meta property="twitter:image" content="<?php echo($GLOBALS['rooturl'] ). 'assets/img/Logo/LogoWS.png'?>">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Archivo&display=swap" rel="stylesheet">
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-408NVZ99VY"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-408NVZ99VY');
-    </script>
-
-    <script type="text/javascript">
-        (function (c, l, a, r, i, t, y) {
-            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
-        })(window, document, "clarity", "script", "g3iiq9rlyc");
-    </script>
-
-    <script type="application/ld+json">
-        {
-            "@context": "http://schema.org/",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "template",
-                    "item": "https://workshopressources.fr/template/start"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "creator",
-                    "item": "https://workshopressources.fr/template/start"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 3,
-                    "name": "alexcars",
-                    "item": "https://workshopressources.fr/template/creator/alexcars"
-                }
-            ]
-        }
-    </script>
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description"
+		  content="Optimisez vos projets avec WorkshopRessource : découvrez nos outils exclusifs, incluant des décals et autres ressources, 100% Open-Source. Accédez à des tutoriels détaillés pour enrichir vos compétences. Élevez la qualité de vos projets grâce à des ressources exceptionnelles.">
+	<meta name="keywords"
+		  content="workshop, ressources, gratuit, tutoriels, gmod, zébra, decals, template, créateur, jeu, garry's mod">
+	<meta name="author" content="Alexis Thierry-Bellefond">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="@alexistb2904">
+	<meta name="twitter:title" content="WorkshopRessources - +100 Ressources pour vous">
+	<meta name="twitter:description"
+		  content="Optimisez vos projets avec WorkshopRessource : découvrez nos outils exclusifs, incluant des décals et autres ressources, 100% Open-Source. Accédez à des tutoriels détaillés pour enrichir vos compétences. Élevez la qualité de vos projets grâce à des ressources exceptionnelles.">
+	<meta name="twitter:image" content="<?php echo($GLOBALS['rootUrl']) ?>assets/images/logo.webp">
+	<!-- Balise de Langue -->
+	<meta http-equiv="Content-Language" content="fr">
+	<!-- Balise de Favicon (Logo) -->
+	<link rel="icon" href="<?php echo($GLOBALS['rootUrl']) ?>assets/images/favicon.ico" type="image/x-icon">
+	<!-- Balise de CSS -->
+	<link rel="stylesheet" href="<?php echo($GLOBALS['rootUrl']) ?>css/style.css">
+	<script src="https://kit.fontawesome.com/e1413d4c65.js" crossorigin="anonymous"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap" rel="stylesheet">
+	<title>WorkshopRessources - +100 Ressources pour vous</title>
 </head>
-
 <body>
-
-    <!-- Navigation -->
-    <?php include_once('header.php'); ?>
-
-    <main>
-        <div class="start">
-            <div class="start-img">
-                <img src="<?php echo($GLOBALS['rooturl'] ). 'assets/img/gmodimage/ImgAccueil/gmodaccueil.webp'?>" alt="Peugeot 208 Gendamerie" width="1366" height="768" loading="lazy">
-            </div>
-            <div class="start-text">
-                <?php if(isset($loggedUser)) : ?>
-                    <h1 class="entrytext">Bienvenue sur Workshop Ressources <?php echo($_SESSION['LOGGED_USER_PSEUDO']); ?> ! <br><br></h1>
-                <?php else: ?>
-                    <h1 class="entrytext">Bienvenue sur Workshop Ressources ! <br><br></h1>
-                <?php endif; ?>
-                <p>Ce site vous permettra de trouver du
-                    contenu qui vous convient, que ce soit des modèles, des décalcomanies ou des motifs zébrés. Nous
-                    proposons une grande variété de ressources à votre disposition, et tout cela
-                    gratuitement.<br><br>Amusez-vous bien !</p>
-            </div>
-        </div>
-        <section class="section-ressources">
-            <h2 class="ressources">Ressources</h2>
-            <div class="grid-select">
-                <a href="cars/start.php" class="template">
-                    <div>
-                        <p class="h3card">Template</p>
-                    </div>
-                </a>
-                <a href="misc/zebra.php" class="zebra">
-                    <div>
-                        <p class="h3card">Zébras</p>
-                    </div>
-                </a>
-                <a href="misc/decals.php" class="decals">
-                    <div>
-                        <p class="h3card">Decals</p>
-                    </div>
-                </a>
-                <a href="misc/helpreskin.php" class="aide">
-                    <div>
-                        <p class="h3card">Aide</p>
-                    </div>
-                </a>
-                <a href="" class="vmt_vtf">
-                    <div>
-                        <p class="h3card">Vmt / Vtf</p>
-                    </div>
-                </a>
-            </div>
-        </section>
-    </main>
-<?php include_once('footer.php'); ?>
+<header>
+    <?php include_once 'components/nav_bar.php' ?>
+</header>
+<main>
+	<section class="header-text">
+		<div>
+			<h1>GAGNE DU TEMPS</h1>
+			<p>Utilise nos ressources spécialement crée pour te faciliter la vie et <br> arrête de perdre du temps
+				inutilement</p>
+		</div>
+		<a class="glow-button-a" href="#card-ressources">
+			<button class="glow-button">VOIR NOS RESSOURCES</button>
+		</a>
+	</section>
+	<?php if(isLogged() === false) { ?>
+	<div class="banner-signup-container">
+		<div class="banner-signup">
+			<p>Rejoins-nous pour pouvoir partager tes créations</p>
+			<a href="login.php?signup">
+				<button>S'inscrire</button>
+			</a>
+		</div>
+	</div>
+	<?php } else { ?>
+	<div class="banner-signup-container">
+		<div class="banner-signup">
+			<p>Commence à partager tes créations</p>
+			<a href="panel/index.php">
+				<button>Panel Utilisateur</button>
+			</a>
+		</div>
+	</div>
+	<?php } ?>
+	<section class="category-card" id="card-ressources">
+		<a href="ressources/decals.php" class="card-a">
+			<div class="card" id="decals">
+				<div class="card-item">
+					<h3>Decals</h3>
+					<div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+				</div>
+			</div>
+		</a>
+		<a href="ressources/zebra.php" class="card-a">
+			<div class="card" id="zebra">
+				<div class="card-item">
+					<h3>Zébra</h3>
+					<div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+				</div>
+			</div>
+		</a>
+		<a href="templates.php" class="card-a">
+			<div class="card" id="template">
+				<div class="card-item">
+					<h3>Template</h3>
+					<div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+				</div>
+			</div>
+		</a>
+		<a href="ressources/aide.php" class="card-a">
+			<div class="card" id="aide">
+				<div class="card-item">
+					<h3>Aide</h3>
+					<div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+				</div>
+			</div>
+		</a>
+		<a href="ressources/vmtvtf.php" class="card-a">
+			<div class="card" id="vmtvtf">
+				<div class="card-item">
+					<h3>VMT</h3>
+					<div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+				</div>
+			</div>
+		</a>
+	</section>
+	<section class="new-ressources">
+		<h2>Nouvelles ressources</h2>
+		<div class="new-ressources-card-container">
+			<?php foreach (getItem('decals_c', 1, 2) as $item) { ?>
+				<div class="new-ressources-card">
+                    <?php if(strpos($item['photo'], "http://") === 0 || strpos($item['photo'], "https://") === 0) { ?>
+						<img src="<?php echo($item['photo']) ?>"
+							 alt="<?php echo $item['title']; ?>" loading="lazy">
+                    <?php } else { ?>
+						<img src="<?php echo $item['photo']; ?>"
+							 alt="<?php echo $item['title']; ?>" loading="lazy">
+                    <?php } ?>
+					<p><?php echo($item['title']) ?></p>
+					<p>Ajouté par : <?php echo($item['creator_name']) ?></p>
+					<a href="<?php echo($item['photo']); ?>" download>Télécharger</a>
+				</div>
+			<?php } ?>
+            <?php foreach (getItem('zebra_c', 1, 2) as $item) { ?>
+				<div class="new-ressources-card">
+                    <?php if(strpos($item['photo'], "http://") === 0 || strpos($item['photo'], "https://") === 0) { ?>
+						<img src="<?php echo($item['photo']) ?>"
+							 alt="<?php echo $item['title']; ?>" loading="lazy">
+                    <?php } else { ?>
+						<img src="<?php echo $item['photo']; ?>"
+							 alt="<?php echo $item['title']; ?>" loading="lazy">
+                    <?php } ?>
+					<p><?php echo($item['title']) ?></p>
+					<p>Ajouté par : <?php echo($item['creator_name']) ?></p>
+					<a href="<?php echo($item['photo']); ?>" download>Télécharger</a>
+				</div>
+            <?php } ?>
+		</div>
+	</section>
+</main>
+<?php include_once 'components/footer.php'; ?>
 </body>
 </html>
+
