@@ -12,7 +12,7 @@ if (isset($postData['send'])) {
             if ($postData['category'] === 'other') {
                 if (isset($postData['url'])) {
                     if ($postData['creator_name'] === $_SESSION['username']) {
-                        $addContent = "UPDATE `" . $postData['category'] . "` SET `title` = :title, `photo` = :photo, `workshop_name` = :workshop_name, `url` = :url WHERE `id` = :id AND `creator_name` = :creator_name";
+                        $addContent = "UPDATE `" . $postData['category'] . "` SET `title` = :title, `photo` = :photo, `workshop_name` = :workshop_name, `is_enabled` = 0, `url` = :url WHERE `id` = :id AND `creator_name` = :creator_name";
                         $resultStatement = $mysqlClient->prepare($addContent);
                         $resultStatement->bindParam(':title', htmlspecialchars($postData['title']));
                         $resultStatement->bindParam(':photo', htmlspecialchars($postData['photo']));
@@ -31,7 +31,7 @@ if (isset($postData['send'])) {
                 }
             } else {
                 if ($postData['creator_name'] === $_SESSION['username']) {
-                    $addContent = "UPDATE `" . $postData['category'] . "` SET `title` = :title, `photo` = :photo, `workshop_name` = :workshop_name WHERE `id` = :id AND `creator_name` = :creator_name";
+                    $addContent = "UPDATE `" . $postData['category'] . "` SET `title` = :title, `photo` = :photo, `workshop_name` = :workshop_name, `is_enabled` = 0, WHERE `id` = :id AND `creator_name` = :creator_name";
                     $resultStatement = $mysqlClient->prepare($addContent);
                     $resultStatement->bindParam(':title', $postData['title']);
                     $resultStatement->bindParam(':photo', $postData['photo']);
@@ -150,7 +150,7 @@ if (isset($postData['send'])) {
 										<label hidden>
 											<input type="text" name="send" value="send" hidden>
 											<input type="text" name="category"
-												   value="<?php echo($_SESSION['category']) ?>" hidden>
+												   value="<?php echo($_GET['category']) ?>" hidden>
 											<input type="text" name="creator_name"
 												   value="<?php echo($_SESSION['username']) ?>" hidden>
 										</label>

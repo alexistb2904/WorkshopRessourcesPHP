@@ -116,7 +116,7 @@ if (isset($postData['send'])) {
 										</div>
 										<label hidden>
 											<input type="text" name="send" value="send" hidden>
-											<input type="text" name="category" value="<?php echo($_SESSION['category'])?>" hidden>
+											<input type="text" name="category" value="<?php echo($_GET['category'])?>" hidden>
 											<input type="text" name="creator_name" value="<?php echo($_SESSION['username'])?>" hidden>
 										</label>
 										<button type="submit">Supprimer</button>
