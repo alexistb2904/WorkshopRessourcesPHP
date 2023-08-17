@@ -87,7 +87,7 @@ if (isset($postData['send'])) {
     <meta name="author" content="Alexis Thierry-Bellefond">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@alexistb2904">
-    <meta name="twitter:title" content="WorkshopRessources - +100 Ressources pour vous">
+    <meta name="twitter:title" content="WorkshopRessources +100 Ressources pour vous">
     <meta name="twitter:description"
           content="Optimisez vos projets avec WorkshopRessource : découvrez nos outils exclusifs, incluant des décals et autres ressources, 100% Open-Source. Accédez à des tutoriels détaillés pour enrichir vos compétences. Élevez la qualité de vos projets grâce à des ressources exceptionnelles.">
     <meta name="twitter:image" content="<?php echo($GLOBALS['rootUrl']) ?>assets/images/logo.webp">
@@ -101,7 +101,7 @@ if (isset($postData['send'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap" rel="stylesheet">
-    <title>WorkshopRessources - +100 Ressources pour vous</title>
+    <title>WorkshopRessources - Ajout</title>
 </head>
 <body>
 <header>

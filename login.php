@@ -103,7 +103,7 @@ if (isset($postData['type'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap" rel="stylesheet">
-    <title>WorkshopRessources - +100 Ressources pour vous</title>
+    <title>WorkshopRessources - Connection</title>
 </head>
 <body>
 <header>
