@@ -920,6 +920,21 @@ body {
     .category-div {
         flex-direction: column;
     }
+
+    #zebra-b-div , #decals-b-div , #template-b-div {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(auto-fill, 25vmax);
+    }
+
+    #template-b-div-a #creator_container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(auto-fill, 20vmax);
+    }
+
+    #community-b-div {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(auto-fill, 25vmax);
+    }
 }
 
 @media screen and (max-width: 500px) {
@@ -931,11 +946,28 @@ body {
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(auto-fill, 15vmax);
     }
+
+
 }
 
 @media screen and (max-width: 300px) {
     .download-container {
         grid-template-columns: repeat(1, 1fr);
         grid-template-rows: repeat(auto-fill, 12vmax);
+    }
+
+    #zebra-b-div , #decals-b-div , #template-b-div {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(auto-fill, 25vmax);
+    }
+
+    #template-b-div-a #creator_container {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(auto-fill, 20vmax);
+    }
+
+    #community-b-div {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(auto-fill, 25vmax);
     }
 }

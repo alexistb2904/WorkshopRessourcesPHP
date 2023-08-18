@@ -1,6 +1,6 @@
 <?php
 
-if ($_SERVER['HTTP_HOST'] === 'localhost') {
+if (substr($_SERVER['HTTP_HOST'], 0, strlen('localhost')) === 'localhost') {
     $_ENV['MYSQL_HOST'] = "localhost";
     $_ENV['MYSQL_USERNAME'] = "root";
     $_ENV['MYSQL_PASSWORD'] = "";
