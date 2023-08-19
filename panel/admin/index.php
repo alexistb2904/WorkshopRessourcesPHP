@@ -219,7 +219,7 @@ error_reporting(E_ALL);
                                     </div>
                                 <?php } ?>
                             <?php } else { ?>
-                                <div style="grid-column-start: 1; grid-column-end: 5; display: flex; flex-direction: column; justify-content: center; align-items: center">
+                                <div id="other-text">
                                     <p class="text-empty">Rien n'a été créé dans <?php echo($table)?> :(</p>
                                 </div>
                             <?php } ?>

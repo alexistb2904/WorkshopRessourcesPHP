@@ -4,7 +4,7 @@ include_once '../util/functions.php';
 include_once '../util/variables.php';
 startSession();
 
-$titleOfPage = 'Aide';
+$titleOfPage = 'Outils';
 ?>
 
 <!DOCTYPE html>
@@ -40,29 +40,15 @@ $titleOfPage = 'Aide';
     <?php include_once '../components/nav_bar.php' ?>
 </header>
 <main>
-	<section class="start-card" id="start-ressources">
-		<a href="tutoriels.php" class="start-a">
-			<div class="start" id="tutoriels">
-				<div class="start-item" >
-					<h3>Tutoriels</h3>
-				</div>
-			</div>
-		</a>
-		<a href="vmtvtf.php" class="start-a">
-			<div class="start" id="vmtvtf">
-				<div class="start-item" >
-					<h3>VMT/VTF</h3>
-				</div>
-			</div>
-		</a>
-		<a href="outils.php" class="start-a">
-			<div class="start" id="outils">
-				<div class="start-item" >
-					<h3>Outils</h3>
-				</div>
-			</div>
-		</a>
-	</section>
+    <section class="header-text">
+        <div>
+            <h1>Oups..</h1>
+            <p>Cette page n'est pas encore prête un peu de patience..</p>
+        </div>
+        <a class="glow-button-a" href="<?php echo($GLOBALS['rootUrl'])?>index.php">
+            <button class="glow-button">ACCUEIL</button>
+        </a>
+    </section>
 </main>
 <?php include_once '../components/footer.php'; ?>
 </body>

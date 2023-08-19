@@ -190,6 +190,17 @@ body {
     background-image: url("../assets/images/vmtvtfimg.webp");
 }
 
+#tutoriels {
+    background-image: url("../assets/images/learn.svg");
+    background-size: 12vmax 12vmax;
+}
+
+#outils {
+    background-image: url("../assets/images/outils.svg");
+    background-size: 12vmax 12vmax;
+}
+
+
 .card:hover .card-arrow {
     background: #FFF;
     color: #1F1F1F;
@@ -847,6 +858,86 @@ body {
     transform: rotate(-2deg) scale(1.05);
 }
 
+#other-text {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tutorial-section {
+    margin: 5% 10% 0 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #282828;
+    color: white;
+    border-radius: 1rem;
+    padding: 2%;
+}
+
+.tutorial-div {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    gap: 5%
+}
+
+.tutorial-item {
+    margin: 1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: #1F1F1F;
+    padding: 2%;
+    border-radius: 1rem;
+}
+
+.tutorial-item h2 {
+    margin-bottom: 1vmax;
+}
+
+.tutorial-item iframe {
+    width: 100%;
+    height: 25vmax;
+    border-radius: 1rem;
+}
+
+.tutorial-description {
+    margin-top: 2%;
+    margin-bottom: 1%;
+    width: 100%;
+    display: flex;
+    gap: 1%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.tutorial-description p {
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
+}
+
+.tutorial-description ul, .tutorial-description a {
+    list-style: none;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+}
+
+.tutorial-description a:hover {
+    text-decoration: underline;
+    color: #727272;
+}
+
 @media screen and (max-width: 768px) {
     .header-text div h1 {
         font-size: 3rem;
@@ -920,6 +1011,39 @@ body {
     .category-div {
         flex-direction: column;
     }
+
+    #template-b-div-a #creator_container {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(auto-fill, 20vmax);
+    }
+
+    #community-b-div {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(auto-fill, 25vmax);
+    }
+
+    #edit-b {
+        font-size: 0.7rem;
+    }
+
+    #delete-b {
+        font-size: 0.7rem;
+    }
+
+    #zebra-b-div , #decals-b-div , #template-b-div {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(auto-fill, 20vmax);
+    }
+
+    #other-text {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
 }
 
 @media screen and (max-width: 500px) {
@@ -931,6 +1055,37 @@ body {
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(auto-fill, 15vmax);
     }
+
+    #template-b-div-a #creator_container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(auto-fill, 20vmax);
+    }
+
+    #community-b-div {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(auto-fill, 25vmax);
+    }
+
+    #edit-b {
+        font-size: 0.8rem;
+    }
+
+    #delete-b {
+        font-size: 0.8rem;
+    }
+
+    #zebra-b-div , #decals-b-div , #template-b-div {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(auto-fill, 20vmax);
+    }
+    #other-text {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 @media screen and (max-width: 300px) {
@@ -938,4 +1093,28 @@ body {
         grid-template-columns: repeat(1, 1fr);
         grid-template-rows: repeat(auto-fill, 12vmax);
     }
+
+    #template-b-div-a #creator_container {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(auto-fill, 20vmax);
+    }
+
+    #community-b-div {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(auto-fill, 25vmax);
+    }
+
+    #edit-b {
+        font-size: 0.8rem;
+    }
+
+    #delete-b {
+        font-size: 0.8rem;
+    }
+
+    #zebra-b-div , #decals-b-div , #template-b-div {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(auto-fill, 20vmax);
+    }
+
 }

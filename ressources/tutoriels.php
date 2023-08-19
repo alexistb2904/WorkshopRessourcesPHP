@@ -4,7 +4,7 @@ include_once '../util/functions.php';
 include_once '../util/variables.php';
 startSession();
 
-$titleOfPage = 'Aide';
+$titleOfPage = 'Tutoriels';
 ?>
 
 <!DOCTYPE html>
@@ -40,28 +40,26 @@ $titleOfPage = 'Aide';
     <?php include_once '../components/nav_bar.php' ?>
 </header>
 <main>
-	<section class="start-card" id="start-ressources">
-		<a href="tutoriels.php" class="start-a">
-			<div class="start" id="tutoriels">
-				<div class="start-item" >
-					<h3>Tutoriels</h3>
+	<section class="tutorial-section">
+		<h1>Liste de Tutoriels</h1>
+		<div class="tutorial-div">
+			<div class="tutorial-item">
+				<h2>Apprendre à Reskin</h2>
+				<iframe src="https://www.youtube.com/embed/TDt6f6G51BQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+				<div class="tutorial-description">
+					<p>Liens Utiles</p>
+					<ul>
+						<li><a href="https://web.archive.org/web/20170913055549/http://nemesis.thewavelength.net/index.php?c=238#p238
+						" target="_blank">VTFEdit</a></li>
+						<li><a href="https://github.com/Dima-369/VMT-Editor" target="_blank">VMTEditor</a></li>
+						<li><a href="https://github.com/ZeqMacaw/Crowbar/releases" target="_blank">Crowbar</a></li>
+						<li><a href="" target="_blank">Script Python [NON DISPO]</a></li>
+						<li><a href="https://youtu.be/TDt6f6G51BQ" target="_blank">Lien Youtube</a></li>
+						<li><a href="" target="_blank"></a></li>
+					</ul>
 				</div>
 			</div>
-		</a>
-		<a href="vmtvtf.php" class="start-a">
-			<div class="start" id="vmtvtf">
-				<div class="start-item" >
-					<h3>VMT/VTF</h3>
-				</div>
-			</div>
-		</a>
-		<a href="outils.php" class="start-a">
-			<div class="start" id="outils">
-				<div class="start-item" >
-					<h3>Outils</h3>
-				</div>
-			</div>
-		</a>
+		<div>
 	</section>
 </main>
 <?php include_once '../components/footer.php'; ?>
