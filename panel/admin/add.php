@@ -120,7 +120,7 @@ if (isset($postData['send'])) {
         </section>
     <?php } else { ?>
         <?php if (!isset($created) || $created !== true) { ?>
-            <?php if (isset($_GET['other']) || isset($_GET['zebra']) || isset($_GET['decals'])) { ?>
+            <?php if (isset($_GET['other']) || isset($_GET['zebra']) || isset($_GET['decals']) || isset($_GET['alexcars']) || isset($_GET['azok30']) || isset($_GET['itzdannio25']) || isset($_GET['rytrak']) || isset($_GET['sgm']) || isset($_GET['w4nou']) ) { ?>
                 <section class="category-container">
                     <form action="" method="post">
                         <h1>Création de contenu</h1>
