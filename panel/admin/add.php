@@ -137,7 +137,7 @@ if (isset($postData['send'])) {
                             <label for="workshop_name" class="form-label">Nom du créateur originel</label>
                             <input type="text" class="form-control" id="workshop_name" name="workshop_name" placeholder="Nom du créateur originel" autocomplete="off">
                         </div>
-                        <?php if(isset($_GET['other'])) { ?>
+                        <?php if(!isset($_GET['zebra']) || !isset($_GET['decals'])) { ?>
                             <div class="part-form">
                                 <label for="url" class="form-label">Lien vers le contenu*</label>
                                 <input type="text" class="form-control" id="url" name="url" placeholder="Lien Direct vers le contenu" autocomplete="off" maxlength="512" required>
@@ -150,14 +150,14 @@ if (isset($postData['send'])) {
 						<div class="part-form">
 							<label for="category" class="form-label">Catégorie</label>
 							<select name="category" id="category" required>
-								<option value="zebra">Zébra</option>
-								<option value="decals">Décals</option>
-								<option value="alexcars">AlexCars</option>
-								<option value="azok30">Azok30</option>
-								<option value="itzdannio25">ItzDannio25</option>
-								<option value="rytrak">Rytrak</option>
-								<option value="sgm">SGM</option>
-								<option value="w4nou">W4nou</option>
+								<option value="zebra" <?php if(isset($_GET['zebra'])) { echo "selected"; } ?>>Zébra</option>
+								<option value="decals" <?php if(isset($_GET['decals'])) { echo "selected"; } ?>>Décals</option>
+								<option value="alexcars" <?php if(isset($_GET['alexcars'])) { echo "selected"; } ?>>AlexCars</option>
+								<option value="azok30" <?php if(isset($_GET['azok30'])) { echo "selected"; } ?>>Azok30</option>
+								<option value="itzdannio25" <?php if(isset($_GET['itzdannio25'])) { echo "selected"; } ?>>ItzDannio25</option>
+								<option value="rytrak" <?php if(isset($_GET['rytrak'])) { echo "selected"; } ?>>Rytrak</option>
+								<option value="sgm" <?php if(isset($_GET['sgm'])) { echo "selected"; } ?>>SGM</option>
+								<option value="w4nou" <?php if(isset($_GET['w4nou'])) { echo "selected"; } ?>>W4nou</option>
 							</select>
 						</div>
                         <label hidden>
