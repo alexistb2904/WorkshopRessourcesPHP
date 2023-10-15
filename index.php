@@ -21,7 +21,6 @@ include_once 'util/variables.php';
 	<meta name="twitter:description"
 		content="Optimisez vos projets avec WorkshopRessource : découvrez nos outils exclusifs, incluant des décals et autres ressources, 100% Open-Source. Accédez à des tutoriels détaillés pour enrichir vos compétences. Élevez la qualité de vos projets grâce à des ressources exceptionnelles.">
 	<meta name="twitter:image" content="<?php echo ($GLOBALS['rootUrl']) ?>assets/images/logo.webp">
-	<meta name="google-adsense-account" content="ca-pub-9084782304604516">
 	<!-- Balise de Langue -->
 	<meta http-equiv="Content-Language" content="fr">
 	<!-- Balise de Favicon (Logo) -->
