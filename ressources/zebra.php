@@ -14,7 +14,7 @@ startSession();
     <meta name="description"
         content="Optimisez vos projets avec WorkshopRessource : découvrez nos zebra sélectionner par la notre équipe et la communauté.">
     <meta name="keywords"
-        content="workshop, ressources, gratuit, tutoriels, gmod, zébra, decals, template, créateur, jeu, garry's mod">
+        content="workshop, ressources, gratuit, tutoriels, gmod, zébra, decals, template, créateur, jeu, garry's mod, novalife, nova-life">
     <meta name="author" content="Alexis Thierry-Bellefond">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@alexistb2904">

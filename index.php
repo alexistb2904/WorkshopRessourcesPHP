@@ -13,7 +13,7 @@ include_once 'util/variables.php';
 	<meta name="description"
 		content="Optimisez vos projets avec WorkshopRessource : découvrez nos outils exclusifs, incluant des décals et autres ressources, 100% Open-Source. Accédez à des tutoriels détaillés pour enrichir vos compétences. Élevez la qualité de vos projets grâce à des ressources exceptionnelles.">
 	<meta name="keywords"
-		content="workshop, ressources, gratuit, tutoriels, gmod, zébra, decals, template, créateur, jeu, garry's mod">
+		content="workshop, ressources, gratuit, tutoriels, gmod, zébra, decals, template, créateur, jeu, garry's mod, novalife, nova-life">
 	<meta name="author" content="Alexis Thierry-Bellefond">
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:site" content="@alexistb2904">
@@ -68,6 +68,16 @@ include_once 'util/variables.php';
 				</div>
 			</div>
 		<?php } ?>
+		<section class="game-card">
+			<a href="ressources/garrysmod/" class="card-game">
+				<img src="../assets/images/gmod.png">
+				<h3>Garry's Mod</h3>
+			</a>
+			<a href="ressources/novalife/" class="card-game">
+				<img src="../assets/images/novalife.jpg">
+				<h3>Nova Life</h3>
+			</a>
+		</section>
 		<section class="category-card" id="card-ressources">
 			<a href="ressources/decals.php" class="card-a">
 				<div class="card" id="decals">
@@ -85,7 +95,7 @@ include_once 'util/variables.php';
 					</div>
 				</div>
 			</a>
-			<a href="templates.php" class="card-a">
+			<!--<a href="templates.php" class="card-a">
 				<div class="card" id="template">
 					<div class="card-item">
 						<h3>Template</h3>
@@ -108,7 +118,7 @@ include_once 'util/variables.php';
 						<div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
 					</div>
 				</div>
-			</a>
+			</a>-->
 		</section>
 		<section class="new-ressources">
 			<h2>Nouvelles ressources</h2>

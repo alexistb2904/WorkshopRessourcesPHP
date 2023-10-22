@@ -10,11 +10,12 @@ if (!defined('BY_SERVER')) {
 	<div class="footer-container">
 		<div class="footer_1">
 			<div>
-				<img src="<?php echo ($GLOBALS['rootUrl']) ?>assets/images/logo.webp" alt="Logo de WorkshopRessources" />
+				<img src="<?php echo ($GLOBALS['rootUrl']) ?>assets/images/logo.webp"
+					alt="Logo de WorkshopRessources" />
 				<h1>Workshop Ressources</h1>
 			</div>
 			<p>Workshop Ressources est une plateforme qui propose une variété de ressources utiles aux reskinneurs et
-				développeurs de Garry's Mod.
+				développeurs de divers jeux.
 				Workshop Ressources is not affiliated with Facepunch Studios Ltd.</p>
 		</div>
 		<div class="footer_2">

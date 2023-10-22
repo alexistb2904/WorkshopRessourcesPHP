@@ -21,7 +21,7 @@ if (isLogged()) {
     <meta name="description"
           content="Optimisez vos projets avec WorkshopRessource : découvrez nos outils exclusifs, incluant des décals et autres ressources, 100% Open-Source. Accédez à des tutoriels détaillés pour enrichir vos compétences. Élevez la qualité de vos projets grâce à des ressources exceptionnelles.">
     <meta name="keywords"
-          content="workshop, ressources, gratuit, tutoriels, gmod, zébra, decals, template, créateur, jeu, garry's mod">
+          content="workshop, ressources, gratuit, tutoriels, gmod, zébra, decals, template, créateur, jeu, garry's mod, novalife, nova-life">
     <meta name="author" content="Alexis Thierry-Bellefond">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@alexistb2904">

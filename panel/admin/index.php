@@ -14,7 +14,7 @@ error_reporting(E_ALL);
     <meta name="description"
           content="Optimisez vos projets avec WorkshopRessource : découvrez nos outils exclusifs, incluant des décals et autres ressources, 100% Open-Source. Accédez à des tutoriels détaillés pour enrichir vos compétences. Élevez la qualité de vos projets grâce à des ressources exceptionnelles.">
     <meta name="keywords"
-          content="workshop, ressources, gratuit, tutoriels, gmod, zébra, decals, template, créateur, jeu, garry's mod">
+          content="workshop, ressources, gratuit, tutoriels, gmod, zébra, decals, template, créateur, jeu, garry's mod, novalife, nova-life">
     <meta name="author" content="Alexis Thierry-Bellefond">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@alexistb2904">
@@ -61,6 +61,7 @@ error_reporting(E_ALL);
                 <div class="category-div">
                     <a class="button-category" id="zebra-b" onclick="showZebra('admin')">Zebra</a>
                     <a class="button-category" id="decals-b" onclick="showDecals('admin')">Decals</a>
+                    <a class="button-category" id="novalife-b" onclick="showNovaLife('admin')">Nova-Life</a>
                     <a class="button-category" id="template-b" onclick="showTemplate('admin')">Templates</a>
                     <a class="button-category" id="community-b" onclick="showCommunity('admin')">Vérifications</a>
 
@@ -130,7 +131,39 @@ error_reporting(E_ALL);
                             </div>
                         <?php } ?>
                     </div>
-                    <div id="template-b-div-a">
+                    <div id="novalife-b-div">
+                        <?php if (!empty(getAllTable('novalife'))) { ?>
+                            <?php foreach (getAllTable('novalife') as $item ) { ?>
+                                <div class="download-card">
+                                    <div class="download-card-image">
+                                        <?php if(strpos($item['photo'], "http://") === 0 || strpos($item['photo'], "https://") === 0) { ?>
+                                            <img src="<?php echo($item['photo']) ?>"
+                                                 alt="<?php echo $item['title']; ?>" loading="lazy">
+                                        <?php } else { ?>
+                                            <img src="../../<?php echo $item['photo']; ?>"
+                                                 alt="<?php echo $item['title']; ?>" loading="lazy">
+                                        <?php } ?>
+                                    </div>
+                                    <div class="download-card-text">
+                                        <a href="<?php echo($item['url']) ?>">
+                                            <h2><?php echo $item['title']; ?></h2>
+                                        </a>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; width: 100%; align-items: center; justify-content: center;">
+                                        <a class="download-card-button" id="edit-b" href="edit.php?id=<?php echo($item['id']) ?>&category=novalife">Modifier</a>
+                                        <a class="download-card-button" id="delete-b" href="delete.php?id=<?php echo($item['id']) ?>&category=novalife">Supprimer</a>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                            <a class="button-empty" href="add.php?novalife">Créer une nouvelle ressource</a>
+                        <?php } else { ?>
+                            <div style="grid-column-start: 1; grid-column-end: 5; display: flex; flex-direction: column; justify-content: center; align-items: center">
+                                <p class="text-empty">Aucune ressource :(</p>
+                                <a class="button-empty" href="add.php?novalife">Commence Maintenant</a>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    <div id="template-b-div-a"> 
                         <?php
                         $creator_list = [
                             'azok30',
@@ -230,7 +263,7 @@ error_reporting(E_ALL);
         <?php } ?>
     </main>
 <?php include_once '../../components/footer.php'; ?>
-<script src="../../js/panel.js"></script>
+<script src="<?php echo($GLOBALS['rootUrl']) ?>js/panel.js"></script>
 </body>
 </html>
 

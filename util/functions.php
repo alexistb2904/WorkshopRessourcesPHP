@@ -4,7 +4,7 @@ if ((substr($_SERVER['HTTP_HOST'], 0, strlen('localhost')) === 'localhost') || (
     $_ENV['MYSQL_HOST'] = "localhost";
     $_ENV['MYSQL_USERNAME'] = "root";
     $_ENV['MYSQL_PASSWORD'] = "";
-    $_ENV['MYSQL_DATABASE'] = "workshopressources";
+    $_ENV['MYSQL_DATABASE'] = "s79805_WorkshopRessources";
 }
 
 $mysqlHost = $_ENV['MYSQL_HOST'];
@@ -15,16 +15,19 @@ $mysqlPort = 3306;
 
 try {
     $GLOBALS['mysqlClientPDO'] = new PDO(
-        sprintf('mysql:host=%s;dbname=%s;port=%s', $mysqlHost, $mysqlName, 3306), $mysqlUser, $mysqlPassword
+        sprintf('mysql:host=%s;dbname=%s;port=%s', $mysqlHost, $mysqlName, 3306),
+        $mysqlUser,
+        $mysqlPassword
     );
     $GLOBALS['mysqlClientPDO']->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(Exception $exception) {
-    die('Erreur : '.$exception->getMessage());
+} catch (Exception $exception) {
+    die('Erreur : ' . $exception->getMessage());
 }
 
 $GLOBALS['mysqlClient'] = mysqli_connect($mysqlHost, $mysqlUser, $mysqlPassword, $mysqlName);
 
-function isAdmin($email) {
+function isAdmin($email)
+{
     $userAdminFetch = 'SELECT * FROM users WHERE email = ? AND isAdmin = 1;';
     $mysqlHost = $_ENV['MYSQL_HOST'];
     $mysqlUser = $_ENV['MYSQL_USERNAME'];
@@ -43,14 +46,16 @@ function isAdmin($email) {
     }
 }
 
-function isLogged() {
+function isLogged()
+{
     if (isset($_SESSION['isLogged']) && ($_SESSION['isLogged'] === true) && isset($_SESSION['username']) && isset($_SESSION['email'])) {
         return true;
     } else {
         return false;
     }
 }
-function getName() {
+function getName()
+{
     if (isset($_SESSION['username'])) {
         return $_SESSION['username'];
     } else {
@@ -58,11 +63,12 @@ function getName() {
     }
 }
 
-function getCreatorById($id, $table) {
+function getCreatorById($id, $table)
+{
     if (!isset($id, $table)) {
         return null;
     } else {
-        $getById = 'SELECT `creator_name` FROM '. $table .' WHERE id = '. $id .';';
+        $getById = 'SELECT `creator_name` FROM ' . $table . ' WHERE id = ' . $id . ';';
         $result = $GLOBALS['mysqlClient']->prepare($getById);
         $result->execute();
         $items = array();
@@ -74,11 +80,12 @@ function getCreatorById($id, $table) {
     }
 }
 
-function getById($id, $table) {
+function getById($id, $table)
+{
     if (!isset($id, $table)) {
         return null;
     } else {
-        $getById = 'SELECT * FROM '. $table .' WHERE id = '. $id .';';
+        $getById = 'SELECT * FROM ' . $table . ' WHERE id = ' . $id . ';';
         $result = $GLOBALS['mysqlClient']->prepare($getById);
         $result->execute();
         $ListItems = array();
@@ -89,10 +96,11 @@ function getById($id, $table) {
         return $ListItems;
     }
 }
-function getSelfTable($table) {
+function getSelfTable($table)
+{
     $mysqlClient = $GLOBALS['mysqlClientPDO'];
     if (isset($table)) {
-        $getItemNumber = "SELECT * FROM " . $table . " WHERE `creator_name` = '". $_SESSION['username'] ."' ORDER BY id DESC;";
+        $getItemNumber = "SELECT * FROM " . $table . " WHERE `creator_name` = '" . $_SESSION['username'] . "' ORDER BY id DESC;";
         $resultStatement = $mysqlClient->prepare($getItemNumber);
         $resultStatement->execute();
         $items = array();
@@ -107,7 +115,8 @@ function getSelfTable($table) {
     }
 }
 
-function getItem($table, $status, $limit = 'all') {
+function getItem($table, $status, $limit = 'all')
+{
     $mysqlClient = $GLOBALS['mysqlClientPDO'];
     if (isset($table)) {
         if (($limit === 'all') || !isset($limit)) {
@@ -137,13 +146,15 @@ function getItem($table, $status, $limit = 'all') {
     }
 }
 
-function startSession() {
+function startSession()
+{
     if (session_status() === PHP_SESSION_NONE) {
         return session_start();
     }
 }
 
-function getAllTable($table) {
+function getAllTable($table)
+{
     $mysqlClient = $GLOBALS['mysqlClientPDO'];
     if (isset($table)) {
         $getAllTable = "SELECT * FROM " . $table . " ORDER BY id DESC ;";
@@ -161,7 +172,8 @@ function getAllTable($table) {
     }
 }
 
-function getTable($table, $numberOfItem, $startAt, $withStatus = 1) {
+function getTable($table, $numberOfItem, $startAt, $withStatus = 1)
+{
     $mysqlClient = $GLOBALS['mysqlClientPDO'];
     if (isset($table) && isset($numberOfItem) && isset($startAt)) {
         if (isset($withStatus) && ($withStatus === 1)) {
