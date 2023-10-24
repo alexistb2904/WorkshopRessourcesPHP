@@ -8,13 +8,13 @@ startSession();
 ?>
 
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TVQQ5364KV"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-408NVZ99VY"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
-    gtag('config', 'G-TVQQ5364KV');
+    gtag('config', 'G-408NVZ99VY');
 </script>
 <link rel="stylesheet" href="<?php echo ($GLOBALS['rootUrl']) ?>css/nav_bar.css">
 <script src="<?php echo ($GLOBALS['rootUrl']) ?>js/nav_bar.js"></script>
