@@ -43,6 +43,16 @@ if (isset($postData['send'])) {
 				}
 			} else {
 				if ($postData['category'] != 'novalife_flocage') {
+					$title = htmlspecialchars($postData['title']);
+					$photo = htmlspecialchars($postData['photo']);
+					if (empty($postData['url']) || !isset($postData['url']))
+						$url = '';
+					else
+						$url = htmlspecialchars($postData['url']);
+					$is_enabled = htmlspecialchars($postData['is_enabled']);
+					$id = htmlspecialchars($_GET['id']);
+					$creator_name = htmlspecialchars($postData['creator_name']);
+
 					$addContent = "UPDATE `" . $postData['category'] . "` SET `title` = :title, `photo` = :photo, `url` = :url WHERE `id` = :id";
 					$resultStatement = $mysqlClient->prepare($addContent);
 					$title = htmlspecialchars($postData['title']);
@@ -57,6 +67,12 @@ if (isset($postData['send'])) {
 					$resultStatement->closeCursor();
 					$updated = true;
 				} else {
+					$title = htmlspecialchars($postData['title']);
+					$photo = htmlspecialchars($postData['photo']);
+					$is_enabled = htmlspecialchars($postData['is_enabled']);
+					$id = htmlspecialchars($_GET['id']);
+					$creator_name = htmlspecialchars($postData['creator_name']);
+
 					$addContent = "UPDATE `" . $postData['category'] . "` SET `title` = :title, `photo` = :photo, `creator_name` = :creator_name, `is_enabled` = :is_enabled WHERE `id` = :id;";
 					$resultStatement = $mysqlClient->prepare($addContent);
 					$resultStatement->bindParam(':title', $title);

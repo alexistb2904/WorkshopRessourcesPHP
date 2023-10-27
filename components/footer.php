@@ -24,7 +24,7 @@ if (!defined('BY_SERVER')) {
 				<li><a href="">Discord</a></li>
 				<li><a href="">Youtube</a></li>
 				<li><a href="<?php echo ($GLOBALS['rootUrl']) ?>history.php">Histoire</a></li>
-				<li><a href="<?php echo ($GLOBALS['rootUrl']) ?>legal.php">Mentions Légales</a></li>
+				<li><a href="<?php echo ($GLOBALS['rootUrl']) ?>mentions-legale.php">Mentions Légales</a></li>
 			</ul>
 		</div>
 		<div class="footer_3">
