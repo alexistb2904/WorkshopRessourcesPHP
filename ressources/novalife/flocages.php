@@ -56,6 +56,16 @@ $titleOfPage = 'Nova-Life Flocages';
                 <button class="glow-button">DÉCOUVRE LES TEMPLATES</button>
             </a>
         </section>
+        <?php if (isLogged() === false) { ?>
+            <div class="banner-signup-container">
+                <div class="banner-signup">
+                    <p>Rejoins-nous pour pouvoir partager tes créations</p>
+                    <a href="<?php echo ($GLOBALS['rootUrl']) ?>login.php?signup">
+                        <button>S'inscrire</button>
+                    </a>
+                </div>
+            </div>
+        <?php } ?>
         <section class="download-container">
             <?php
             $titleOfPageLow = strtolower('novalife_flocage');
@@ -98,6 +108,11 @@ $titleOfPage = 'Nova-Life Flocages';
                             Lien</a>
                     <?php } ?>
                 </div>
+            <?php } ?>
+            <?php if (isLogged() == true) { ?>
+                <a class="button-empty"
+                    href="<?php echo ($GLOBALS['rootUrl']) ?>panel/add.php?<?php echo $titleOfPageLow ?>">Créer une nouvelle
+                    ressource</a>
             <?php } ?>
         </section>
         <div class="page-index">
