@@ -53,6 +53,9 @@ $titleOfPage = 'Nova-Life';
                     <?php echo ($titleOfPage) ?>
                 </p>
             </div>
+            <a class="glow-button-a" href="flocages.php">
+                <button class="glow-button">DÉCOUVRE NOS FLOCAGES</button>
+            </a>
         </section>
         <section class="download-container">
             <?php
@@ -64,7 +67,7 @@ $titleOfPage = 'Nova-Life';
             }
             $pageOffset = ($page - 1) * 12;
             $pageMax = count(getAllTable($titleOfPageLow)) / 12;
-            foreach (getTable($titleOfPageLow, 12, $pageOffset, 0) as $item) { ?>
+            foreach (getTable($titleOfPageLow, 12, $pageOffset) as $item) { ?>
                 <div class="download-card">
                     <div class="download-card-image">
                         <?php if (strpos($item['photo'], "http://") === 0 || strpos($item['photo'], "https://") === 0) { ?>

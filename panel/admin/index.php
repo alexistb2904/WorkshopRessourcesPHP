@@ -184,8 +184,7 @@ error_reporting(E_ALL);
                                             <div class="download-card">
                                                 <div class="download-card-image">
                                                     <?php if(strpos($item['photo'], "http://") === 0 || strpos($item['photo'], "https://") === 0) { ?>
-                                                        <img src="<?php echo($item['photo']) ?>"
-                                                             alt="<?php echo $item['title']; ?>" loading="lazy">
+                                                        <img src="<?php echo($item['photo']) ?>" alt="<?php echo $item['title']; ?>" loading="lazy">
                                                     <?php } else { ?>
                                                         <img src="../../<?php echo $item['photo']; ?>"
                                                              alt="<?php echo $item['title']; ?>" loading="lazy">
@@ -215,6 +214,7 @@ error_reporting(E_ALL);
                     <div id="community-b-div">
                         <?php
                         $community_list = [
+                            'novalife_flocage',
                             'zebra_c',
                             'decals_c',
                             'other',
@@ -234,11 +234,19 @@ error_reporting(E_ALL);
                                             <?php } ?>
                                         </div>
                                         <div class="download-card-text">
-                                            <a href="<?php echo($item['url']) ?>">
-                                                <h2><?php echo $item['title']; ?></h2>
-                                            </a>
+                                        <?php if ($table === 'novalife_flocage') { ?>
+                                                <a href="<?php echo($item['photo']) ?>" target="_blank">
+                                                    <h2><?php echo $item['title']; ?></h2>
+                                                </a>
+                                            <?php } else { ?>
+                                                <a href="<?php echo($item['url']) ?>">
+                                                    <h2><?php echo $item['title']; ?></h2>
+                                                </a>
+                                            <?php } ?>
                                             <p>Upload par: <?php echo $item['creator_name']; ?></p>
-                                            <p>Crée par: <?php echo $item['workshop_name']; ?></p>
+                                            <?php if ($table != 'novalife_flocage') { ?>
+                                                <p>Crée par: <?php echo $item['workshop_name']; ?></p>
+                                            <?php } ?>
                                             <p>Status: <?php if($item['is_enabled'] === 1) {
                                                     echo('<span style="color: darkgreen">Activé</span>');
                                                 } else {

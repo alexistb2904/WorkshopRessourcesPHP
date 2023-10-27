@@ -8,19 +8,26 @@ $postData = $_POST;
 startSession();
 if (isset($postData['send'])) {
 	if (isLogged() && isAdmin($_SESSION['email'])) {
-		if (isset($postData['category']) && isset($postData['title']) && isset($postData['photo']) && isset($postData['url'])) {
+		if (isset($postData['category']) && isset($postData['title']) && isset($postData['photo'])) {
 			if ($postData['category'] == 'other' || $postData['category'] == 'zebra_c' || $postData['category'] == 'decals_c') {
-				if (isset($postData['workshop_name']) && isset($postData['creator_name']) && isset($postData['is_enabled'])) {
-					$addContent = "UPDATE `" . $postData['category'] . "` SET `title` = :title, `photo` = :photo, `workshop_name` = :workshop_name, `url` = :url, `creator_name` = :creator_name, `is_enabled` = :is_enabled WHERE `id` = :id;";
-					$resultStatement = $mysqlClient->prepare($addContent);
+				if (isset($postData['creator_name']) && isset($postData['is_enabled'])) {
 					$title = htmlspecialchars($postData['title']);
 					$photo = htmlspecialchars($postData['photo']);
-					$url = htmlspecialchars($postData['url']);
+					if (empty($postData['url']) || !isset($postData['url']))
+						$url = '';
+					else
+						$url = htmlspecialchars($postData['url']);
 					$is_enabled = htmlspecialchars($postData['is_enabled']);
-					$workshop_name = htmlspecialchars($postData['workshop_name']);
+					if (empty($postData['workshop_name']) || !isset($postData['workshop_name'])) {
+						$workshop_name = '';
+					} else {
+						$workshop_name = htmlspecialchars($postData['workshop_name']);
+					}
 					$id = htmlspecialchars($_GET['id']);
 					$creator_name = htmlspecialchars($postData['creator_name']);
 
+					$addContent = "UPDATE `" . $postData['category'] . "` SET `title` = :title, `photo` = :photo, `workshop_name` = :workshop_name, `url` = :url, `creator_name` = :creator_name, `is_enabled` = :is_enabled WHERE `id` = :id;";
+					$resultStatement = $mysqlClient->prepare($addContent);
 					$resultStatement->bindParam(':title', $title);
 					$resultStatement->bindParam(':photo', $photo);
 					$resultStatement->bindParam(':url', $url);
@@ -35,23 +42,38 @@ if (isset($postData['send'])) {
 					$errorMessage = 'Il manque des informations pour pouvoir mettre à jour une ressource. ERROR1';
 				}
 			} else {
-				$addContent = "UPDATE `" . $postData['category'] . "` SET `title` = :title, `photo` = :photo, `url` = :url WHERE `id` = :id";
-				$resultStatement = $mysqlClient->prepare($addContent);
-				$title = htmlspecialchars($postData['title']);
-				$photo = htmlspecialchars($postData['photo']);
-				$url = htmlspecialchars($postData['url']);
-				$id = htmlspecialchars($_GET['id']);
-				$resultStatement->bindParam(':title', $title);
-				$resultStatement->bindParam(':photo', $photo);
-				$resultStatement->bindParam(':url', $url);
-				$resultStatement->bindParam(':id', $id);
-				$resultStatement->execute();
-				$resultStatement->closeCursor();
-				$updated = true;
+				if ($postData['category'] != 'novalife_flocage') {
+					$addContent = "UPDATE `" . $postData['category'] . "` SET `title` = :title, `photo` = :photo, `url` = :url WHERE `id` = :id";
+					$resultStatement = $mysqlClient->prepare($addContent);
+					$title = htmlspecialchars($postData['title']);
+					$photo = htmlspecialchars($postData['photo']);
+					$url = htmlspecialchars($postData['url']);
+					$id = htmlspecialchars($_GET['id']);
+					$resultStatement->bindParam(':title', $title);
+					$resultStatement->bindParam(':photo', $photo);
+					$resultStatement->bindParam(':url', $url);
+					$resultStatement->bindParam(':id', $id);
+					$resultStatement->execute();
+					$resultStatement->closeCursor();
+					$updated = true;
+				} else {
+					$addContent = "UPDATE `" . $postData['category'] . "` SET `title` = :title, `photo` = :photo, `creator_name` = :creator_name, `is_enabled` = :is_enabled WHERE `id` = :id;";
+					$resultStatement = $mysqlClient->prepare($addContent);
+					$resultStatement->bindParam(':title', $title);
+					$resultStatement->bindParam(':photo', $photo);
+					$resultStatement->bindParam(':is_enabled', $is_enabled);
+					$resultStatement->bindParam(':id', $id);
+					$resultStatement->bindParam(':creator_name', $creator_name);
+					$resultStatement->execute();
+					$resultStatement->closeCursor();
+					$updated = true;
+				}
 			}
+		} else {
+			$errorMessage = 'Il manque des informations pour pouvoir mettre à jour une ressource. ERROR2';
 		}
 	} else {
-		$errorMessage = 'Il faut être connecté et avoir les permissions pour pouvoir mettre à jour une ressource. ERROR2';
+		$errorMessage = 'Il faut être connecté et avoir les permissions pour pouvoir mettre à jour une ressource. ERROR3';
 	}
 }
 ?>
@@ -123,35 +145,39 @@ if (isset($postData['send'])) {
 											value="<?php echo ($item['title']) ?>" placeholder="Titre du contenu" autocomplete="off"
 											required>
 									</div>
-									<div class="part-form">
-										<label for="url" class="form-label">Lien vers le contenu*</label>
-										<input type="text" class="form-control" id="url" name="url"
-											placeholder="Lien Direct vers le contenu" value="<?php echo ($item['url']) ?>"
-											autocomplete="off" maxlength="512">
-									</div>
+									<?php if ($_GET['category'] != 'novalife_flocage') { ?>
+										<div class="part-form">
+											<label for="url" class="form-label">Lien vers le contenu*</label>
+											<input type="text" class="form-control" id="url" name="url"
+												placeholder="Lien Direct vers le contenu" value="<?php echo ($item['url']) ?>"
+												autocomplete="off" maxlength="512">
+										</div>
+									<?php } ?>
 									<div class="part-form">
 										<label for="photo" class="form-label">Lien vers l'image*</label>
 										<input type="text" class="form-control" id="photo" name="photo"
 											placeholder="Lien Direct vers l'image" autocomplete="off" value="<?php echo ($item['photo']) ?>"
 											maxlength="512" required>
 									</div>
-									<?php if (($_GET['category'] === 'zebra_c' || $_GET['category'] === 'decals_c' || $_GET['category'] === 'other')) { ?>
+									<?php if (($_GET['category'] === 'zebra_c' || $_GET['category'] === 'decals_c' || $_GET['category'] === 'other' || $_GET['category'] === 'novalife_flocage')) { ?>
 										<div class="part-form">
 											<label for="creator_name" class="form-label">Nom de l'uploader</label>
 											<input type="text" class="form-control" id="creator_name" name="creator_name"
 												placeholder="Nom de l'uploader" value="<?php echo ($item['creator_name']) ?>" autocomplete="off"
-												maxlength="512" required>
+												maxlength="512" readonly>
 										</div>
-										<div class="part-form">
-											<label for="workshop_name" class="form-label">Nom du créateur originel</label>
-											<input type="text" class="form-control" id="workshop_name" name="workshop_name"
-												placeholder="Nom du créateur originel" value="<?php echo ($item['workshop_name']) ?>"
-												autocomplete="off" required>
-										</div>
+										<?php if ($_GET['category'] != 'novalife_flocage') { ?>
+											<div class="part-form">
+												<label for="workshop_name" class="form-label">Nom du créateur originel</label>
+												<input type="text" class="form-control" id="workshop_name" name="workshop_name"
+													placeholder="Nom du créateur originel" value="<?php echo ($item['workshop_name']) ?>"
+													autocomplete="off" required>
+											</div>
+										<?php } ?>
 										<div class="part-form">
 											<label for="is_enabled" class="form-label">Status de la création</label>
-											<input type="text" class="form-control" id="is_enabled" name="is_enabled" placeholder="Status"
-												value="<?php echo ($item['is_enabled']) ?>" autocomplete="off" required>
+											<input type="number" min=0 max=1 class="form-control" id="is_enabled" name="is_enabled"
+												placeholder="Status" value="<?php echo ($item['is_enabled']) ?>" autocomplete="off" required>
 										</div>
 									<?php } ?>
 									<label hidden>

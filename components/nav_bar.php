@@ -16,6 +16,13 @@ startSession();
 
     gtag('config', 'G-408NVZ99VY');
 </script>
+<script type="text/javascript">
+    (function (c, l, a, r, i, t, y) {
+        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+        t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "g3iiq9rlyc");
+</script>
 <link rel="stylesheet" href="<?php echo ($GLOBALS['rootUrl']) ?>css/nav_bar.css">
 <script src="<?php echo ($GLOBALS['rootUrl']) ?>js/nav_bar.js"></script>
 <nav>
@@ -40,13 +47,16 @@ startSession();
             <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>ressources/zebra.php">Zébras</a></li>
             <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>aide.php">Aide</a></li>
             <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>templates.php">Template</a></li>
+            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>ressources/novalife/flocages.php">Flocages</a></li>
         </ul>
         <ul class="list-nav-mobile">
             <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>index.php">Accueil</a></li>
             <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>ressources/decals.php">Decals</a></li>
             <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>ressources/zebra.php">Zébras</a></li>
             <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>aide.php">Aide</a></li>
-            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>templates.php">Template</a></li>
+
+            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>templates.php">Templates</a></li>
+            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>ressources/novalife/flocages.php">Flocages</a></li>
             <?php if (isLogged() === false) { ?>
                 <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>login.php?login" class="button-login"><button>Se
                             connecter</button></a></li>

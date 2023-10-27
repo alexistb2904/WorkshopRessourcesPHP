@@ -109,14 +109,15 @@ startSession();
             <?php foreach (getItem('zebra_c', 1) as $item) { ?>
                 <div class="download-card">
                     <div class="download-card-image">
-                        <?php if (strpos($item['photo'], "http://") === 0 || strpos($item['photo'], "https://") === 0) { ?>
-                            <img src="<?php echo ($item['photo']) ?>" alt="<?php echo $item['title']; ?>" loading="lazy">
-                        <?php } else { ?>
-                            <img src="../<?php echo $item['photo']; ?>" alt="<?php echo $item['title']; ?>" loading="lazy">
+                        <?php if (strpos($item['photo'], "http://") === 0 || strpos($item['photo'], "https://") === 0) {
+                            $lienPhoto = $item['photo'] ?>
+                        <?php } else {
+                            $lienPhoto = '../' . $item['photo'] ?>
                         <?php } ?>
+                        <img src="<?php echo $lienPhoto; ?>" alt="<?php echo $item['title']; ?>" loading="lazy">
                     </div>
                     <div class="download-card-text">
-                        <a href="<?php echo ($item['url']) ?>">
+                        <a href="<?php echo $lienPhoto ?>">
                             <h2>
                                 <?php echo $item['title']; ?>
                             </h2>

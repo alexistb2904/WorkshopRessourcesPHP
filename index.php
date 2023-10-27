@@ -73,7 +73,7 @@ include_once 'util/variables.php';
 				<img src="../assets/images/gmod.png">
 				<h3>Garry's Mod</h3>
 			</a>
-			<a href="ressources/novalife/" class="card-game">
+			<a href="ressources/novalife/templates.php" class="card-game">
 				<img src="../assets/images/novalife.jpg">
 				<h3>Nova Life</h3>
 			</a>

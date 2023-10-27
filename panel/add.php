@@ -8,10 +8,10 @@ $rootUrl = $GLOBALS['rootUrl'];
 $postData = $_POST;
 if (isset($postData['send'])) {
     if (isLogged()) {
-        if (!isset($postData['title']) || !isset($postData['photo']) || !isset($postData['category']) || !isset($postData['creator_name'])) {
+        if (!isset($postData['title']) || !isset($postData['category']) || !isset($postData['creator_name'])) {
             $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR1';
         } else {
-            if (empty($postData['title']) || empty($postData['photo']) || empty($postData['category']) || empty($postData['creator_name'])) {
+            if (empty($postData['title']) || empty($postData['category']) || empty($postData['creator_name'])) {
                 $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR2';
             } else {
                 if ($postData['category'] === 'other') {
@@ -27,11 +27,12 @@ if (isset($postData['send'])) {
                             } else {
                                 $workshop_name = htmlspecialchars($postData['workshop_name']);
                             }
-                            $photo = htmlspecialchars($postData['photo']);
+
+
                             $url = htmlspecialchars($postData['url']);
                             $table = htmlspecialchars($postData['category']);
                             $creator_name = htmlspecialchars($postData['creator_name']);
-
+                            $photo = htmlspecialchars($postData['photo']);
                             $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, creator_name, workshop_name) VALUES (:title, :url, :photo, :creator_name, :workshop_name)');
                             $insertRecipe->execute([
                                 'title' => $title,
@@ -51,19 +52,69 @@ if (isset($postData['send'])) {
                     } else {
                         $workshop_name = htmlspecialchars($postData['workshop_name']);
                     }
-                    $photo = htmlspecialchars($postData['photo']);
+                    if (!empty($_FILES['photo_file']['name'])) {
+                        $PhotoImgur = $_FILES['photo_file'];
+                        $curl = curl_init();
+
+                        curl_setopt_array(
+                            $curl,
+                            array(
+                                CURLOPT_URL => 'https://api.imgur.com/3/image',
+                                CURLOPT_RETURNTRANSFER => true,
+                                CURLOPT_ENCODING => '',
+                                CURLOPT_MAXREDIRS => 10,
+                                CURLOPT_TIMEOUT => 0,
+                                CURLOPT_FOLLOWLOCATION => true,
+                                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                CURLOPT_CUSTOMREQUEST => 'POST',
+                                CURLOPT_POSTFIELDS => array('image' => base64_encode(file_get_contents($PhotoImgur['tmp_name'][0]))),
+                                CURLOPT_HTTPHEADER => array(
+                                    'Authorization: Client-ID f040db64c4332f9'
+                                ),
+                            )
+                        );
+
+                        $response = curl_exec($curl);
+                        curl_close($curl);
+                        $response = json_decode($response, true);
+                        if ($response['success'] === true) {
+                            $photo = $response['data']['link'];
+                            $photoDeleteHash = $response['data']['deletehash'];
+                        } else {
+                            $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR4';
+                            return;
+                        }
+                    } else if (htmlspecialchars($postData['photo']) != '') {
+                        $photo = htmlspecialchars($postData['photo']);
+                        $photoDeleteHash = '';
+                    } else {
+                        $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR5';
+                        return;
+                    }
+
                     $url = '';
                     $table = htmlspecialchars($postData['category']);
                     $creator_name = htmlspecialchars($postData['creator_name']);
 
-                    $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, creator_name, workshop_name) VALUES (:title, :url, :photo, :creator_name, :workshop_name)');
-                    $insertRecipe->execute([
-                        'title' => $title,
-                        'url' => $url,
-                        'photo' => $photo,
-                        'creator_name' => $creator_name,
-                        'workshop_name' => $workshop_name,
-                    ]);
+                    if ($postData['category'] === 'novalife_flocage') {
+                        $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, photo, creator_name, photo_deletehash) VALUES (:title, :photo, :creator_name, :photo_deletehash)');
+                        $insertRecipe->execute([
+                            'title' => $title,
+                            'photo' => $photo,
+                            'creator_name' => $creator_name,
+                            'photo_deletehash' => $photoDeleteHash,
+                        ]);
+                    } else {
+                        $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, creator_name, workshop_name, photo_deletehash) VALUES (:title, :url, :photo, :creator_name, :workshop_name, :photo_deletehash)');
+                        $insertRecipe->execute([
+                            'title' => $title,
+                            'url' => $url,
+                            'photo' => $photo,
+                            'creator_name' => $creator_name,
+                            'workshop_name' => $workshop_name,
+                            'photo_deletehash' => $photoDeleteHash,
+                        ]);
+                    }
 
                     $created = true;
                 }
@@ -122,9 +173,9 @@ if (isset($postData['send'])) {
             </section>
         <?php } else { ?>
             <?php if (!isset($created) || $created !== true) { ?>
-                <?php if (isset($_GET['other']) || isset($_GET['zebra']) || isset($_GET['decals'])) { ?>
+                <?php if (isset($_GET['other']) || isset($_GET['zebra']) || isset($_GET['decals']) || isset($_GET['novalife_flocage'])) { ?>
                     <section class="category-container">
-                        <form action="" method="post">
+                        <form action="" method="post" enctype="multipart/form-data" id="creation-form">
                             <h1>Création de contenu</h1>
                             <?php if (isset($errorMessage)) { ?>
                                 <div class="error-message">
@@ -136,25 +187,30 @@ if (isset($postData['send'])) {
                             <div class="part-form">
                                 <label for="title" class="form-label">Titre du contenu*</label>
                                 <input type="text" class="form-control" id="title" name="title" aria-describedby="title-help"
-                                    placeholder="Titre du contenu" autocomplete="off" required>
+                                    placeholder="Titre du contenu" autocomplete="off" required title="Titre du contenu">
                             </div>
                             <div class="part-form">
-                                <label for="workshop_name" class="form-label">Nom du créateur originel</label>
+                                <label for="workshop_name" class="form-label">Nom du créateur d'origine</label>
                                 <input type="text" class="form-control" id="workshop_name" name="workshop_name"
-                                    placeholder="Nom du créateur originel" autocomplete="off">
+                                    placeholder="Nom du créateur originel" autocomplete="off" title="Nom du créateur d'origine">
                             </div>
                             <?php if (isset($_GET['other'])) { ?>
                                 <div class="part-form">
                                     <label for="url" class="form-label">Lien vers le contenu*</label>
                                     <input type="text" class="form-control" id="url" name="url"
-                                        placeholder="Lien Direct vers le contenu" autocomplete="off" maxlength="512" required>
+                                        placeholder="Lien Direct vers le contenu" autocomplete="off" maxlength="512" required
+                                        title="Lien vers le contenu">
                                 </div>
                             <?php } ?>
                             <div class="part-form">
-                                <label for="photo" class="form-label">Lien vers l'image*</label>
-                                <input type="text" class="form-control" id="photo" name="photo"
-                                    placeholder="Lien Direct vers l'image" autocomplete="off" maxlength="512" required>
+                                <label for="photo" class="form-label">Lien ou choisir l'image*</label>
+                                <input type="text" class="form-control" id="photo" name="photo" placeholder="Url de l'image"
+                                    autocomplete="off" title="Lien Image" maxlength="512">
+                                <label class="form-label" id="labelFile"><i class="fa-regular fa-file"></i> <span>Choisir une
+                                        image</span><input type="file" class="form-control" id="photo_file" name="photo_file[]"
+                                        accept=".png, .jpeg, .webp, .svg, .jpg, image/*" title="Emplacment Image">
                             </div>
+
                             <label hidden>
                                 <input type="text" name="send" value="send" hidden>
                                 <?php if (isset($_GET['other'])) { ?>
@@ -163,6 +219,8 @@ if (isset($postData['send'])) {
                                     <input type="text" name="category" value="zebra_c" hidden>
                                 <?php } elseif (isset($_GET['decals'])) { ?>
                                     <input type="text" name="category" value="decals_c" hidden>
+                                <?php } elseif (isset($_GET['novalife_flocage'])) { ?>
+                                    <input type="text" name="category" value="novalife_flocage" hidden>
                                 <?php } ?>
                                 <input type="text" name="creator_name" value="<?php echo ($_SESSION['username']) ?>" hidden>
                             </label>
@@ -194,6 +252,7 @@ if (isset($postData['send'])) {
         <?php } ?>
     </main>
     <?php include_once '../components/footer.php'; ?>
+    <script src="<?php echo ($GLOBALS['rootUrl']) ?>js/add.js"></script>
 </body>
 
 </html>
