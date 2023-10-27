@@ -123,7 +123,7 @@ include_once 'util/variables.php';
 		<section class="new-ressources">
 			<h2>Nouvelles ressources</h2>
 			<div class="new-ressources-card-container">
-				<?php foreach (getItem('decals_c', 1, 2) as $item) { ?>
+				<?php foreach (getItem('novalife_flocage', 1, 2) as $item) { ?>
 					<div class="new-ressources-card">
 						<?php if (strpos($item['photo'], "http://") === 0 || strpos($item['photo'], "https://") === 0) { ?>
 							<img src="<?php echo ($item['photo']) ?>" alt="<?php echo $item['title']; ?>" loading="lazy">
