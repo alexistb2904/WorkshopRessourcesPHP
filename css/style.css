@@ -1071,8 +1071,7 @@ body {
   }
 
   .download-container {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(auto-fill, 20vmax);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .download-card-image {
@@ -1106,6 +1105,11 @@ body {
   #community-b-div {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(auto-fill, 25vmax);
+  }
+
+  #novalife-b-div {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(auto-fill, 26vmax);
   }
 
   #edit-b {
@@ -1147,8 +1151,7 @@ body {
   }
 
   .download-container {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(auto-fill, 15vmax);
+    grid-template-columns: repeat(1, 1fr);
   }
 
   #template-b-div-a #creator_container {
