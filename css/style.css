@@ -1103,8 +1103,8 @@ body {
   }
 
   #community-b-div {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(auto-fill, 25vmax);
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(auto-fill, 26vmax);
   }
 
   #novalife-b-div {
@@ -1124,7 +1124,7 @@ body {
   #decals-b-div,
   #template-b-div {
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(auto-fill, 20vmax);
+    grid-template-rows: repeat(auto-fill, 25vmax);
   }
 
   #other-text {
@@ -1148,15 +1148,6 @@ body {
 
   .banner-signup {
     font-size: 0.8rem;
-  }
-  #template-b-div-a #creator_container {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(auto-fill, 20vmax);
-  }
-
-  #community-b-div {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(auto-fill, 25vmax);
   }
 
   #edit-b {
@@ -1192,12 +1183,12 @@ body {
 
   #template-b-div-a #creator_container {
     grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(auto-fill, 20vmax);
+    grid-template-rows: repeat(auto-fill, 30vmax);
   }
 
   #community-b-div {
     grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(auto-fill, 25vmax);
+    grid-template-rows: repeat(auto-fill, 30vmax);
   }
 
   #edit-b {
@@ -1212,6 +1203,6 @@ body {
   #decals-b-div,
   #template-b-div {
     grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(auto-fill, 20vmax);
+    grid-template-rows: repeat(auto-fill, 30vmax);
   }
 }

@@ -69,13 +69,11 @@ if (isset($postData['send'])) {
                             'is_enabled' => '1',
                         ]);
                     } else {
-                        $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, creator_name, workshop_name) VALUES (:title, :url, :photo, :creator_name, :workshop_name)');
+                        $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo) VALUES (:title, :url, :photo)');
                         $insertRecipe->execute([
                             'title' => $title,
                             'url' => $url,
                             'photo' => $photo,
-                            'creator_name' => $creator_name,
-                            'workshop_name' => $workshop_name,
                         ]);
                     }
 
