@@ -91,7 +91,7 @@ include_once '../util/variables.php';
                                         <p>Crée par:
                                             <?php echo $item['workshop_name']; ?>
                                         </p>
-                                        <p>Status:
+                                        <p>
                                             <?php if ($item['is_enabled'] === 1) {
                                                 echo ('Activé');
                                             } else {
@@ -139,11 +139,11 @@ include_once '../util/variables.php';
                                         <p>Crée par:
                                             <?php echo $item['workshop_name']; ?>
                                         </p>
-                                        <p>Status:
+                                        <p>
                                             <?php if ($item['is_enabled'] === 1) {
-                                                echo ('Activé');
+                                                echo ('Approuvé');
                                             } else {
-                                                echo ('Désactivé');
+                                                echo ('En attente | Non approuvé');
                                             } ?>
                                         </p>
                                     </div>
@@ -187,11 +187,11 @@ include_once '../util/variables.php';
                                         <p>Crée par:
                                             <?php echo $item['workshop_name']; ?>
                                         </p>
-                                        <p>Status:
+                                        <p>
                                             <?php if ($item['is_enabled'] === 1) {
-                                                echo ('Activé');
+                                                echo ('Approuvé');
                                             } else {
-                                                echo ('Désactivé');
+                                                echo ('En attente | Non approuvé');
                                             } ?>
                                         </p>
                                     </div>
@@ -214,8 +214,8 @@ include_once '../util/variables.php';
                         <?php } ?>
                     </div>
                     <div id="novalife-b-div">
-                        <?php if (!empty(getAllTable('novalife_flocage'))) { ?>
-                            <?php foreach (getAllTable('novalife_flocage') as $item) { ?>
+                        <?php if (!empty(getSelfTable('novalife_flocage'))) { ?>
+                            <?php foreach (getSelfTable('novalife_flocage') as $item) { ?>
                                 <div class="download-card">
                                     <div class="download-card-image">
                                         <?php if (strpos($item['photo'], "http://") === 0 || strpos($item['photo'], "https://") === 0) { ?>
@@ -235,11 +235,11 @@ include_once '../util/variables.php';
                                         <p>Crée par:
                                             <?php echo $item['creator_name']; ?>
                                         </p>
-                                        <p>Status:
+                                        <p>
                                             <?php if ($item['is_enabled'] === 1) {
-                                                echo ('Activé');
+                                                echo ('Approuvé');
                                             } else {
-                                                echo ('Désactivé');
+                                                echo ('En attente | Non approuvé');
                                             } ?>
                                         </p>
                                     </div>
