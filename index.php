@@ -70,11 +70,11 @@ include_once 'util/variables.php';
 		<?php } ?>
 		<section class="game-card">
 			<a href="ressources/garrysmod/" class="card-game">
-				<img src="../assets/images/gmod.png">
+				<img src="../assets/images/gmod.png" alt="Garry's Mod Game Image">
 				<h3>Garry's Mod</h3>
 			</a>
 			<a href="ressources/novalife/templates.php" class="card-game">
-				<img src="../assets/images/novalife.jpg">
+				<img src="../assets/images/novalife.jpg" alt="Nova-Life Game Image">
 				<h3>Nova Life</h3>
 			</a>
 		</section>
