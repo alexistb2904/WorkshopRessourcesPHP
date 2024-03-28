@@ -1,5 +1,11 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require "vendor/autoload.php";
+
 if ((substr($_SERVER['HTTP_HOST'], 0, strlen('localhost')) === 'localhost') || ($_SERVER['HTTP_HOST'] === "wslocal")) {
     $_ENV['MYSQL_HOST'] = "localhost";
     $_ENV['MYSQL_USERNAME'] = "root";
@@ -21,7 +27,7 @@ try {
     );
     $GLOBALS['mysqlClientPDO']->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (Exception $exception) {
-    die ('Erreur : ' . $exception->getMessage());
+    die('Erreur : ' . $exception->getMessage());
 }
 
 $GLOBALS['mysqlClient'] = mysqli_connect($mysqlHost, $mysqlUser, $mysqlPassword, $mysqlName);
@@ -48,7 +54,7 @@ function isAdmin($email)
 
 function isLogged()
 {
-    if (isset ($_SESSION['isLogged']) && ($_SESSION['isLogged'] === true) && isset ($_SESSION['username']) && isset ($_SESSION['email'])) {
+    if (isset($_SESSION['isLogged']) && ($_SESSION['isLogged'] === true) && isset($_SESSION['username']) && isset($_SESSION['email'])) {
         return true;
     } else {
         return false;
@@ -56,7 +62,7 @@ function isLogged()
 }
 function getName()
 {
-    if (isset ($_SESSION['username'])) {
+    if (isset($_SESSION['username'])) {
         return $_SESSION['username'];
     } else {
         return null;
@@ -65,7 +71,7 @@ function getName()
 
 function getCreatorById($id, $table)
 {
-    if (!isset ($id, $table)) {
+    if (!isset($id, $table)) {
         return null;
     } else {
         $getById = 'SELECT `creator_name` FROM ' . $table . ' WHERE id = ' . $id . ';';
@@ -82,7 +88,7 @@ function getCreatorById($id, $table)
 
 function getById($id, $table)
 {
-    if (!isset ($id, $table)) {
+    if (!isset($id, $table)) {
         return null;
     } else {
         $getById = 'SELECT * FROM ' . $table . ' WHERE id = ' . $id . ';';
@@ -99,7 +105,7 @@ function getById($id, $table)
 function getSelfTable($table)
 {
     $mysqlClient = $GLOBALS['mysqlClientPDO'];
-    if (isset ($table)) {
+    if (isset($table)) {
         $getItemNumber = "SELECT * FROM " . $table . " WHERE `creator_name` = '" . $_SESSION['username'] . "' ORDER BY id DESC;";
         $resultStatement = $mysqlClient->prepare($getItemNumber);
         $resultStatement->execute();
@@ -118,15 +124,15 @@ function getSelfTable($table)
 function getItem($table, $status, $limit = 'all')
 {
     $mysqlClient = $GLOBALS['mysqlClientPDO'];
-    if (isset ($table)) {
-        if (($limit === 'all') || !isset ($limit)) {
-            if (isset ($status) && ($status === 1) || ($status === 0)) {
+    if (isset($table)) {
+        if (($limit === 'all') || !isset($limit)) {
+            if (isset($status) && ($status === 1) || ($status === 0)) {
                 $getItemNumber = 'SELECT * FROM ' . $table . ' WHERE is_enabled = ' . $status . ' ORDER BY id DESC;';
             } else {
                 $getItemNumber = 'SELECT * FROM ' . $table . ' ORDER BY id DESC;';
             }
         } else {
-            if (isset ($status) && ($status === 1) || ($status === 0)) {
+            if (isset($status) && ($status === 1) || ($status === 0)) {
                 $getItemNumber = 'SELECT * FROM ' . $table . ' WHERE is_enabled = ' . $status . ' ORDER BY id DESC LIMIT ' . $limit . ';';
             } else {
                 $getItemNumber = 'SELECT * FROM ' . $table . ' ORDER BY id DESC LIMIT ' . $limit . ';';
@@ -156,7 +162,7 @@ function startSession()
 function getAllTable($table)
 {
     $mysqlClient = $GLOBALS['mysqlClientPDO'];
-    if (isset ($table)) {
+    if (isset($table)) {
         $getAllTable = "SELECT * FROM " . $table . " ORDER BY id DESC ;";
         $resultStatement = $mysqlClient->prepare($getAllTable);
         $resultStatement->execute();
@@ -175,8 +181,8 @@ function getAllTable($table)
 function getTable($table, $numberOfItem, $startAt, $withStatus = 1)
 {
     $mysqlClient = $GLOBALS['mysqlClientPDO'];
-    if (isset ($table) && isset ($numberOfItem) && isset ($startAt)) {
-        if (isset ($withStatus) && ($withStatus === 1)) {
+    if (isset($table) && isset($numberOfItem) && isset($startAt)) {
+        if (isset($withStatus) && ($withStatus === 1)) {
             $getTable = "SELECT * FROM " . $table . " WHERE `is_enabled` = " . $withStatus . " ORDER BY id DESC LIMIT " . $numberOfItem . " OFFSET " . $startAt . ";";
         } else {
             $getTable = "SELECT * FROM " . $table . " ORDER BY id DESC LIMIT " . $numberOfItem . " OFFSET " . $startAt . ";";
@@ -201,5 +207,12 @@ function sendMailNewRessource()
     $to = "alexistb2904@gmail.com";
     $subject = "Nouvelle ressource ajoutée";
     $message = "Une nouvelle ressource a été ajoutée sur le site Workshop Ressources";
-    mail($to, $subject, $message);
+    $mail = new PHPMailer;
+    $mail->setFrom("support@workshopressources.fr");
+    $mail->addAddress($to);
+    $mail->Subject = $subject;
+    $mail->Body = $message;
+    echo $mail->send()
+        ? "Mail sent"
+        : "Error sending mail" . $mail->ErrorInfo;
 }
