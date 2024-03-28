@@ -1,10 +1,5 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-require_once "../vendor/autoload.php";
 
 if ((substr($_SERVER['HTTP_HOST'], 0, strlen('localhost')) === 'localhost') || ($_SERVER['HTTP_HOST'] === "wslocal")) {
     $_ENV['MYSQL_HOST'] = "localhost";
@@ -201,18 +196,3 @@ function getTable($table, $numberOfItem, $startAt, $withStatus = 1)
     }
 }
 
-
-function sendMailNewRessource()
-{
-    $to = "alexistb2904@gmail.com";
-    $subject = "Nouvelle ressource ajoutée";
-    $message = "Une nouvelle ressource a été ajoutée sur le site Workshop Ressources";
-    $mail = new PHPMailer;
-    $mail->setFrom("support@workshopressources.fr");
-    $mail->addAddress($to);
-    $mail->Subject = $subject;
-    $mail->Body = $message;
-    echo $mail->send()
-        ? "Mail sent"
-        : "Error sending mail" . $mail->ErrorInfo;
-}

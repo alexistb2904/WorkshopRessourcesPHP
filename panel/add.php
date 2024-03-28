@@ -6,19 +6,19 @@ startSession();
 $mysqlClient = $GLOBALS['mysqlClientPDO'];
 $rootUrl = $GLOBALS['rootUrl'];
 $postData = $_POST;
-if (isset ($postData['send'])) {
+if (isset($postData['send'])) {
     if (isLogged()) {
-        if (!isset ($postData['title']) || !isset ($postData['category']) || !isset ($postData['creator_name'])) {
+        if (!isset($postData['title']) || !isset($postData['category']) || !isset($postData['creator_name'])) {
             $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR1';
         } else {
-            if (empty ($postData['title']) || empty ($postData['category']) || empty ($postData['creator_name'])) {
+            if (empty($postData['title']) || empty($postData['category']) || empty($postData['creator_name'])) {
                 $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR2';
             } else {
                 if ($postData['category'] === 'other') {
-                    if (!isset ($postData['url'])) {
+                    if (!isset($postData['url'])) {
                         $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR3';
                     } else {
-                        if (empty ($postData['url'])) {
+                        if (empty($postData['url'])) {
                             $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR4';
                         } else {
                             $title = htmlspecialchars($postData['title']);
@@ -42,7 +42,7 @@ if (isset ($postData['send'])) {
                                 'workshop_name' => $workshop_name,
                             ]);
 
-                            sendMailNewRessource();
+
 
                             $created = true;
                         }
@@ -54,7 +54,7 @@ if (isset ($postData['send'])) {
                     } else {
                         $workshop_name = htmlspecialchars($postData['workshop_name']);
                     }
-                    if (!empty ($_FILES['photo_file']['name'])) {
+                    if (!empty($_FILES['photo_file']['name'])) {
                         $PhotoImgur = $_FILES['photo_file'];
                         $curl = curl_init();
 
@@ -117,7 +117,7 @@ if (isset ($postData['send'])) {
                             'photo_deletehash' => $photoDeleteHash,
                         ]);
                     }
-                    sendMailNewRessource();
+
                     $created = true;
                 }
             }
@@ -173,12 +173,12 @@ if (isset ($postData['send'])) {
                 </a>
             </section>
         <?php } else { ?>
-            <?php if (!isset ($created) || $created !== true) { ?>
-                <?php if (isset ($_GET['other']) || isset ($_GET['zebra']) || isset ($_GET['decals']) || isset ($_GET['novalife_flocage'])) { ?>
+            <?php if (!isset($created) || $created !== true) { ?>
+                <?php if (isset($_GET['other']) || isset($_GET['zebra']) || isset($_GET['decals']) || isset($_GET['novalife_flocage'])) { ?>
                     <section class="category-container">
                         <form action="" method="post" enctype="multipart/form-data" id="creation-form">
                             <h1>Création de contenu</h1>
-                            <?php if (isset ($errorMessage)) { ?>
+                            <?php if (isset($errorMessage)) { ?>
                                 <div class="error-message">
                                     <p style="color: gray;">
                                         <?php echo ($errorMessage) ?>
@@ -195,7 +195,7 @@ if (isset ($postData['send'])) {
                                 <input type="text" class="form-control" id="workshop_name" name="workshop_name" placeholder="Nom du créateur originel" autocomplete="off"
                                     title="Nom du créateur d'origine">
                             </div>
-                            <?php if (isset ($_GET['other'])) { ?>
+                            <?php if (isset($_GET['other'])) { ?>
                                 <div class="part-form">
                                     <label for="url" class="form-label">Lien vers le contenu*</label>
                                     <input type="text" class="form-control" id="url" name="url" placeholder="Lien Direct vers le contenu" autocomplete="off" maxlength="512" required
@@ -212,13 +212,13 @@ if (isset ($postData['send'])) {
 
                             <label hidden>
                                 <input type="text" name="send" value="send" hidden>
-                                <?php if (isset ($_GET['other'])) { ?>
+                                <?php if (isset($_GET['other'])) { ?>
                                     <input type="text" name="category" value="other" hidden>
-                                <?php } elseif (isset ($_GET['zebra'])) { ?>
+                                <?php } elseif (isset($_GET['zebra'])) { ?>
                                     <input type="text" name="category" value="zebra_c" hidden>
-                                <?php } elseif (isset ($_GET['decals'])) { ?>
+                                <?php } elseif (isset($_GET['decals'])) { ?>
                                     <input type="text" name="category" value="decals_c" hidden>
-                                <?php } elseif (isset ($_GET['novalife_flocage'])) { ?>
+                                <?php } elseif (isset($_GET['novalife_flocage'])) { ?>
                                     <input type="text" name="category" value="novalife_flocage" hidden>
                                 <?php } ?>
                                 <input type="text" name="creator_name" value="<?php echo ($_SESSION['username']) ?>" hidden>
