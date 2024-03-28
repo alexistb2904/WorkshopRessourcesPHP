@@ -200,6 +200,6 @@ function sendMailNewRessource()
 {
     $to = "alexistb2904@gmail.com";
     $subject = "Nouvelle ressource ajoutée";
-    $message = "Une nouvelle ressource a été ajoutée sur le site Workshop Ressources" + date('Y-m-d H:i:s') + ".";
+    $message = "Une nouvelle ressource a été ajoutée sur le site Workshop Ressources";
     mail($to, $subject, $message);
 }
