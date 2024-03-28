@@ -43,7 +43,7 @@ include_once 'util/variables.php';
 			<div>
 				<h1>GAGNE DU TEMPS</h1>
 				<p>Utilise nos ressources spécialement crée pour te faciliter la vie et <br> arrête de perdre du temps
-					inutilement</p>
+				inutilement</p>
 			</div>
 			<a class="glow-button-a" href="#card-ressources">
 				<button class="glow-button">VOIR NOS RESSOURCES</button>
