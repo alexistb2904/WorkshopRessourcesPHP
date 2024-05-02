@@ -10,8 +10,7 @@ if (!defined('BY_SERVER')) {
 	<div class="footer-container">
 		<div class="footer_1">
 			<div>
-				<img src="<?php echo ($GLOBALS['rootUrl']) ?>assets/images/logo.webp"
-					alt="Logo de WorkshopRessources" />
+				<img src="<?php echo ($GLOBALS['rootUrl']) ?>assets/images/logo.webp" alt="Logo de WorkshopRessources" />
 				<h1>Workshop Ressources</h1>
 			</div>
 			<p>Workshop Ressources est une plateforme qui propose une variété de ressources utiles aux reskinneurs et
@@ -36,8 +35,7 @@ if (!defined('BY_SERVER')) {
 	</div>
 	<hr>
 	<div class="footer_4">
-		<p>© 2023 Workshop Ressources. Tous droits réservés.</p>
-		<a id="bmc" href="https://buymeacoffee.com/alexistb2904"><img
-				src="<?php echo ($GLOBALS['rootUrl']) ?>assets/images/bmc.svg" alt="BuyMeACoffeLogo"></a>
+		<p>© 2024 Workshop Ressources. Tous droits réservés.</p>
+		<a id="bmc" href="https://buymeacoffee.com/alexistb2904"><img src="<?php echo ($GLOBALS['rootUrl']) ?>assets/images/bmc.svg" alt="BuyMeACoffeLogo"></a>
 	</div>
 </footer>

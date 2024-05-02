@@ -1,7 +1,8 @@
 <?php
+require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
 
-if ((substr($_SERVER['HTTP_HOST'], 0, strlen('localhost')) === 'localhost') || ($_SERVER['HTTP_HOST'] === "wslocal")) {
+if ((substr($_SERVER['HTTP_HOST'], 0, strlen('localhost')) == 'localhost') || ($_SERVER['HTTP_HOST'] == "wslocal")) {
     $_ENV['MYSQL_HOST'] = "localhost";
     $_ENV['MYSQL_USERNAME'] = "root";
     $_ENV['MYSQL_PASSWORD'] = "";
@@ -196,3 +197,23 @@ function getTable($table, $numberOfItem, $startAt, $withStatus = 1)
     }
 }
 
+function sendEmail($to, $subject, $message)
+{
+    $email = new \SendGrid\Mail\Mail();
+    $email->setFrom("support@workshopressources.fr", "Workshop Ressources");
+    $email->setSubject($subject);
+    $email->addTo($to, $to);
+    $email->addContent(
+        "text/html",
+        $message
+    );
+    $sendgrid = new \SendGrid($_ENV['SENGRID_KEY']);
+    try {
+        $response = $sendgrid->send($email);
+        /*print $response->statusCode() . "\n";
+        print_r($response->headers());
+        print $response->body() . "\n";*/
+    } catch (Exception $e) {
+        echo 'Caught exception: ' . $e->getMessage() . "\n";
+    }
+}

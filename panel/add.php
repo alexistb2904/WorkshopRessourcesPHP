@@ -42,7 +42,7 @@ if (isset($postData['send'])) {
                                 'workshop_name' => $workshop_name,
                             ]);
 
-
+                            sendEmail('alexistb2904@gmail.com', 'Nouvelle ressource | ' . $table, 'Une nouvelle ressource a été ajoutée' . PHP_EOL . 'Titre : ' . $title . PHP_EOL . 'Créateur : ' . $creator_name . PHP_EOL . 'Lien : ' . $url . PHP_EOL . 'Photo : ' . $photo . PHP_EOL . 'Workshop : ' . $workshop_name . PHP_EOL . 'Table : ' . $table);
 
                             $created = true;
                         }
@@ -106,6 +106,8 @@ if (isset($postData['send'])) {
                             'creator_name' => $creator_name,
                             'photo_deletehash' => $photoDeleteHash,
                         ]);
+
+                        sendEmail('alexistb2904@gmail.com', 'Nouvelle ressource | ' . $table, 'Une nouvelle ressource a été ajoutée' . PHP_EOL . 'Titre : ' . $title . PHP_EOL . 'Créateur : ' . $creator_name . PHP_EOL . 'Photo : ' . $photo . PHP_EOL . 'Table : ' . $table);
                     } else {
                         $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, creator_name, workshop_name, photo_deletehash) VALUES (:title, :url, :photo, :creator_name, :workshop_name, :photo_deletehash)');
                         $insertRecipe->execute([
@@ -116,6 +118,8 @@ if (isset($postData['send'])) {
                             'workshop_name' => $workshop_name,
                             'photo_deletehash' => $photoDeleteHash,
                         ]);
+
+                        sendEmail('alexistb2904@gmail.com', 'Nouvelle ressource | ' . $table, 'Une nouvelle ressource a été ajoutée' . PHP_EOL . 'Titre : ' . $title . PHP_EOL . 'Créateur : ' . $creator_name . PHP_EOL . 'Photo : ' . $photo . PHP_EOL . 'Table : ' . $table);
                     }
 
                     $created = true;
