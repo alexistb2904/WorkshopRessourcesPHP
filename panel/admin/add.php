@@ -248,12 +248,12 @@ function uploadImage($image, $workshop_name, $image_windows = false) {
                             <?php } ?>
                             <div class="part-form">
                                 <label class="form-label" id="labelFile"><i class="fa-regular fa-file"></i> <span>Choisir une
-                                        image *</span><input type="file" class="form-control" id="photo_file" name="photo_file[]" accept=".png, .jpeg, .webp, .svg, .jpg, image/*"
-                                        title="Emplacment Image" required>
+                                        image *</span><input type="file" class="form-control" id="photo_file" name="photo_file[]" accept=".png, .jpeg, .jpg, image/*"
+                                        title="Emplacement Image" required>
                                 </label>
                                 <label class="form-label" id="labelFile"><i class="fa-regular fa-file"></i> <span>Choisir une
-                                        image fenêtre</span><input type="file" class="form-control" id="photo_file_windows" name="photo_file_windows[]" accept=".png, .jpeg, .webp, .svg, .jpg, image/*"
-                                        title="Emplacment Image">
+                                        image fenêtre</span><input type="file" class="form-control" id="photo_file_windows" name="photo_file_windows[]" accept=".png, .jpeg, .jpg, image/*"
+                                        title="Emplacement Image Fenêtre">
                                 </label>
                             </div>
                             <div class="part-form">
