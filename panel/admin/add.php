@@ -6,6 +6,8 @@ startSession();
 $mysqlClient = $GLOBALS['mysqlClientPDO'];
 $rootUrl = $GLOBALS['rootUrl'];
 $postData = $_POST;
+var_dump($postData);
+var_dump($_FILES);
 if (isset($postData['send'])) {
     if (isLogged() && isAdmin($_SESSION['email'])) {
         if (!isset($postData['title']) || !isset($postData['category']) ) {
@@ -199,7 +201,6 @@ if (isset($postData['send'])) {
 
 function uploadImage($PhotoImgur) {
         $curl = curl_init();
-
         curl_setopt_array(
             $curl,
             array(
