@@ -6,8 +6,6 @@ startSession();
 $mysqlClient = $GLOBALS['mysqlClientPDO'];
 $rootUrl = $GLOBALS['rootUrl'];
 $postData = $_POST;
-var_dump($postData);
-var_dump($_FILES);
 if (isset($postData['send'])) {
     if (isLogged() && isAdmin($_SESSION['email'])) {
         if (!isset($postData['title']) || !isset($postData['category']) ) {
@@ -34,6 +32,7 @@ if (isset($postData['send'])) {
                             $table = htmlspecialchars($postData['category']);
                             $creator_name = htmlspecialchars($_SESSION['username']);
                             if (!isAllowed($table)) {
+                                echo 'Erreur la table '. $table . ' n\'existe pas';
                                 return null;
                             }
                             $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, creator_name, workshop_name) VALUES (:title, :url, :photo, :creator_name, :workshop_name)');
@@ -80,6 +79,7 @@ if (isset($postData['send'])) {
                     }
 
                     if (!isAllowed($table)) {
+                        echo 'Erreur la table '. $table . ' n\'existe pas';
                         return null;
                     }
 
@@ -151,6 +151,7 @@ if (isset($postData['send'])) {
                     $table = htmlspecialchars($postData['category']);
                     $creator_name = htmlspecialchars($_SESSION['username']);
                     if (!isAllowed($table)) {
+                        echo 'Erreur la table '. $table . ' n\'existe pas';
                         return null;
                     }
                     if ($table === 'zebra' || $table === 'decals' || $table === 'novalife') {
@@ -204,12 +205,9 @@ function uploadImage($img) {
                         $response = curl_exec($curl);
                         curl_close($curl);
                         $response = json_decode($response, true);
-        var_dump($response);
         if ($response['success'] === true) {
             $photo = $response['data']['link'];
             $photoDeleteHash = $response['data']['deletehash'];
-            var_dump($photo);
-            var_dump($photoDeleteHash);
             return ['photo' => $photo, 'deletehash' => $photoDeleteHash];
         } else {
             $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR4';
