@@ -8,7 +8,43 @@ $rootUrl = $GLOBALS['rootUrl'];
 $postData = $_POST;
 if (isset($postData['send'])) {
 	if (isLogged() && isAdmin($_SESSION['email'])) {
-		if (isset($postData['category']) && isset($_GET['id'])) {
+		if (isset($postData['category']) && isset($_GET['id']) && isset($postData['photo'])) {
+			if (str_starts_with($postData['photo'], 'https://')) {
+				$deleteHash = getById($id, $creator)[0]['photo_deletehash'];
+                    $curl = curl_init();
+
+                    curl_setopt_array(
+                        $curl,
+                        array(
+                            CURLOPT_URL => 'https://api.imgur.com/3/image/' . $deleteHash,
+                            CURLOPT_RETURNTRANSFER => true,
+                            CURLOPT_ENCODING => '',
+                            CURLOPT_MAXREDIRS => 10,
+                            CURLOPT_TIMEOUT => 0,
+                            CURLOPT_FOLLOWLOCATION => true,
+                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                            CURLOPT_CUSTOMREQUEST => 'DELETE',
+                            CURLOPT_HTTPHEADER => array(
+                                'Authorization: Client-ID f040db64c4332f9'
+                            ),
+                        )
+                    );
+
+                    $response = curl_exec($curl);
+                    curl_close($curl);
+                    $response = json_decode($response, true);
+					if ($response['success'] === true) {
+                        $deleteRecipeStatement = $GLOBALS['mysqlClient']->prepare('DELETE FROM ' . $creator . ' WHERE id = :id');
+                        $deleteRecipeStatement->execute([
+                            'id' => $id,
+                        ]);
+						$deleted = true;
+                    } else {
+                        $errorMessage = 'Une erreur est surevenue lors de la suppression.';
+                        $deleted = false;
+                    }
+					
+			} else {
 			$id = htmlspecialchars($_GET['id']);
 			$creator = htmlspecialchars($postData['category']);
 			$deleteRecipeStatement = $GLOBALS['mysqlClient']->prepare('DELETE FROM ' . $creator . ' WHERE id = :id');
@@ -16,6 +52,7 @@ if (isset($postData['send'])) {
 				'id' => $id,
 			]);
 			$deleted = true;
+		}
 		} else {
 			$errorMessage = 'Nous n\'avons pas toutes les informations nécessaires à ta demande';
 		}

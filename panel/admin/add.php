@@ -13,7 +13,7 @@ if (isset($postData['send'])) {
         if (!isset($postData['title']) || !isset($postData['category']) ) {
             $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR1';
         } else {
-            if (empty($postData['title']) || empty($postData['category']) || empty($_FILES['photo_file']['name'])) {
+            if (empty($postData['title']) || empty($postData['category'])  ) {
                 $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR2';
             } else {
                 if ($postData['category'] === 'other') {
@@ -49,6 +49,7 @@ if (isset($postData['send'])) {
                         }
                     }
                 } else {
+                    if ($postData['photo'] == '') {
                     $title = htmlspecialchars($postData['title']);
                     if (htmlspecialchars($postData['workshop_name']) === '') {
                         $workshop_name = 'Inconnu';
@@ -63,12 +64,19 @@ if (isset($postData['send'])) {
                     }
                     $table = htmlspecialchars($postData['category']);
                     $creator_name = htmlspecialchars($_SESSION['username']);
+                    $photo = '';
                     $photo_windows = 0;
+                    $photoDeleteHash = 0;
+                    $photoWindowsDeleteHash = 0;
                     if (!empty($_FILES['photo_file']['name'])) {
-                        $photo = uploadImage($_FILES['photo_file'], $workshop_name);
+                        $photo = uploadImage($_FILES['photo_file']);
+                        $photoDeleteHash = $photo['deletehash'];
+                        $photo = $photo['photo'];
                     }
                     if (!empty($_FILES['photo_file_windows']['name'])) {
-                        $photo_windows = uploadImage($_FILES['photo_file_windows'], $workshop_name, true);
+                        $photo_windows = uploadImage($_FILES['photo_file_windows']);
+                        $photoWindowsDeleteHash = $photo_windows['deletehash'];
+                        $photo_windows = $photo_windows['photo'];
                     }
 
                     if (!isAllowed($table)) {
@@ -82,38 +90,42 @@ if (isset($postData['send'])) {
                         // Est-ce que l'image de la fenêtre existe ?
                         if ($photo_windows == 0 || $photo_windows == '') {
                             if ($table === 'zebra' || $table === 'decals' || $table === 'novalife') {
-                                $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, is_enabled) VALUES (:title, :url, :photo, :is_enabled)');
+                                $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, photo_deletehash, is_enabled) VALUES (:title, :url, :photo, :photo_deletehash, :is_enabled)');
                                 $insertRecipe->execute([
                                     'title' => $title,
                                     'url' => $url,
                                     'photo' => $photo,
+                                    'photo_deletehash' => $photoDeleteHash,
                                     'is_enabled' => '1',
                                 ]);
                             } else {
-                                $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo) VALUES (:title, :url, :photo)');
+                                $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, photo_deletehash) VALUES (:title, :url, :photo, :photo_deletehash)');
                                 $insertRecipe->execute([
                                     'title' => $title,
                                     'url' => $url,
                                     'photo' => $photo,
+                                    'photo_deletehash' => $photoDeleteHash,
                                 ]);
                             }
 
                             $created = true;
                         } else {
                             if ($table === 'zebra' || $table === 'decals' || $table === 'novalife') {
-                                $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, is_enabled) VALUES (:title, :url, :photo, :is_enabled)');
+                                $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, photo_deletehash, is_enabled) VALUES (:title, :url, :photo, :photo_deletehash, :is_enabled)');
                                 $insertRecipe->execute([
                                     'title' => $title,
                                     'url' => $url,
                                     'photo' => $photo,
+                                    'photo_deletehash' => $photoDeleteHash,
                                     'is_enabled' => '1',
                                 ]);
 
-                                $windowsRequest = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, is_enabled) VALUES (:title, :url, :photo, :is_enabled)');
+                                $windowsRequest = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, photo_deletehash, is_enabled) VALUES (:title, :url, :photo, :photo_deletehash, :is_enabled)');
                                 $windowsRequest->execute([
                                     'title' => $title + ' - Fenêtre',
                                     'url' => $url,
                                     'photo' => $photo_windows,
+                                    'photo_deletehash' => $photoWindowsDeleteHash,
                                     'is_enabled' => '1',
                                 ]);
                             } else {
@@ -138,7 +150,44 @@ if (isset($postData['send'])) {
                             $created = true;
                         }
                     }
+                } else {
+                    $photo = htmlspecialchars($postData['photo']);
+                    $title = htmlspecialchars($postData['title']);
+                    if (htmlspecialchars($postData['workshop_name']) === '') {
+                        $workshop_name = 'Inconnu';
+                    } else {
+                        $workshop_name = htmlspecialchars($postData['workshop_name']);
+                    }
+                    
+                    if (htmlspecialchars($postData['url']) === '') {
+                        $url = '';
+                    } else {
+                        $url = htmlspecialchars($postData['url']);
+                    }
+                    $table = htmlspecialchars($postData['category']);
+                    $creator_name = htmlspecialchars($_SESSION['username']);
+                    if (!isAllowed($table)) {
+                        return null;
+                    }
+                    if ($table === 'zebra' || $table === 'decals' || $table === 'novalife') {
+                        $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, is_enabled) VALUES (:title, :url, :photo, :is_enabled)');
+                        $insertRecipe->execute([
+                            'title' => $title,
+                            'url' => $url,
+                            'photo' => $photo,
+                            'is_enabled' => '1',
+                        ]);
+                    } else {
+                        $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo) VALUES (:title, :url, :photo)');
+                        $insertRecipe->execute([
+                            'title' => $title,
+                            'url' => $url,
+                            'photo' => $photo,
+                        ]);
+                    }
+                    $created = true;
                 }
+            }
             }
         }
     } else {
@@ -146,28 +195,38 @@ if (isset($postData['send'])) {
     }
 }
 
-function uploadImage($image, $workshop_name, $image_windows = false) {
-    $image_name = strtolower(str_replace(' ', '_', $workshop_name)) . ($image_windows ? '_windows' : '');
-    $extension = strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
-    $target_dir = '../../assets/img/gmodimage/ImgTemplate/';
-    $target_file = $target_dir . $image_name . '.' . $extension;
+function uploadImage($PhotoImgur) {
+        $curl = curl_init();
 
-    if (!in_array($extension, ['png', 'jpeg', 'jpg'])) {
-        return 'Unsupported file type.';
-    }
-    if ($image['size'] > 10000000) {
-        return 'File size exceeds limit.';
-    }
-    if (!getimagesize($image['tmp_name'])) {
-        return 'Invalid image file.';
-    }
-    if (!is_dir($target_dir) && !mkdir($target_dir, 0777, true)) {
-        return 'Failed to create directory.';
-    }
-    if (!move_uploaded_file($image['tmp_name'], $target_file)) {
-        return 'Failed to upload file.';
-    }
-    return $GLOBALS['rootUrl'] . 'assets/img/gmodimage/ImgTemplate/' . $image_name . '.' . $extension;
+        curl_setopt_array(
+            $curl,
+            array(
+                CURLOPT_URL => 'https://api.imgur.com/3/image',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => array('image' => base64_encode(file_get_contents($PhotoImgur['tmp_name'][0]))),
+                CURLOPT_HTTPHEADER => array(
+                    'Authorization: Client-ID f040db64c4332f9'
+                ),
+            )
+        );
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $response = json_decode($response, true);
+        if ($response['success'] === true) {
+            $photo = $response['data']['link'];
+            $photoDeleteHash = $response['data']['deletehash'];
+            return ['photo' => $photo, 'deletehash' => $photoDeleteHash];
+        } else {
+            $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR4';
+            return ['photo' => '', 'deletehash' => ''];
+        }
 }
 
 ?>
@@ -248,6 +307,7 @@ function uploadImage($image, $workshop_name, $image_windows = false) {
                                 </div>
                             <?php } ?>
                             <div class="part-form">
+                                <input type="text" class="form-control" id="photo" name="photo" placeholder="Url de l'image" autocomplete="off" title="Lien Image" maxlength="512">
                                 <label class="form-label" id="labelFile"><i class="fa-regular fa-file"></i> <span>Choisir une
                                         image *</span><input type="file" class="form-control" id="photo_file" name="photo_file" accept=".png, .jpeg, .jpg, image/*"
                                         title="Emplacement Image" required>
