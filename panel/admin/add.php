@@ -6,10 +6,9 @@ startSession();
 $mysqlClient = $GLOBALS['mysqlClientPDO'];
 $rootUrl = $GLOBALS['rootUrl'];
 $postData = $_POST;
-
 if (isset($postData['send'])) {
     if (isLogged() && isAdmin($_SESSION['email'])) {
-        if (!isset($postData['title']) || !isset($postData['category']) || !isset($_FILES['photo_file']['name'])) {
+        if (!isset($postData['title']) || !isset($postData['category']) ) {
             $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR1';
         } else {
             if (empty($postData['title']) || empty($postData['category']) || empty($_FILES['photo_file']['name'])) {
@@ -63,10 +62,10 @@ if (isset($postData['send'])) {
                     $table = htmlspecialchars($postData['category']);
                     $creator_name = htmlspecialchars($_SESSION['username']);
                     $photo_windows = 0;
-                    if (isset($_FILES['photo_file']['name'])) {
+                    if (!empty($_FILES['photo_file']['name'])) {
                         $photo = uploadImage($_FILES['photo_file'], $workshop_name);
                     }
-                    if (isset($_FILES['photo_file_windows']['name'])) {
+                    if (!empty($_FILES['photo_file_windows']['name'])) {
                         $photo_windows = uploadImage($_FILES['photo_file_windows'], $workshop_name, true);
                     }
 
