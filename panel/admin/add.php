@@ -209,7 +209,7 @@ function uploadImage($PhotoImgur) {
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => array('image' => base64_encode(file_get_contents($PhotoImgur['tmp_name'][0]))),
+                CURLOPT_POSTFIELDS => array('image' => base64_encode(file_get_contents($PhotoImgur['tmp_name']))),
                 CURLOPT_HTTPHEADER => array(
                     'Authorization: Client-ID f040db64c4332f9'
                 ),
