@@ -121,7 +121,7 @@ if (isset($postData['send'])) {
 
                                 $windowsRequest = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, photo_deletehash, is_enabled) VALUES (:title, :url, :photo, :photo_deletehash, :is_enabled)');
                                 $windowsRequest->execute([
-                                    'title' => $title + ' - Fenêtre',
+                                    'title' => $title . ' - Fenêtre',
                                     'url' => $url,
                                     'photo' => $photo_windows,
                                     'photo_deletehash' => $photoWindowsDeleteHash,
@@ -138,7 +138,7 @@ if (isset($postData['send'])) {
 
                                 $windowsRequest = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, photo_deletehash, is_enabled) VALUES (:title, :url, :photo, :photo_deletehash, :is_enabled)');
                                 $windowsRequest->execute([
-                                    'title' => $title + ' - Fenêtre',
+                                    'title' => $title . ' - Fenêtre',
                                     'url' => $url,
                                     'photo' => $photo_windows,
                                     'photo_deletehash' => $photoWindowsDeleteHash,
