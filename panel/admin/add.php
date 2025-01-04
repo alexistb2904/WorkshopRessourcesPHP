@@ -128,7 +128,7 @@ if (isset($postData['send'])) {
                                     'is_enabled' => '1',
                                 ]);
                             } else {
-                                $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo) VALUES (:title, :url, :photo)');
+                                $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, photo_deletehash) VALUES (:title, :url, :photo, :photo_deletehash)');
                                 $insertRecipe->execute([
                                     'title' => $title,
                                     'url' => $url,
@@ -136,7 +136,7 @@ if (isset($postData['send'])) {
                                     'photo_deletehash' => $photoWindowsDeleteHash,
                                 ]);
 
-                                $windowsRequest = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, is_enabled) VALUES (:title, :url, :photo, :is_enabled)');
+                                $windowsRequest = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, photo_deletehash, is_enabled) VALUES (:title, :url, :photo, :photo_deletehash, :is_enabled)');
                                 $windowsRequest->execute([
                                     'title' => $title + ' - Fenêtre',
                                     'url' => $url,
