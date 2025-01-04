@@ -110,7 +110,6 @@ if (isset($postData['send'])) {
 
                             $created = true;
                         } else {
-                            if ($table === 'zebra' || $table === 'decals' || $table === 'novalife') {
                                 $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, photo_deletehash, is_enabled) VALUES (:title, :url, :photo, :photo_deletehash, :is_enabled)');
                                 $insertRecipe->execute([
                                     'title' => $title,
@@ -128,21 +127,6 @@ if (isset($postData['send'])) {
                                     'photo_deletehash' => $photoWindowsDeleteHash,
                                     'is_enabled' => '1',
                                 ]);
-                            } else {
-                                $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo) VALUES (:title, :url, :photo)');
-                                $insertRecipe->execute([
-                                    'title' => $title,
-                                    'url' => $url,
-                                    'photo' => $photo,
-                                ]);
-
-                                $windowsRequest = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, is_enabled) VALUES (:title, :url, :photo, :is_enabled)');
-                                $windowsRequest->execute([
-                                    'title' => $title + ' - Fenêtre',
-                                    'url' => $url,
-                                    'photo' => $photo_windows,
-                                ]);
-                            }
 
                             if ($photo_windows == '' ) {
                                 $errorMessage = 'Erreur lors de l\'upload de l\'image de la fenêtre';
@@ -219,9 +203,12 @@ function uploadImage($PhotoImgur) {
         $response = curl_exec($curl);
         curl_close($curl);
         $response = json_decode($response, true);
+        var_dump($response);
         if ($response['success'] === true) {
             $photo = $response['data']['link'];
             $photoDeleteHash = $response['data']['deletehash'];
+            var_dump($photo);
+            var_dump($photoDeleteHash);
             return ['photo' => $photo, 'deletehash' => $photoDeleteHash];
         } else {
             $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR4';
