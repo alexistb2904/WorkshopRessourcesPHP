@@ -133,6 +133,7 @@ if (isset($postData['send'])) {
                                     'title' => $title,
                                     'url' => $url,
                                     'photo' => $photo,
+                                    'photo_deletehash' => $photoWindowsDeleteHash,
                                 ]);
 
                                 $windowsRequest = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, is_enabled) VALUES (:title, :url, :photo, :is_enabled)');
@@ -140,6 +141,7 @@ if (isset($postData['send'])) {
                                     'title' => $title + ' - Fenêtre',
                                     'url' => $url,
                                     'photo' => $photo_windows,
+                                    'photo_deletehash' => $photoWindowsDeleteHash,
                                 ]);
                             }
 
