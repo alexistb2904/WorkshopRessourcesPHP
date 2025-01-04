@@ -10,6 +10,8 @@ if (isset($postData['send'])) {
 	if (isLogged() && isAdmin($_SESSION['email'])) {
 		if (isset($postData['category']) && isset($_GET['id']) && isset($postData['photo'])) {
 			if (str_starts_with($postData['photo'], 'https://')) {
+				$id = htmlspecialchars($_GET['id']);
+                $creator = htmlspecialchars($postData['category']);
 				$deleteHash = getById($id, $creator)[0]['photo_deletehash'];
                     $curl = curl_init();
 
