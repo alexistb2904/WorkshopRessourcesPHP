@@ -67,6 +67,9 @@ function getName()
 
 function getCreatorById($id, $table)
 {
+    if (!isAllowed($table)) {
+        return null;
+    }
     if (!isset($id, $table)) {
         return null;
     } else {
@@ -84,6 +87,9 @@ function getCreatorById($id, $table)
 
 function getById($id, $table)
 {
+    if (!isAllowed($table)) {
+        return null;
+    }
     if (!isset($id, $table)) {
         return null;
     } else {
@@ -100,6 +106,9 @@ function getById($id, $table)
 }
 function getSelfTable($table)
 {
+    if (!isAllowed($table)) {
+        return null;
+    }
     $mysqlClient = $GLOBALS['mysqlClientPDO'];
     if (isset($table)) {
         $getItemNumber = "SELECT * FROM " . $table . " WHERE `creator_name` = '" . $_SESSION['username'] . "' ORDER BY id DESC;";
@@ -119,6 +128,9 @@ function getSelfTable($table)
 
 function getItem($table, $status, $limit = 'all')
 {
+    if (!isAllowed($table)) {
+        return null;
+    }
     $mysqlClient = $GLOBALS['mysqlClientPDO'];
     if (isset($table)) {
         if (($limit === 'all') || !isset($limit)) {
@@ -157,6 +169,9 @@ function startSession()
 
 function getAllTable($table)
 {
+    if (!isAllowed($table)) {
+        return null;
+    }
     $mysqlClient = $GLOBALS['mysqlClientPDO'];
     if (isset($table)) {
         $getAllTable = "SELECT * FROM " . $table . " ORDER BY id DESC ;";
@@ -176,6 +191,9 @@ function getAllTable($table)
 
 function getTable($table, $numberOfItem, $startAt, $withStatus = 1)
 {
+    if (!isAllowed($table)) {
+        return null;
+    }
     $mysqlClient = $GLOBALS['mysqlClientPDO'];
     if (isset($table) && isset($numberOfItem) && isset($startAt)) {
         if (isset($withStatus) && ($withStatus === 1)) {
@@ -215,5 +233,14 @@ function sendEmail($to, $subject, $message)
         print $response->body() . "\n";*/
     } catch (Exception $e) {
         echo 'Caught exception: ' . $e->getMessage() . "\n";
+    }
+}
+
+function isAllowed($str) {
+    $allowedTable = ['alexcars', 'azok30', 'decals', 'decals_c', 'itzdannio25', 'novalife', 'novalife_flocage', 'other', 'rytrak', 'sgm', 'users', 'w4nou', 'zebra', 'zebra_c'];
+    if (in_array($str, $allowedTable)) {
+        return true;
+    } else {
+        return false;
     }
 }

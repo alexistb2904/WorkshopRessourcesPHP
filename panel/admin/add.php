@@ -6,12 +6,13 @@ startSession();
 $mysqlClient = $GLOBALS['mysqlClientPDO'];
 $rootUrl = $GLOBALS['rootUrl'];
 $postData = $_POST;
+
 if (isset($postData['send'])) {
     if (isLogged() && isAdmin($_SESSION['email'])) {
-        if (!isset($postData['title']) || !isset($postData['photo']) || !isset($postData['category'])) {
+        if (!isset($postData['title']) || !isset($postData['category']) || !isset($_FILES['photo_file']['name'])) {
             $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR1';
         } else {
-            if (empty($postData['title']) || empty($postData['photo']) || empty($postData['category'])) {
+            if (empty($postData['title']) || empty($postData['category']) || empty($_FILES['photo_file']['name'])) {
                 $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR2';
             } else {
                 if ($postData['category'] === 'other') {
@@ -31,7 +32,9 @@ if (isset($postData['send'])) {
                             $url = htmlspecialchars($postData['url']);
                             $table = htmlspecialchars($postData['category']);
                             $creator_name = htmlspecialchars($_SESSION['username']);
-
+                            if (!isAllowed($table)) {
+                                return null;
+                            }
                             $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, creator_name, workshop_name) VALUES (:title, :url, :photo, :creator_name, :workshop_name)');
                             $insertRecipe->execute([
                                 'title' => $title,
@@ -51,7 +54,7 @@ if (isset($postData['send'])) {
                     } else {
                         $workshop_name = htmlspecialchars($postData['workshop_name']);
                     }
-                    $photo = htmlspecialchars($postData['photo']);
+                    
                     if (htmlspecialchars($postData['url']) === '') {
                         $url = '';
                     } else {
@@ -59,25 +62,81 @@ if (isset($postData['send'])) {
                     }
                     $table = htmlspecialchars($postData['category']);
                     $creator_name = htmlspecialchars($_SESSION['username']);
-
-                    if ($table === 'zebra' || $table === 'decals' || $table === 'novalife') {
-                        $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, is_enabled) VALUES (:title, :url, :photo, :is_enabled)');
-                        $insertRecipe->execute([
-                            'title' => $title,
-                            'url' => $url,
-                            'photo' => $photo,
-                            'is_enabled' => '1',
-                        ]);
-                    } else {
-                        $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo) VALUES (:title, :url, :photo)');
-                        $insertRecipe->execute([
-                            'title' => $title,
-                            'url' => $url,
-                            'photo' => $photo,
-                        ]);
+                    $photo_windows = 0;
+                    if (isset($_FILES['photo_file']['name'])) {
+                        $photo = uploadImage($_FILES['photo_file'], $workshop_name);
+                    }
+                    if (isset($_FILES['photo_file_windows']['name'])) {
+                        $photo_windows = uploadImage($_FILES['photo_file_windows'], $workshop_name, true);
                     }
 
-                    $created = true;
+                    if (!isAllowed($table)) {
+                        return null;
+                    }
+
+                    if ($photo == '') {
+                        $errorMessage = 'Erreur lors de l\'upload de l\'image';
+                        $created = false;
+                    } else {
+                        // Est-ce que l'image de la fenêtre existe ?
+                        if ($photo_windows == 0 || $photo_windows == '') {
+                            if ($table === 'zebra' || $table === 'decals' || $table === 'novalife') {
+                                $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, is_enabled) VALUES (:title, :url, :photo, :is_enabled)');
+                                $insertRecipe->execute([
+                                    'title' => $title,
+                                    'url' => $url,
+                                    'photo' => $photo,
+                                    'is_enabled' => '1',
+                                ]);
+                            } else {
+                                $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo) VALUES (:title, :url, :photo)');
+                                $insertRecipe->execute([
+                                    'title' => $title,
+                                    'url' => $url,
+                                    'photo' => $photo,
+                                ]);
+                            }
+
+                            $created = true;
+                        } else {
+                            if ($table === 'zebra' || $table === 'decals' || $table === 'novalife') {
+                                $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, is_enabled) VALUES (:title, :url, :photo, :is_enabled)');
+                                $insertRecipe->execute([
+                                    'title' => $title,
+                                    'url' => $url,
+                                    'photo' => $photo,
+                                    'is_enabled' => '1',
+                                ]);
+
+                                $windowsRequest = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, is_enabled) VALUES (:title, :url, :photo, :is_enabled)');
+                                $windowsRequest->execute([
+                                    'title' => $title + ' - Fenêtre',
+                                    'url' => $url,
+                                    'photo' => $photo_windows,
+                                    'is_enabled' => '1',
+                                ]);
+                            } else {
+                                $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo) VALUES (:title, :url, :photo)');
+                                $insertRecipe->execute([
+                                    'title' => $title,
+                                    'url' => $url,
+                                    'photo' => $photo,
+                                ]);
+
+                                $windowsRequest = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, is_enabled) VALUES (:title, :url, :photo, :is_enabled)');
+                                $windowsRequest->execute([
+                                    'title' => $title + ' - Fenêtre',
+                                    'url' => $url,
+                                    'photo' => $photo_windows,
+                                ]);
+                            }
+
+                            if ($photo_windows == '' ) {
+                                $errorMessage = 'Erreur lors de l\'upload de l\'image de la fenêtre';
+                            }
+                            $created = true;
+                        }
+                    }
                 }
             }
         }
@@ -85,6 +144,31 @@ if (isset($postData['send'])) {
         $errorMessage = 'Il faut être connecté ou avoir la permission pour pouvoir créer une ressource administrateur.';
     }
 }
+
+function uploadImage($image, $workshop_name, $image_windows = false) {
+    $image_name = strtolower(str_replace(' ', '_', $workshop_name)) . ($image_windows ? '_windows' : '');
+    $extension = strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
+    $target_dir = '../../assets/img/gmodimage/ImgTemplate/';
+    $target_file = $target_dir . $image_name . '.' . $extension;
+
+    if (!in_array($extension, ['png', 'jpeg', 'jpg'])) {
+        return 'Unsupported file type.';
+    }
+    if ($image['size'] > 10000000) {
+        return 'File size exceeds limit.';
+    }
+    if (!getimagesize($image['tmp_name'])) {
+        return 'Invalid image file.';
+    }
+    if (!is_dir($target_dir) && !mkdir($target_dir, 0777, true)) {
+        return 'Failed to create directory.';
+    }
+    if (!move_uploaded_file($image['tmp_name'], $target_file)) {
+        return 'Failed to upload file.';
+    }
+    return $GLOBALS['rootUrl'] . 'assets/img/gmodimage/ImgTemplate/' . $image_name . '.' . $extension;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -157,15 +241,20 @@ if (isset($postData['send'])) {
                             </div>
                             <?php if (!isset($_GET['zebra']) || !isset($_GET['decals']) || !isset($_GET['novalife'])) { ?>
                                 <div class="part-form">
-                                    <label for="url" class="form-label">Lien vers le contenu*</label>
+                                    <label for="url" class="form-label">Lien du workshop*</label>
                                     <input type="text" class="form-control" id="url" name="url"
                                         placeholder="Lien Direct vers le contenu" autocomplete="off" maxlength="512" required>
                                 </div>
                             <?php } ?>
                             <div class="part-form">
-                                <label for="photo" class="form-label">Lien vers l'image*</label>
-                                <input type="text" class="form-control" id="photo" name="photo"
-                                    placeholder="Lien Direct vers l'image" autocomplete="off" maxlength="512" required>
+                                <label class="form-label" id="labelFile"><i class="fa-regular fa-file"></i> <span>Choisir une
+                                        image *</span><input type="file" class="form-control" id="photo_file" name="photo_file[]" accept=".png, .jpeg, .webp, .svg, .jpg, image/*"
+                                        title="Emplacment Image" required>
+                                </label>
+                                <label class="form-label" id="labelFile"><i class="fa-regular fa-file"></i> <span>Choisir une
+                                        image fenêtre</span><input type="file" class="form-control" id="photo_file_windows" name="photo_file_windows[]" accept=".png, .jpeg, .webp, .svg, .jpg, image/*"
+                                        title="Emplacment Image">
+                                </label>
                             </div>
                             <div class="part-form">
                                 <label for="category" class="form-label">Catégorie</label>
