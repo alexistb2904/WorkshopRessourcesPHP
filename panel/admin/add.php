@@ -249,11 +249,11 @@ function uploadImage($image, $workshop_name, $image_windows = false) {
                             <?php } ?>
                             <div class="part-form">
                                 <label class="form-label" id="labelFile"><i class="fa-regular fa-file"></i> <span>Choisir une
-                                        image *</span><input type="file" class="form-control" id="photo_file" name="photo_file[]" accept=".png, .jpeg, .jpg, image/*"
+                                        image *</span><input type="file" class="form-control" id="photo_file" name="photo_file" accept=".png, .jpeg, .jpg, image/*"
                                         title="Emplacement Image" required>
                                 </label>
                                 <label class="form-label" id="labelFile"><i class="fa-regular fa-file"></i> <span>Choisir une
-                                        image fenêtre</span><input type="file" class="form-control" id="photo_file_windows" name="photo_file_windows[]" accept=".png, .jpeg, .jpg, image/*"
+                                        image fenêtre</span><input type="file" class="form-control" id="photo_file_windows" name="photo_file_windows" accept=".png, .jpeg, .jpg, image/*"
                                         title="Emplacement Image Fenêtre">
                                 </label>
                             </div>
@@ -323,6 +323,7 @@ function uploadImage($image, $workshop_name, $image_windows = false) {
         <?php } ?>
     </main>
     <?php include_once '../../components/footer.php'; ?>
+    <script src="<?php echo ($GLOBALS['rootUrl']) ?>js/add.js"></script>
 </body>
 
 </html>
