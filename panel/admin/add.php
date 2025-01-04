@@ -221,7 +221,7 @@ function uploadImage($image, $workshop_name, $image_windows = false) {
             <?php if (!isset($created) || $created !== true) { ?>
                 <?php if (isset($_GET['other']) || isset($_GET['zebra']) || isset($_GET['decals']) || isset($_GET['novalife']) || isset($_GET['alexcars']) || isset($_GET['azok30']) || isset($_GET['itzdannio25']) || isset($_GET['rytrak']) || isset($_GET['sgm']) || isset($_GET['w4nou'])) { ?>
                     <section class="category-container">
-                        <form action="" method="post">
+                        <form action="" method="post" enctype="multipart/form-data">
                             <h1>Création de contenu</h1>
                             <?php if (isset($errorMessage)) { ?>
                                 <div class="error-message">
@@ -252,7 +252,7 @@ function uploadImage($image, $workshop_name, $image_windows = false) {
                                         image *</span><input type="file" class="form-control" id="photo_file" name="photo_file" accept=".png, .jpeg, .jpg, image/*"
                                         title="Emplacement Image" required>
                                 </label>
-                                <label class="form-label" id="labelFile"><i class="fa-regular fa-file"></i> <span>Choisir une
+                                <label class="form-label" id="labelFile2"><i class="fa-regular fa-file"></i> <span>Choisir une
                                         image fenêtre</span><input type="file" class="form-control" id="photo_file_windows" name="photo_file_windows" accept=".png, .jpeg, .jpg, image/*"
                                         title="Emplacement Image Fenêtre">
                                 </label>
