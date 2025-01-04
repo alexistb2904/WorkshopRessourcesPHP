@@ -82,7 +82,6 @@ if (isset($postData['send'])) {
                         echo 'Erreur la table '. $table . ' n\'existe pas';
                         return null;
                     }
-
                     if ($photo == '') {
                         $errorMessage = 'Erreur lors de l\'upload de l\'image';
                         $created = false;
@@ -110,6 +109,7 @@ if (isset($postData['send'])) {
 
                             $created = true;
                         } else {
+                            if ($table === 'zebra' || $table === 'decals' || $table === 'novalife') {
                                 $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, photo_deletehash, is_enabled) VALUES (:title, :url, :photo, :photo_deletehash, :is_enabled)');
                                 $insertRecipe->execute([
                                     'title' => $title,
@@ -127,6 +127,21 @@ if (isset($postData['send'])) {
                                     'photo_deletehash' => $photoWindowsDeleteHash,
                                     'is_enabled' => '1',
                                 ]);
+                            } else {
+                                $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo) VALUES (:title, :url, :photo)');
+                                $insertRecipe->execute([
+                                    'title' => $title,
+                                    'url' => $url,
+                                    'photo' => $photo,
+                                ]);
+
+                                $windowsRequest = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, is_enabled) VALUES (:title, :url, :photo, :is_enabled)');
+                                $windowsRequest->execute([
+                                    'title' => $title + ' - Fenêtre',
+                                    'url' => $url,
+                                    'photo' => $photo_windows,
+                                ]);
+                            }
 
                             if ($photo_windows == '' ) {
                                 $errorMessage = 'Erreur lors de l\'upload de l\'image de la fenêtre';
@@ -180,31 +195,30 @@ if (isset($postData['send'])) {
     }
 }
 
-function uploadImage($img) {
-        $PhotoImgur = $img;
+function uploadImage($PhotoImgur) {
         $curl = curl_init();
 
-                        curl_setopt_array(
-                            $curl,
-                            array(
-                                CURLOPT_URL => 'https://api.imgur.com/3/image',
-                                CURLOPT_RETURNTRANSFER => true,
-                                CURLOPT_ENCODING => '',
-                                CURLOPT_MAXREDIRS => 10,
-                                CURLOPT_TIMEOUT => 0,
-                                CURLOPT_FOLLOWLOCATION => true,
-                                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                                CURLOPT_CUSTOMREQUEST => 'POST',
-                                CURLOPT_POSTFIELDS => array('image' => base64_encode(file_get_contents($PhotoImgur['tmp_name']))),
-                                CURLOPT_HTTPHEADER => array(
-                                    'Authorization: Client-ID f040db64c4332f9'
-                                ),
-                            )
-                        );
+        curl_setopt_array(
+            $curl,
+            array(
+                CURLOPT_URL => 'https://api.imgur.com/3/image',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => array('image' => base64_encode(file_get_contents($PhotoImgur['tmp_name'][0]))),
+                CURLOPT_HTTPHEADER => array(
+                    'Authorization: Client-ID f040db64c4332f9'
+                ),
+            )
+        );
 
-                        $response = curl_exec($curl);
-                        curl_close($curl);
-                        $response = json_decode($response, true);
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $response = json_decode($response, true);
         if ($response['success'] === true) {
             $photo = $response['data']['link'];
             $photoDeleteHash = $response['data']['deletehash'];
