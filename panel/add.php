@@ -17,7 +17,7 @@ if (isset($postData['send'])) {
                 if (!isAllowed(htmlspecialchars($postData['category']))) {
                     return null;
                 }
-                if ($postData['category'] === 'other') {
+                if ($postData['category'] === 'other' || !empty($postData['photo'])) {
                     if (!isset($postData['url'])) {
                         $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR3';
                     } else {
