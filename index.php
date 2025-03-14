@@ -5,15 +5,14 @@ include_once 'util/variables.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= $GLOBALS['lang'] ?>">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description"
 		content="Optimisez vos projets avec WorkshopRessource : découvrez nos outils exclusifs, incluant des décals et autres ressources, 100% Open-Source. Accédez à des tutoriels détaillés pour enrichir vos compétences. Élevez la qualité de vos projets grâce à des ressources exceptionnelles.">
-	<meta name="keywords"
-		content="workshop, ressources, gratuit, tutoriels, gmod, zébra, decals, template, créateur, jeu, garry's mod, novalife, nova-life">
+	<meta name="keywords" content="workshop, ressources, gratuit, tutoriels, gmod, zébra, decals, template, créateur, jeu, garry's mod, novalife, nova-life">
 	<meta name="author" content="Alexis Thierry-Bellefond">
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:site" content="@alexistb2904">
@@ -41,29 +40,28 @@ include_once 'util/variables.php';
 	<main>
 		<section class="header-text">
 			<div>
-				<h1>GAGNE DU TEMPS</h1>
-				<p>Utilise nos ressources spécialement crée pour te faciliter la vie et <br> arrête de perdre du temps
-				inutilement</p>
+				<h1><?= lang("header_page_title") ?></h1>
+				<p><?= lang("header_page_description") ?></p>
 			</div>
 			<a class="glow-button-a" href="#card-ressources">
-				<button class="glow-button">VOIR NOS RESSOURCES</button>
+				<button class="glow-button"><?= lang("header_page_button") ?></button>
 			</a>
 		</section>
 		<?php if (isLogged() === false) { ?>
 			<div class="banner-signup-container">
 				<div class="banner-signup">
-					<p>Rejoins-nous pour pouvoir partager tes créations</p>
+					<p><?= lang("banner_action_call_1") ?></p>
 					<a href="login.php?signup">
-						<button>S'inscrire</button>
+						<button><?= lang("banner_action_call_1_btn") ?></button>
 					</a>
 				</div>
 			</div>
 		<?php } else { ?>
 			<div class="banner-signup-container">
 				<div class="banner-signup">
-					<p>Commence à partager tes créations</p>
+					<p><?= lang("banner_action_call_2") ?></p>
 					<a href="panel/index.php">
-						<button>Panel Utilisateur</button>
+						<button><?= lang("banner_action_call_2_btn") ?></button>
 					</a>
 				</div>
 			</div>
@@ -82,7 +80,7 @@ include_once 'util/variables.php';
 			<a href="ressources/decals.php" class="card-a">
 				<div class="card" id="decals">
 					<div class="card-item">
-						<h3>Decals</h3>
+						<h3><?= lang("category_title_1") ?></h3>
 						<div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
 					</div>
 				</div>
@@ -90,7 +88,7 @@ include_once 'util/variables.php';
 			<a href="ressources/zebra.php" class="card-a">
 				<div class="card" id="zebra">
 					<div class="card-item">
-						<h3>Zébra</h3>
+						<h3><?= lang("category_title_2") ?></h3>
 						<div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
 					</div>
 				</div>
@@ -121,7 +119,7 @@ include_once 'util/variables.php';
 			</a>-->
 		</section>
 		<section class="new-ressources">
-			<h2>Nouvelles ressources</h2>
+			<h2><?= lang("new_ressources_string") ?></h2>
 			<div class="new-ressources-card-container">
 				<?php foreach (getItem('novalife_flocage', 1, 2) as $item) { ?>
 					<div class="new-ressources-card">
@@ -133,10 +131,10 @@ include_once 'util/variables.php';
 						<p>
 							<?php echo ($item['title']) ?>
 						</p>
-						<p>Ajouté par :
+						<p><?= lang("add_by") ?> :
 							<?php echo ($item['creator_name']) ?>
 						</p>
-						<a href="<?php echo ($item['photo']); ?>" download>Télécharger</a>
+						<a href="<?php echo ($item['photo']); ?>" download><?= lang("download_btn") ?></a>
 					</div>
 				<?php } ?>
 				<?php foreach (getItem('zebra_c', 1, 2) as $item) { ?>
@@ -149,10 +147,10 @@ include_once 'util/variables.php';
 						<p>
 							<?php echo ($item['title']) ?>
 						</p>
-						<p>Ajouté par :
+						<p><?= lang("add_by") ?> :
 							<?php echo ($item['creator_name']) ?>
 						</p>
-						<a href="<?php echo ($item['photo']); ?>" download>Télécharger</a>
+						<a href="<?php echo ($item['photo']); ?>" download><?= lang("download_btn") ?></a>
 					</div>
 				<?php } ?>
 			</div>

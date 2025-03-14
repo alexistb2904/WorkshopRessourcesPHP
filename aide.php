@@ -4,25 +4,22 @@ include_once 'util/functions.php';
 include_once 'util/variables.php';
 startSession();
 
-$titleOfPage = 'Aide';
+$titleOfPage = lang("category_title_3");
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= $GLOBALS['lang'] ?>">
 
 <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="description"
-            content="Optimisez vos projets avec WorkshopRessource : découvrez nos decals sélectionner par la notre équipe et la communauté.">
-      <meta name="keywords"
-            content="workshop, ressources, gratuit, tutoriels, gmod, zébra, decals, template, créateur, jeu, garry's mod, <?php echo ($titleOfPage) ?>">
+      <meta name="description" content="Optimisez vos projets avec WorkshopRessource : découvrez nos decals sélectionner par la notre équipe et la communauté.">
+      <meta name="keywords" content="workshop, ressources, gratuit, tutoriels, gmod, zébra, decals, template, créateur, jeu, garry's mod, <?php echo ($titleOfPage) ?>">
       <meta name="author" content="Alexis Thierry-Bellefond">
       <meta name="twitter:card" content="summary">
       <meta name="twitter:site" content="@alexistb2904">
       <meta name="twitter:title" content="WorkshopRessources - <?php echo ($titleOfPage) ?>">
-      <meta name="twitter:description"
-            content="Optimisez vos projets avec WorkshopRessource : découvrez nos decals sélectionner par la notre équipe et la communauté.">
+      <meta name="twitter:description" content="Optimisez vos projets avec WorkshopRessource : découvrez nos decals sélectionner par la notre équipe et la communauté.">
       <meta name="twitter:image" content="<?php echo ($GLOBALS['rootUrl']) ?>assets/images/logo.webp">
       <!-- Balise de Langue -->
       <meta http-equiv="Content-Language" content="fr">
@@ -46,8 +43,8 @@ $titleOfPage = 'Aide';
       <main>
             <section class="header-text">
                   <div>
-                        <h1>Aides</h1>
-                        <p>Sélectionnez le jeu avec lequel vous avez besoin d'aide</p>
+                        <h1><?= lang("category_title_3") ?></h1>
+                        <p><?= lang("help_page_description") ?></p>
                   </div>
             </section>
             <section class="game-card">

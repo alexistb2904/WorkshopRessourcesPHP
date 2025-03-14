@@ -28,8 +28,7 @@ startSession();
 <nav>
     <div class="burger-menu">
         <div id="logo-nav">
-            <a href=""><img src="<?php echo ($GLOBALS['rootUrl']) ?>assets/images/logo.webp"
-                    alt="Logo de WorkshopRessources" /></a>
+            <a href=""><img src="<?php echo ($GLOBALS['rootUrl']) ?>assets/images/logo.webp" alt="Logo de WorkshopRessources" /></a>
             <p>WorkshopRessources</p>
         </div>
         <div class="nav-burger">
@@ -42,44 +41,36 @@ startSession();
     </div>
     <div id="middle-nav">
         <ul id="list-nav">
-            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>index.php">Accueil</a></li>
-            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>ressources/decals.php">Decals</a></li>
-            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>ressources/zebra.php">Zébras</a></li>
-            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>aide.php">Aide</a></li>
-            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>templates.php">Template</a></li>
-            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>ressources/novalife/flocages.php">Flocages</a></li>
+            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>index.php"><?= lang("nav_home") ?></a></li>
+            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>ressources/decals.php"><?= lang("category_title_1") ?></a></li>
+            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>ressources/zebra.php"><?= lang("category_title_2") ?></a></li>
+            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>aide.php"><?= lang("category_title_3") ?></a></li>
+            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>templates.php"><?= lang("category_title_4") ?></a></li>
+            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>ressources/novalife/flocages.php"><?= lang("category_title_5") ?></a></li>
         </ul>
         <ul class="list-nav-mobile">
-            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>index.php">Accueil</a></li>
-            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>ressources/decals.php">Decals</a></li>
-            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>ressources/zebra.php">Zébras</a></li>
-            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>aide.php">Aide</a></li>
-
-            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>templates.php">Templates</a></li>
-            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>ressources/novalife/flocages.php">Flocages</a></li>
+            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>index.php"><?= lang("nav_home") ?></a></li>
+            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>ressources/decals.php"><?= lang("category_title_1") ?></a></li>
+            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>ressources/zebra.php"><?= lang("category_title_2") ?></a></li>
+            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>aide.php"><?= lang("category_title_3") ?></a></li>
+            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>templates.php"><?= lang("category_title_4") ?></a></li>
+            <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>ressources/novalife/flocages.php"><?= lang("category_title_5") ?></a></li>
             <?php if (isLogged() === false) { ?>
-                <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>login.php?login" class="button-login"><button>Se
-                            connecter</button></a></li>
-                <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>login.php?signup"
-                        class="button-signup"><button>S'inscrire</button></a></li>
+                <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>login.php?login" class="button-login"><button><?= lang("login_string") ?></button></a></li>
+                <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>login.php?signup" class="button-signup"><button><?= lang("register_string") ?></button></a></li>
             <?php } else { ?>
-                <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>panel/index.php"
-                        class="button-login"><button>Panel</button></a></li>
-                <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>logout.php" class="button-signup"><button>Se
-                            déconnecter</button></a></li>
+                <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>panel/index.php" class="button-login"><button><?= lang("nav_panel") ?></button></a></li>
+                <li><a href="<?php echo ($GLOBALS['rootUrl']) ?>logout.php" class="button-signup"><button><?= lang("logout_string") ?></button></a></li>
             <?php } ?>
         </ul>
     </div>
     <div id="list-nav-button-login">
         <?php if (isLogged() === false) { ?>
-            <a href="<?php echo ($GLOBALS['rootUrl']) ?>login.php?login" class="button-login"><button>Se
-                    connecter</button></a>
-            <a href="<?php echo ($GLOBALS['rootUrl']) ?>login.php?signup"
-                class="button-signup"><button>S'inscrire</button></a>
+            <a href="<?php echo ($GLOBALS['rootUrl']) ?>login.php?login" class="button-login"><button><?= lang("login_string") ?></button></a>
+            <a href="<?php echo ($GLOBALS['rootUrl']) ?>login.php?signup" class="button-signup"><button><?= lang("register_string") ?></button></a>
         <?php } else { ?>
-            <a href="<?php echo ($GLOBALS['rootUrl']) ?>panel/index.php" class="button-login"><button>Panel</button></a>
-            <a href="<?php echo ($GLOBALS['rootUrl']) ?>logout.php" class="button-signup"><button>Se
-                    déconnecter</button></a>
+            <a href="<?php echo ($GLOBALS['rootUrl']) ?>panel/index.php" class="button-login"><button><?= lang("nav_panel") ?></button></a>
+            <a href="<?php echo ($GLOBALS['rootUrl']) ?>logout.php" class="button-signup"><button><?= lang("logout_string") ?></button></a>
         <?php } ?>
     </div>
 </nav>

@@ -217,3 +217,30 @@ function sendEmail($to, $subject, $message)
         echo 'Caught exception: ' . $e->getMessage() . "\n";
     }
 }
+
+function checkLang()
+{
+
+    if (isset($_GET['lang'])) {
+        $GLOBALS['lang'] = $_GET['lang'];
+        $_SESSION['lang'] = $GLOBALS['lang'];
+    } elseif (isset($_SESSION['lang'])) {
+        $GLOBALS['lang'] = $_SESSION['lang'];
+    } else {
+        $GLOBALS['lang'] = 'fr_FR';
+    }
+    $lang_file = __DIR__ . "/../assets/lang/" . $GLOBALS['lang'] . ".json";
+
+    if (file_exists($lang_file)) {
+        $GLOBALS['messageLocales'] = json_decode(file_get_contents($lang_file), true);
+    } else {
+        $GLOBALS['messageLocales'] = json_decode(file_get_contents(__DIR__ . "/../assets/lang/fr_FR.json"), true);
+    }
+}
+
+checkLang();
+
+function lang($text)
+{
+    return isset($GLOBALS['messageLocales'][$text]) ? $GLOBALS['messageLocales'][$text] : $text;
+}

@@ -6,21 +6,18 @@ startSession();
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= $GLOBALS['lang'] ?>">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Optimisez vos projets avec WorkshopRessource : découvrez nos zebra sélectionner par la notre équipe et la communauté.">
-    <meta name="keywords"
-        content="workshop, ressources, gratuit, tutoriels, gmod, zébra, decals, template, créateur, jeu, garry's mod, novalife, nova-life">
+    <meta name="description" content="Optimisez vos projets avec WorkshopRessource : découvrez nos zebra sélectionner par la notre équipe et la communauté.">
+    <meta name="keywords" content="workshop, ressources, gratuit, tutoriels, gmod, zébra, decals, template, créateur, jeu, garry's mod, novalife, nova-life">
     <meta name="author" content="Alexis Thierry-Bellefond">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@alexistb2904">
     <meta name="twitter:title" content="WorkshopRessources - Zebra">
-    <meta name="twitter:description"
-        content="Optimisez vos projets avec WorkshopRessource : découvrez nos zebra sélectionner par la notre équipe et la communauté.">
+    <meta name="twitter:description" content="Optimisez vos projets avec WorkshopRessource : découvrez nos zebra sélectionner par la notre équipe et la communauté.">
     <meta name="twitter:image" content="<?php echo ($GLOBALS['rootUrl']) ?>assets/images/logo.webp">
     <!-- Balise de Langue -->
     <meta http-equiv="Content-Language" content="fr">
@@ -32,7 +29,7 @@ startSession();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap" rel="stylesheet">
-    <title>WorkshopRessources - Zebra</title>
+    <title>WorkshopRessources - <?= lang('category_title_2') ?></title>
 </head>
 
 <body>
@@ -42,19 +39,19 @@ startSession();
     <main>
         <section class="header-text">
             <div>
-                <h1>Zébras</h1>
-                <p>Une liste de zébras présélectionner juste pour toi</p>
+                <h1><?= lang('category_title_2') ?></h1>
+                <p><?= lang('zebra_page_description') ?></p>
             </div>
             <a class="glow-button-a" href="#community">
-                <button class="glow-button">ZÉBRAS COMMUNAUTÉ</button>
+                <button class="glow-button"><?= lang('category_title_2') . ' ' . lang('category_title_7') ?></button>
             </a>
         </section>
         <?php if (isLogged() === false) { ?>
             <div class="banner-signup-container">
                 <div class="banner-signup">
-                    <p>Rejoins-nous pour pouvoir partager tes créations</p>
+                    <p><?= lang("banner_action_call_1") ?></p>
                     <a href="../login.php?signup">
-                        <button>S'inscrire</button>
+                        <button><?= lang("banner_action_call_1_btn") ?></button>
                     </a>
                 </div>
             </div>
@@ -85,9 +82,9 @@ startSession();
                         </a>
                     </div>
                     <?php if (strpos($item['photo'], "http://") === 0 || strpos($item['photo'], "https://") === 0) { ?>
-                        <a class="download-card-button" href="<?php echo ($item['photo']) ?>" download>Télécharger</a>
+                        <a class="download-card-button" href="<?php echo ($item['photo']) ?>" download><?= lang('download_btn') ?></a>
                     <?php } else { ?>
-                        <a class="download-card-button" href="../<?php echo ($item['photo']) ?>" download>Télécharger</a>
+                        <a class="download-card-button" href="../<?php echo ($item['photo']) ?>" download><?= lang('download_btn') ?></a>
                     <?php } ?>
                 </div>
             <?php } ?>
@@ -122,17 +119,17 @@ startSession();
                                 <?php echo $item['title']; ?>
                             </h2>
                         </a>
-                        <p>Ajouté par:
+                        <p><?= lang('add_by') ?> :
                             <?php echo $item['creator_name']; ?>
                         </p>
-                        <p>Créateur:
+                        <p><?= lang('creator') ?> :
                             <?php echo $item['workshop_name']; ?>
                         </p>
                     </div>
                     <?php if (strpos($item['photo'], "http://") === 0 || strpos($item['photo'], "https://") === 0) { ?>
-                        <a class="download-card-button" href="<?php echo ($item['photo']) ?>" download>Télécharger</a>
+                        <a class="download-card-button" href="<?php echo ($item['photo']) ?>" download><?= lang('download_btn') ?></a>
                     <?php } else { ?>
-                        <a class="download-card-button" href="../<?php echo ($item['photo']) ?>" download>Télécharger</a>
+                        <a class="download-card-button" href="../<?php echo ($item['photo']) ?>" download><?= lang('download_btn') ?></a>
                     <?php } ?>
                 </div>
             <?php } ?>
