@@ -194,7 +194,7 @@ if (isset($postData['type'])) {
     </main>
     <?php include_once 'components/footer.php'; ?>
     < script src="<?php echo ($GLOBALS['rootUrl']) ?>js/login.js">
-    </script>
+        </script>
 </body>
 
 </html>
