@@ -14,7 +14,10 @@ if (isset($postData['send'])) {
             if (empty($postData['title']) || empty($postData['category']) || empty($postData['creator_name'])) {
                 $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR2';
             } else {
-                if ($postData['category'] === 'other') {
+                if (!isAllowed(htmlspecialchars($postData['category']))) {
+                    return null;
+                }
+                if ($postData['category'] === 'other' || !empty($postData['photo'])) {
                     if (!isset($postData['url'])) {
                         $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR3';
                     } else {
@@ -212,6 +215,7 @@ if (isset($postData['send'])) {
                                 <label class="form-label" id="labelFile"><i class="fa-regular fa-file"></i> <span>Choisir une
                                         image</span><input type="file" class="form-control" id="photo_file" name="photo_file[]" accept=".png, .jpeg, .webp, .svg, .jpg, image/*"
                                         title="Emplacment Image">
+                                </label>
                             </div>
 
                             <label hidden>

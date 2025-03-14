@@ -6,12 +6,14 @@ startSession();
 $mysqlClient = $GLOBALS['mysqlClientPDO'];
 $rootUrl = $GLOBALS['rootUrl'];
 $postData = $_POST;
+var_dump($postData);
+var_dump($_FILES);
 if (isset($postData['send'])) {
     if (isLogged() && isAdmin($_SESSION['email'])) {
-        if (!isset($postData['title']) || !isset($postData['photo']) || !isset($postData['category'])) {
+        if (!isset($postData['title']) || !isset($postData['category']) ) {
             $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR1';
         } else {
-            if (empty($postData['title']) || empty($postData['photo']) || empty($postData['category'])) {
+            if (empty($postData['title']) || empty($postData['category'])  ) {
                 $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR2';
             } else {
                 if ($postData['category'] === 'other') {
@@ -31,7 +33,10 @@ if (isset($postData['send'])) {
                             $url = htmlspecialchars($postData['url']);
                             $table = htmlspecialchars($postData['category']);
                             $creator_name = htmlspecialchars($_SESSION['username']);
-
+                            if (!isAllowed($table)) {
+                                echo 'Erreur la table '. $table . ' n\'existe pas';
+                                return null;
+                            }
                             $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, creator_name, workshop_name) VALUES (:title, :url, :photo, :creator_name, :workshop_name)');
                             $insertRecipe->execute([
                                 'title' => $title,
@@ -45,13 +50,14 @@ if (isset($postData['send'])) {
                         }
                     }
                 } else {
+                    if ($postData['photo'] == '') {
                     $title = htmlspecialchars($postData['title']);
                     if (htmlspecialchars($postData['workshop_name']) === '') {
                         $workshop_name = 'Inconnu';
                     } else {
                         $workshop_name = htmlspecialchars($postData['workshop_name']);
                     }
-                    $photo = htmlspecialchars($postData['photo']);
+                    
                     if (htmlspecialchars($postData['url']) === '') {
                         $url = '';
                     } else {
@@ -59,7 +65,114 @@ if (isset($postData['send'])) {
                     }
                     $table = htmlspecialchars($postData['category']);
                     $creator_name = htmlspecialchars($_SESSION['username']);
+                    $photo = '';
+                    $photo_windows = 0;
+                    $photoDeleteHash = 0;
+                    $photoWindowsDeleteHash = 0;
+                    if (!empty($_FILES['photo_file']['name'])) {
+                        $photo = uploadImage($_FILES['photo_file']);
+                        $photoDeleteHash = $photo['deletehash'];
+                        $photo = $photo['photo'];
+                    }
+                    if (!empty($_FILES['photo_file_windows']['name'])) {
+                        $photo_windows = uploadImage($_FILES['photo_file_windows']);
+                        $photoWindowsDeleteHash = $photo_windows['deletehash'];
+                        $photo_windows = $photo_windows['photo'];
+                    }
 
+                    if (!isAllowed($table)) {
+                        echo 'Erreur la table '. $table . ' n\'existe pas';
+                        return null;
+                    }
+                    if ($photo == '') {
+                        $errorMessage = 'Erreur lors de l\'upload de l\'image';
+                        $created = false;
+                    } else {
+                        // Est-ce que l'image de la fenêtre existe ?
+                        if ($photo_windows == 0 || $photo_windows == '') {
+                            if ($table === 'zebra' || $table === 'decals' || $table === 'novalife') {
+                                $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, photo_deletehash, is_enabled) VALUES (:title, :url, :photo, :photo_deletehash, :is_enabled)');
+                                $insertRecipe->execute([
+                                    'title' => $title,
+                                    'url' => $url,
+                                    'photo' => $photo,
+                                    'photo_deletehash' => $photoDeleteHash,
+                                    'is_enabled' => '1',
+                                ]);
+                            } else {
+                                $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, photo_deletehash) VALUES (:title, :url, :photo, :photo_deletehash)');
+                                $insertRecipe->execute([
+                                    'title' => $title,
+                                    'url' => $url,
+                                    'photo' => $photo,
+                                    'photo_deletehash' => $photoDeleteHash,
+                                ]);
+                            }
+
+                            $created = true;
+                        } else {
+                            if ($table === 'zebra' || $table === 'decals' || $table === 'novalife') {
+                                $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, photo_deletehash, is_enabled) VALUES (:title, :url, :photo, :photo_deletehash, :is_enabled)');
+                                $insertRecipe->execute([
+                                    'title' => $title,
+                                    'url' => $url,
+                                    'photo' => $photo,
+                                    'photo_deletehash' => $photoDeleteHash,
+                                    'is_enabled' => '1',
+                                ]);
+
+                                $windowsRequest = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, photo_deletehash, is_enabled) VALUES (:title, :url, :photo, :photo_deletehash, :is_enabled)');
+                                $windowsRequest->execute([
+                                    'title' => $title . ' - Fenêtre',
+                                    'url' => $url,
+                                    'photo' => $photo_windows,
+                                    'photo_deletehash' => $photoWindowsDeleteHash,
+                                    'is_enabled' => '1',
+                                ]);
+                            } else {
+                                $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, photo_deletehash) VALUES (:title, :url, :photo, :photo_deletehash)');
+                                $insertRecipe->execute([
+                                    'title' => $title,
+                                    'url' => $url,
+                                    'photo' => $photo,
+                                    'photo_deletehash' => $photoWindowsDeleteHash,
+                                ]);
+
+                                $windowsRequest = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, photo_deletehash) VALUES (:title, :url, :photo, :photo_deletehash)');
+                                $windowsRequest->execute([
+                                    'title' => $title . ' - Fenêtre',
+                                    'url' => $url,
+                                    'photo' => $photo_windows,
+                                    'photo_deletehash' => $photoWindowsDeleteHash,
+                                ]);
+                            }
+
+                            if ($photo_windows == '' ) {
+                                $errorMessage = 'Erreur lors de l\'upload de l\'image de la fenêtre';
+                            }
+                            $created = true;
+                        }
+                    }
+                } else {
+                    $photo = htmlspecialchars($postData['photo']);
+                    $title = htmlspecialchars($postData['title']);
+                    if (htmlspecialchars($postData['workshop_name']) === '') {
+                        $workshop_name = 'Inconnu';
+                    } else {
+                        $workshop_name = htmlspecialchars($postData['workshop_name']);
+                    }
+                    
+                    if (htmlspecialchars($postData['url']) === '') {
+                        $url = '';
+                    } else {
+                        $url = htmlspecialchars($postData['url']);
+                    }
+                    $table = htmlspecialchars($postData['category']);
+                    $creator_name = htmlspecialchars($_SESSION['username']);
+                    if (!isAllowed($table)) {
+                        echo 'Erreur la table '. $table . ' n\'existe pas';
+                        return null;
+                    }
                     if ($table === 'zebra' || $table === 'decals' || $table === 'novalife') {
                         $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, is_enabled) VALUES (:title, :url, :photo, :is_enabled)');
                         $insertRecipe->execute([
@@ -76,15 +189,49 @@ if (isset($postData['send'])) {
                             'photo' => $photo,
                         ]);
                     }
-
                     $created = true;
                 }
+            }
             }
         }
     } else {
         $errorMessage = 'Il faut être connecté ou avoir la permission pour pouvoir créer une ressource administrateur.';
     }
 }
+
+function uploadImage($PhotoImgur) {
+        $curl = curl_init();
+        curl_setopt_array(
+            $curl,
+            array(
+                CURLOPT_URL => 'https://api.imgur.com/3/image',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => array('image' => base64_encode(file_get_contents($PhotoImgur['tmp_name']))),
+                CURLOPT_HTTPHEADER => array(
+                    'Authorization: Client-ID f040db64c4332f9'
+                ),
+            )
+        );
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $response = json_decode($response, true);
+        if ($response['success'] === true) {
+            $photo = $response['data']['link'];
+            $photoDeleteHash = $response['data']['deletehash'];
+            return ['photo' => $photo, 'deletehash' => $photoDeleteHash];
+        } else {
+            $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR4';
+            return ['photo' => '', 'deletehash' => ''];
+        }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -136,7 +283,7 @@ if (isset($postData['send'])) {
             <?php if (!isset($created) || $created !== true) { ?>
                 <?php if (isset($_GET['other']) || isset($_GET['zebra']) || isset($_GET['decals']) || isset($_GET['novalife']) || isset($_GET['alexcars']) || isset($_GET['azok30']) || isset($_GET['itzdannio25']) || isset($_GET['rytrak']) || isset($_GET['sgm']) || isset($_GET['w4nou'])) { ?>
                     <section class="category-container">
-                        <form action="" method="post">
+                        <form action="" method="post" enctype="multipart/form-data">
                             <h1>Création de contenu</h1>
                             <?php if (isset($errorMessage)) { ?>
                                 <div class="error-message">
@@ -157,15 +304,21 @@ if (isset($postData['send'])) {
                             </div>
                             <?php if (!isset($_GET['zebra']) || !isset($_GET['decals']) || !isset($_GET['novalife'])) { ?>
                                 <div class="part-form">
-                                    <label for="url" class="form-label">Lien vers le contenu*</label>
+                                    <label for="url" class="form-label">Lien du workshop*</label>
                                     <input type="text" class="form-control" id="url" name="url"
                                         placeholder="Lien Direct vers le contenu" autocomplete="off" maxlength="512" required>
                                 </div>
                             <?php } ?>
                             <div class="part-form">
-                                <label for="photo" class="form-label">Lien vers l'image*</label>
-                                <input type="text" class="form-control" id="photo" name="photo"
-                                    placeholder="Lien Direct vers l'image" autocomplete="off" maxlength="512" required>
+                                <input type="text" class="form-control" id="photo" name="photo" placeholder="Url de l'image" autocomplete="off" title="Lien Image" maxlength="512">
+                                <label class="form-label" id="labelFile"><i class="fa-regular fa-file"></i> <span>Choisir une
+                                        image *</span><input type="file" class="form-control" id="photo_file" name="photo_file" accept=".png, .jpeg, .jpg, image/*"
+                                        title="Emplacement Image" required>
+                                </label>
+                                <label class="form-label" id="labelFile2"><i class="fa-regular fa-file"></i> <span>Choisir une
+                                        image fenêtre</span><input type="file" class="form-control" id="photo_file_windows" name="photo_file_windows" accept=".png, .jpeg, .jpg, image/*"
+                                        title="Emplacement Image Fenêtre">
+                                </label>
                             </div>
                             <div class="part-form">
                                 <label for="category" class="form-label">Catégorie</label>
@@ -233,6 +386,7 @@ if (isset($postData['send'])) {
         <?php } ?>
     </main>
     <?php include_once '../../components/footer.php'; ?>
+    <script src="<?php echo ($GLOBALS['rootUrl']) ?>js/add.js"></script>
 </body>
 
 </html>

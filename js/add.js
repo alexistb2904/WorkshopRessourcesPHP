@@ -1,5 +1,7 @@
 const ImgFile = document.getElementById('photo_file');
+const ImgFileWindows = document.getElementById('photo_file_windows');
 const ImgLabel = document.querySelector('#labelFile span');
+const ImgLabel2 = document.querySelector('#labelFile span');
 const ImgUrl = document.querySelector('#photo');
 const Form = document.querySelector('#creation-form');
 
@@ -26,3 +28,13 @@ Form.addEventListener('submit', function (e) {
 		alert(LANGUAGE_FILE.alert_choose_image);
 	}
 });
+
+if (ImgFileWindows) {
+	ImgFileWindows.addEventListener('change', function (e) {
+		const file = e.target.files[0];
+		if (file.name.lenght != 0) {
+			ImgLabel2.innerHTML = file.name;
+		}
+	});
+}
+
