@@ -8,7 +8,7 @@ $titleOfPage = 'VMT/VTF';
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= $GLOBALS['lang'] ?>">
 
 <head>
     <meta charset="UTF-8">

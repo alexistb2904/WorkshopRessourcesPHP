@@ -5,15 +5,14 @@ include_once 'util/variables.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= $GLOBALS['lang'] ?>">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="Optimisez vos projets avec WorkshopRessource : découvrez nos outils exclusifs, incluant des décals et autres ressources, 100% Open-Source. Accédez à des tutoriels détaillés pour enrichir vos compétences. Élevez la qualité de vos projets grâce à des ressources exceptionnelles.">
-    <meta name="keywords"
-        content="workshop, ressources, gratuit, tutoriels, gmod, zébra, decals, template, créateur, jeu, garry's mod, novalife, nova-life">
+    <meta name="keywords" content="workshop, ressources, gratuit, tutoriels, gmod, zébra, decals, template, créateur, jeu, garry's mod, novalife, nova-life">
     <meta name="author" content="Alexis Thierry-Bellefond">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@alexistb2904">
@@ -31,7 +30,7 @@ include_once 'util/variables.php';
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap" rel="stylesheet">
-    <title>WorkshopRessources - Les Créateurs</title>
+    <title>WorkshopRessources - <?= lang('category_title_6') ?></title>
 </head>
 
 <body>
@@ -41,8 +40,8 @@ include_once 'util/variables.php';
     <main>
         <section class="header-text">
             <div>
-                <h1>Templates</h1>
-                <p>Sélectionne le jeu pour voir leur liste de templates</p>
+                <h1><?= lang('category_title_4') ?></h1>
+                <p><?= lang('template_page_description') ?></p>
             </div>
         </section>
         <section class="game-card">

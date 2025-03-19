@@ -25,7 +25,7 @@ ImgUrl.addEventListener('change', function () {
 Form.addEventListener('submit', function (e) {
 	if (ImgUrl.value == '' && ImgFile.files.length == 0) {
 		e.preventDefault();
-		alert('Veuillez choisir une image au minimum');
+		alert(LANGUAGE_FILE.alert_choose_image);
 	}
 });
 
@@ -37,3 +37,4 @@ if (ImgFileWindows) {
 		}
 	});
 }
+
