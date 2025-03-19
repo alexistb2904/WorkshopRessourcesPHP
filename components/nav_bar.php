@@ -7,22 +7,27 @@ if (!defined('BY_SERVER')) {
 startSession();
 ?>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-408NVZ99VY"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+<script
+    type="module"
+    src="https://unpkg.com/@porscheofficial/cookie-consent-banner@1.0.0/dist/cookie-consent-banner/cookie-consent-banner.esm.js"></script>
 
-    gtag('config', 'G-408NVZ99VY');
-</script>
-<script type="text/javascript">
-    (function (c, l, a, r, i, t, y) {
-        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-        t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-        y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
-    })(window, document, "clarity", "script", "g3iiq9rlyc");
-</script>
+<!-- Cookie Consent Banner -->
+<cookie-consent-banner
+    btn-label-accept-and-continue="Accepter et continuer"
+    btn-label-only-essential-and-continue="Continuer avec uniquement les cookies nécessaires"
+    btn-label-persist-selection-and-continue="Enregistrer la sélection et continuer"
+    btn-label-select-all-and-continue="Tout sélectionner et continuer"
+    content-settings-description="Vous pouvez décider des cookies à utiliser en sélectionnant les options ci-dessous. Veuillez noter que votre choix peut affecter le bon fonctionnement du service.">
+    Nous utilisons des cookies et des technologies similaires pour activer certaines fonctionnalités, améliorer l'expérience utilisateur et diffuser du contenu pertinent selon vos centres d'intérêt. Selon leur finalité, des cookies d'analyse et de marketing peuvent être utilisés en plus des cookies strictement nécessaires. En cliquant sur « Accepter et continuer », vous consentez à l'utilisation des cookies mentionnés ci-dessus.
+    <a
+        href="javascript:document.dispatchEvent(new Event('cookie_consent_details_show'))">
+        Cliquez ici
+    </a>
+    pour accéder aux paramètres détaillés ou retirer votre consentement (en partie si nécessaire) avec effet pour l’avenir. Pour plus d’informations, veuillez consulter notre
+    <a href="{$WebSiteURL}cgu">Politique de confidentialité</a>
+    .
+</cookie-consent-banner>
+
 <link rel="stylesheet" href="<?php echo ($GLOBALS['rootUrl']) ?>css/nav_bar.css">
 <script src="<?php echo ($GLOBALS['rootUrl']) ?>js/nav_bar.js"></script>
 <nav>

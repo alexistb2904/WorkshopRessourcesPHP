@@ -39,3 +39,54 @@ if (!defined('BY_SERVER')) {
 		<a id="bmc" href="https://buymeacoffee.com/alexistb2904"><img src="<?php echo ($GLOBALS['rootUrl']) ?>assets/images/bmc.svg" alt="BuyMeACoffeLogo"></a>
 	</div>
 </footer>
+<!-- Cookie Consent Banner Configuration -->
+<script>
+	/* Update available Cookie Categories */
+	const cookieConsentBannerElement = document.querySelector(
+		"cookie-consent-banner",
+	);
+	cookieConsentBannerElement.availableCategories = [{
+			description: "Vous permettent de naviguer et d'utiliser les fonctions de base, ainsi que de mémoriser vos préférences.",
+			key: "technically_required",
+			label: "Cookies strictement nécessaires",
+			isMandatory: true,
+		},
+		{
+			description: "Nous permettent de savoir comment les visiteurs interagissent avec notre service afin d'améliorer l'expérience utilisateur.",
+			key: "analytics",
+			label: "Cookies d'analyse",
+		},
+		{
+			description: "Nous permettent de proposer et d'évaluer des contenus pertinents et de la publicité ciblée selon les centres d'intérêt.",
+			key: "marketing",
+			label: "Cookies marketing",
+		},
+	];
+
+
+	/* Init Tag Manager */
+	function loadTagManager() {
+		if (typeof google_tag_manager !== "undefined") return; // load only once
+		console.log("Loading Google Tag Manager");
+		const gTags = function(w, d, s, l, i) {
+			w[l] = w[l] || [];
+			w[l].push({
+				"gtm.start": new Date().getTime(),
+				event: "gtm.js",
+			});
+			let f = d.getElementsByTagName(s)[0],
+				j = d.createElement(s),
+				dl = l != "dataLayer" ? "&l=" + l : "";
+			j.async = true;
+			j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+			f.parentNode.insertBefore(j, f);
+		};
+
+		gTags(window, document, "script", "dataLayer", "GTM-TCNWZRTX");
+	}
+	window.addEventListener(
+		"cookie_consent_preferences_restored",
+		loadTagManager,
+	);
+	window.addEventListener("cookie_consent_preferences_updated", loadTagManager);
+</script>
