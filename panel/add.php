@@ -30,22 +30,23 @@ if (isset($postData['send'])) {
                             } else {
                                 $workshop_name = htmlspecialchars($postData['workshop_name']);
                             }
-
+                            $url = htmlspecialchars($postData['url']) || '';
                             if (empty($postData['url'])) {
-                                $postData['url'] = '';
+                                $url = '';
                             }
 
-                            $url = htmlspecialchars($postData['url']);
                             $table = htmlspecialchars($postData['category']);
                             $creator_name = htmlspecialchars($postData['creator_name']);
                             $photo = htmlspecialchars($postData['photo']);
-                            $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, creator_name, workshop_name) VALUES (:title, :url, :photo, :creator_name, :workshop_name)');
+                            $photoDeleteHash = htmlspecialchars($postData['photo_deletehash']) || '';
+                            $insertRecipe = $mysqlClient->prepare('INSERT INTO ' . $table . ' (title, url, photo, creator_name, workshop_name, photo_deletehash) VALUES (:title, :url, :photo, :creator_name, :workshop_name, :photo_deletehash)');
                             $insertRecipe->execute([
                                 'title' => $title,
                                 'url' => $url,
                                 'photo' => $photo,
                                 'creator_name' => $creator_name,
                                 'workshop_name' => $workshop_name,
+                                'photo_deletehash' => $photoDeleteHash,
                             ]);
 
                             sendEmail('alexistb2904@gmail.com', 'Nouvelle ressource | ' . $table, 'Une nouvelle ressource a été ajoutée' . PHP_EOL . 'Titre : ' . $title . PHP_EOL . 'Créateur : ' . $creator_name . PHP_EOL . 'Lien : ' . $url . PHP_EOL . 'Photo : ' . $photo . PHP_EOL . 'Workshop : ' . $workshop_name . PHP_EOL . 'Table : ' . $table);
