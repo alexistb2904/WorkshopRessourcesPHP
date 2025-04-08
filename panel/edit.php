@@ -14,13 +14,23 @@ if (isset($postData['send'])) {
 					if ($postData['creator_name'] === $_SESSION['username']) {
 						$addContent = "UPDATE `" . $postData['category'] . "` SET `title` = :title, `photo` = :photo, `workshop_name` = :workshop_name, `is_enabled` = 0, `url` = :url WHERE `id` = :id AND `creator_name` = :creator_name";
 						$resultStatement = $mysqlClient->prepare($addContent);
-						$workshop_name = $postData['workshop_name'] || 'Inconnu';
-						$resultStatement->bindParam(':title', htmlspecialchars($postData['title']));
-						$resultStatement->bindParam(':photo', htmlspecialchars($postData['photo']));
-						$resultStatement->bindParam(':url', htmlspecialchars($postData['url']));
-						$resultStatement->bindParam(':workshop_name', htmlspecialchars($workshop_name));
-						$resultStatement->bindParam(':id', htmlspecialchars($_GET['id']));
-						$resultStatement->bindParam(':creator_name', htmlspecialchars($_SESSION['username']));
+
+						$workshop_name = $postData['workshop_name'] ?? 'Inconnu';
+
+						$title = htmlspecialchars($postData['title']);
+						$photo = htmlspecialchars($postData['photo']);
+						$url = htmlspecialchars($postData['url']);
+						$workshop = htmlspecialchars($workshop_name);
+						$id = htmlspecialchars($_GET['id']);
+						$creator = htmlspecialchars($_SESSION['username']);
+
+						$resultStatement->bindParam(':title', $title);
+						$resultStatement->bindParam(':photo', $photo);
+						$resultStatement->bindParam(':url', $url);
+						$resultStatement->bindParam(':workshop_name', $workshop);
+						$resultStatement->bindParam(':id', $id);
+						$resultStatement->bindParam(':creator_name', $creator);
+
 						$resultStatement->execute();
 						$resultStatement->closeCursor();
 						$updated = true;
@@ -33,9 +43,9 @@ if (isset($postData['send'])) {
 			} else {
 				if ($postData['creator_name'] === $_SESSION['username']) {
 					if ($postData['category'] != 'novalife_flocage') {
-						$addContent = "UPDATE `" . $postData['category'] . "` SET `title` = :title, `photo` = :photo, `workshop_name` = :workshop_name, `is_enabled` = 0, WHERE `id` = :id AND `creator_name` = :creator_name";
+						$addContent = "UPDATE `" . $postData['category'] . "` SET `title` = :title, `photo` = :photo, `workshop_name` = :workshop_name, `is_enabled` = 0 WHERE `id` = :id AND `creator_name` = :creator_name";
 						$resultStatement = $mysqlClient->prepare($addContent);
-						$workshop_name = $postData['workshop_name'] || 'Inconnu';
+						$workshop_name = $postData['workshop_name'] ?? 'Inconnu';
 						$resultStatement->bindParam(':title', $postData['title']);
 						$resultStatement->bindParam(':photo', $postData['photo']);
 						$resultStatement->bindParam(':workshop_name', $workshop_name);
