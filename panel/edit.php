@@ -144,7 +144,7 @@ if (isset($postData['send'])) {
 														originel</label>
 													<input type="text" class="form-control" id="workshop_name" name="workshop_name"
 														placeholder="Nom du créateur originel" value="<?php echo ($item['workshop_name']) ?>"
-														autocomplete="off" required>
+														autocomplete="off">
 												</div>
 											<?php } ?>
 											<?php if (($_GET['category'] === 'other')) { ?>
