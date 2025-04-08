@@ -18,8 +18,7 @@ if (!defined('BY_SERVER')) {
 		<div class="footer_2">
 			<h2><?= lang("footer_links") ?></h2>
 			<ul>
-				<li><a href="">Discord</a></li>
-				<li><a href="">Youtube</a></li>
+				<li><a href="https://discord.gg/8AqYqrGxUQ">Discord</a></li>
 				<li><a href="<?php echo ($GLOBALS['rootUrl']) ?>history.php"><?= lang("footer_history") ?></a></li>
 				<li><a href="<?php echo ($GLOBALS['rootUrl']) ?>mentions-legale.php"><?= lang("footer_legals") ?></a></li>
 			</ul>

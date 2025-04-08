@@ -185,16 +185,15 @@ if (isset($postData['type'])) {
                 </p>
             </div>
             <script>
-                setTimeout({
-                    window.location.replace("<?php echo ($GLOBALS['rootUrl']) ?>")
-                }, 300)
+                setTimeout(function() {
+                    window.location.replace("<?php echo ($GLOBALS['rootUrl']) ?>");
+                }, 300);
             </script>
 
         <?php } ?>
     </main>
     <?php include_once 'components/footer.php'; ?>
-    < script src="<?php echo ($GLOBALS['rootUrl']) ?>js/login.js">
-        </script>
+    <script src="<?php echo ($GLOBALS['rootUrl']) ?>js/login.js"></script>
 </body>
 
 </html>
