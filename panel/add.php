@@ -17,11 +17,11 @@ if (isset($postData['send'])) {
                 if (!isAllowed(htmlspecialchars($postData['category']))) {
                     return null;
                 }
-                if ($postData['category'] === 'other' || !empty($postData['photo'])) {
-                    if (!isset($postData['url'])) {
+                if ($postData['category'] == 'other' || !empty($postData['photo'])) {
+                    if (!isset($postData['url']) && $postData['category'] == 'other') {
                         $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR3';
                     } else {
-                        if (empty($postData['url'])) {
+                        if (empty($postData['url']) && $postData['category'] == 'other') {
                             $errorMessage = 'Les Champs doivent être remplis pour pouvoir créer une ressource. ERROR4';
                         } else {
                             $title = htmlspecialchars($postData['title']);
@@ -31,6 +31,9 @@ if (isset($postData['send'])) {
                                 $workshop_name = htmlspecialchars($postData['workshop_name']);
                             }
 
+                            if (empty($postData['url'])) {
+                                $postData['url'] = '';
+                            }
 
                             $url = htmlspecialchars($postData['url']);
                             $table = htmlspecialchars($postData['category']);
