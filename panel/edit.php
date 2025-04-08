@@ -14,10 +14,11 @@ if (isset($postData['send'])) {
 					if ($postData['creator_name'] === $_SESSION['username']) {
 						$addContent = "UPDATE `" . $postData['category'] . "` SET `title` = :title, `photo` = :photo, `workshop_name` = :workshop_name, `is_enabled` = 0, `url` = :url WHERE `id` = :id AND `creator_name` = :creator_name";
 						$resultStatement = $mysqlClient->prepare($addContent);
+						$workshop_name = $postData['workshop_name'] || 'Inconnu';
 						$resultStatement->bindParam(':title', htmlspecialchars($postData['title']));
 						$resultStatement->bindParam(':photo', htmlspecialchars($postData['photo']));
 						$resultStatement->bindParam(':url', htmlspecialchars($postData['url']));
-						$resultStatement->bindParam(':workshop_name', htmlspecialchars($postData['workshop_name']));
+						$resultStatement->bindParam(':workshop_name', htmlspecialchars($workshop_name));
 						$resultStatement->bindParam(':id', htmlspecialchars($_GET['id']));
 						$resultStatement->bindParam(':creator_name', htmlspecialchars($_SESSION['username']));
 						$resultStatement->execute();
@@ -34,9 +35,10 @@ if (isset($postData['send'])) {
 					if ($postData['category'] != 'novalife_flocage') {
 						$addContent = "UPDATE `" . $postData['category'] . "` SET `title` = :title, `photo` = :photo, `workshop_name` = :workshop_name, `is_enabled` = 0, WHERE `id` = :id AND `creator_name` = :creator_name";
 						$resultStatement = $mysqlClient->prepare($addContent);
+						$workshop_name = $postData['workshop_name'] || 'Inconnu';
 						$resultStatement->bindParam(':title', $postData['title']);
 						$resultStatement->bindParam(':photo', $postData['photo']);
-						$resultStatement->bindParam(':workshop_name', $postData['workshop_name']);
+						$resultStatement->bindParam(':workshop_name', $workshop_name);
 						$resultStatement->bindParam(':id', $_GET['id']);
 						$resultStatement->bindParam(':creator_name', $_SESSION['username']);
 						$resultStatement->execute();
