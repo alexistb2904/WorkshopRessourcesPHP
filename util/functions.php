@@ -2,7 +2,7 @@
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
 
-if ((substr($_SERVER['HTTP_HOST'], 0, strlen('localhost')) == 'localhost') || ($_SERVER['HTTP_HOST'] == "wslocal")) {
+if ((substr($_SERVER['HTTP_HOST'], 0, strlen('localhost')) == 'localhost') || ($_SERVER['HTTP_HOST'] == "ws")) {
     $_ENV['MYSQL_HOST'] = "localhost";
     $_ENV['MYSQL_USERNAME'] = "root";
     $_ENV['MYSQL_PASSWORD'] = "";
