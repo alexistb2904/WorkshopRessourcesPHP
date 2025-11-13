@@ -61,21 +61,18 @@ if (!defined('BY_SERVER')) {
 		</div>
 
 		<div class="card-title-area">
-			<span>Serveur 6TY</span>
-			<span class="card-tag">NOUVEAU</span>
+			<span>Donner votre </span>
+			<span class="card-tag">Avis</span>
 		</div>
 
 		<div class="card-body">
 			
 			<div class="card-description">
-			Rejoins 6ty V3 Paris, le serveur RP 100 % repensé.
-				Une nouvelle map, un nouveau lore, des scripts exclusifs une ambiance urbaine immersive dans les rues de Paris où chaque choix a des conséquences, et où ton histoire ne dépend que de toi.
-				<br>
-				📅 Ouverture prévue pour la mi-septembre.<br>
-				🚧 En attendant, découvre les coulisses, participe à la création, donne ton avis et sois prêt pour le lancement.
+			Donnez votre avis sur WorkshopRessources et aidez-nous à améliorer notre plateforme pour mieux répondre à vos besoins !
+
 			</div>
 
-			<div class="feature-grid">
+			<!--<div class="feature-grid">
 			<div class="feature-item">
 				<div class="feature-icon">
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-plus-icon lucide-map-plus"><path d="m11 19-1.106-.552a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0l4.212 2.106a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619V12"/><path d="M15 5.764V12"/><path d="M18 15v6"/><path d="M21 18h-6"/><path d="M9 3.236v15"/></svg>
@@ -103,7 +100,7 @@ if (!defined('BY_SERVER')) {
 				</div>
 				<span class="feature-text">Script Sur-mesure</span>
 			</div>
-			</div>
+			</div>--->
 
 			<div class="card-actions">
 			<div class="price">
@@ -111,7 +108,7 @@ if (!defined('BY_SERVER')) {
 				<span class="price-period"></span>
 			</div>
 
-			<button class="card-button">Rejoins l'aventure</button>
+			<button class="card-button">Répondre à l’enquête</button>
 			</div>
 		</div>
 
@@ -135,7 +132,7 @@ if (!defined('BY_SERVER')) {
 		<div class="corner-slice"></div>
 
 		<div class="stamp">
-			<span class="stamp-text">+1400 Membres</span>
+			<span class="stamp-text">+1000 Visites</span>
 		</div>
 	</div>
 </div>
@@ -206,7 +203,7 @@ if (!defined('BY_SERVER')) {
 		const currentTime = new Date().getTime();
 		const button = document.querySelector(".card-button");
 
-		if (lastClose && currentTime - lastClose < 2 * 60 * 60 * 1000) { // Fermer il y a
+		if (lastClose && currentTime - lastClose < 10 * 60 * 60 * 1000) { // Fermer il y a moins de 2 heures
 			bannerFivem.style.display = "none";
 		} else {
 			bannerFivem.style.display = "block";
@@ -218,7 +215,7 @@ if (!defined('BY_SERVER')) {
 		});
 
 		button.addEventListener("click", () => {
-			window.location.href = "https://discord.gg/6ty";
+			window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLScPVHb0oyNQ4fXpC-jCjoJSaFBaJTcDr6Aat1ga-2QvNdvOnQ/viewform?usp=sf_link";
 		});
 	});
 </script>
