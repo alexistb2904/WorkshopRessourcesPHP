@@ -61,7 +61,7 @@ if (!defined('BY_SERVER')) {
 		</div>
 
 		<div class="card-title-area">
-			<span>Donner votre </span>
+			<span>Donner votre Avis</span>
 			<span class="card-tag">Avis</span>
 		</div>
 
